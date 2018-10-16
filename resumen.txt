@@ -1,0 +1,239 @@
+implementar un sistema integrado que garantice sostenibilidad  evolución, y sea amigable
+
+misión: Aportar soluciones para hacer ganar tiempo uniendo personas y distancias
+
+vision: ser vista como marca líder
+
+facilitar translados de mercancia y facilitar todos los procesos de negocios
+
+somos empresa de transporte
+
+estamos en Urb. Montalbán, Universidad Católica Andrés Bello, Edif. De
+Laboratorios, Piso 2, Escuela de Ing. Informática.
+
+llegamos a América Latina, España, Portugal y Francia.
+
+tenemos:
+
+(aire)
+●2 Boeing 757-200s
+●3 Airbus A300 - 600s
+tierra:
+●1000 vehículos nacionales
+●2500 vehículos internacionales
+mar
+●1 buque
+
+sucursales (centros de envio):
+●ubicacion
+●nombre
+●capacidad en m2
+●cantidad empleados
+●correo
+●tel
+●capacidad almacén
+●tamaño deposito
+●cantidad vehículos base
+
+empleado de las oficinas:
+●nombre
+●apellido
+●ci
+●correo personal
+●correo empresa
+●tel
+●edad (fecha)
+●nivel academico
+●profession
+●edo civil
+●num hijos
+●direccion
+●lugares de trabajo dentro de la oficina
+	ejemplo José Anderson Ruiz trabaja los lunes y miércoles en el depósito A
+de la sucursal de Girardot Estado Aragua acomodando los paquetes, el resto de la
+semana trabaja en la zona de carga de camiones.
+
+contemple pago semanal (calculo)
+generar recibo por lote y especifico
+
+registro de pago servicios (agua,luz,tel,internet,vigilancia y otros)
+
+zonas en las oficinas
+●depositos A,B,C..
+●zona de carga C1,C2,C3
+	nombre
+	descpricion
+	dimension del area
+
+vehiculos
+●clasificacion (terrestre,maritino,aereo)
+
+terrestre
+●tipo (liviano, moto, camioneta, gandola..)
+●peso
+●capacidad
+●descripcion
+●placa
+●sereal motor
+●sereal carroceria
+●marca
+●modelo
+●año(fecha)
+●otras características
+
+aereo
+●longitud
+●envergadura
+●area
+●altura
+●ancho cabina
+●diametro fuselaje
+●peso vacio
+●peso max al despegar
+●carrera de despegue
+●Vmax
+●capacidad combustible
+●motores
+●capacidad de carga
+
+talleres (maritimos?)
+●nombre
+●direccion
+●tel
+●pagina web
+●correo
+●persona cont
+
+registrar quien esta en taller para revision
+●fecha entrada
+●fecha esperada de salida
+●fecha real salida
+●falla
+●fecha pros revision
+se genera gasto revision
+
+puertos marítimos
+●ubicacion
+●cantidad de puestos
+●areas techadas y abiertas
+●cantidad muelles
+●longitud
+●ancho
+●calado
+●uso
+
+aeropuertos
+●ubicacion
+●candida terminales
+●canditad pistas
+●capacidad
+
+disponemos de pago en el desino
+comprobante
+
+paquete env
+●numero guia
+●oficina origen
+●oficina destino
+●destanario
+●tel de cont
+●fecha entrega
+●peso kg
+
+combinación de traslado
+visionar chequeo y ubicacion
+
+paquete
+●clasificacion
+●precio por kg
+●tipo de prod
+
+cliente
+●nombre
+●apellido
+●tel
+●direccion
+●edad (fecha)
+●edo civil
+●empresa
+●cliente L-VIP
+
+carnet
+●cod oficina registro
+●ci
+●correlativo 3 digitos
+ej: 124-15852963-005
+
+3 diseños carnet
+
+tipo de pago
+efectivo,cheque,transf,debito,credito
+
+recibo
+●monto
+●origen
+●destino
+●fecha
+●num paquete
+●id cliente
+●peso en kg
+●fecha estimada entrega
+●modo transporte
+
+pago solo efectivo en destino
+
+alerta supervisor si paquete lleva 24 horas en la oficina
+
+registro rutas
+
+utilizar DataTable
+
+poder ver estado del envío (ubicación)
+
+usuarios y roles
+
+acciones en el sistema registradas
+
+usuario solo debe observar acciones las cuales tiene permiso
+
+reportar:
+●listado de oficinas
+●listado de medio de tranportes
+●lista de empleados activos dando info básica, cargo, fecha de ingreso a la empresa
+●listado de empleados activos y no con info básica,cargo que ocupo, fecha de ingreso y egreso, total de empleados act y total no act
+●listado de rutas
+●medio mas usado
+●% de uso de un medio de transporte según perdió de tiempo
+●que oficina recibe mas paquetes
+●oficina que envia mas
+●que mes tiene mas envios
+●peso promedio de los paquetes por oficina
+●clientes frecuentes por oficina
+	frecuente si envia mas de 5 al mes
+●listado de paquetes por status (entregado, por entregar, en aduana, en oficina origen, oficina, destino)
+●oficina con mas transito de paquetes por perdido
+●usuario registra mas paquetes por oficina
+●listado de vehículos por oficina base
+●flota terrestre nacional e internacional agrupado por ubicación, tipo, ordenado por serial de motor
+●oficina y zonas por estado
+●centros de servicio a nivel internacional
+●listado de aviones y carac
+●listado de puertos y aeropuertos con info base
+●listado de empleados con su horario y ubicación dentro de cada oficina 
+●listado de paquetes por clasificación y oficina en un periodo
+promedio de paquetes diarios por oficina
+●Listado de oficinas indicando región, país, continente.
+●paquetes combinan más medios de transporte
+●oficina es la más amplia por estado, región y país
+●usuarios y roles.
+●Listado de acciones ejecutadas por usuario y con qué rol se hizo.
+●Promedio de días de estancia de un paquete dentro de las zonas de cada
+oficina.
+●Listado de nomina semanal por oficina.
+●Costo de cada empleado por oficina en un periodo de tiempo. Al final del
+reporte debe mostrar el total los cálculos.
+●Listado de talleres por zona.
+●Listado de flota con su última fecha de revisión y próxima fecha por oficina.
+●Contabilidad: Indicar ingresos y egresos por oficina. Por periodo de tiempo.
+●Oficinas más costosas por estado y país.
+●Listado de servicios por oficina.
