@@ -1,13 +1,13 @@
 Create Database SislogUCAB;
 
 CREATE Table Lugar(
-ID int,
-Tipo varchar(3) NOT NULL,
-Nombre varchar(40) NOT NULL,
-Fk_Lugar int,
-Constraint Pk_Lugar PRIMARY KEY(ID),
-FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
-);
+  ID int,
+  Tipo varchar(3) NOT NULL,
+  Nombre varchar(40) NOT NULL,
+  Fk_Lugar int,
+  Constraint Pk_Lugar PRIMARY KEY(ID),
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
+  );
 
 CREATE Table Rol(
   ID SERIAL UNIQUE,
@@ -26,12 +26,12 @@ CREATE Table Privilegio(
   );
 
 CREATE Table Usuario(
-	ID SERIAL UNIQUE,
-	Username varchar(30) UNIQUE,
-	Password varchar(150) NOT NULL,
+  ID SERIAL UNIQUE,
+  Username varchar(30) UNIQUE,
+  Password varchar(150) NOT NULL,
   Constraint Pk_Usuario PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Rol) REFERENCES Rol (ID)
-	);
+  );
   
 CREATE Table Accion(
   ID SERIAL UNIQUE,
