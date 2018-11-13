@@ -56,7 +56,7 @@ CREATE Table Sucursal(
   Tamaño_D int NOT NULL,
   Fk_Lugar int NOT NULL,
   Constraint Pk_Sucursal PRIMARY KEY (COD),
-  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
   );
   
 Create Table Departamento(
@@ -113,12 +113,12 @@ CREATE Table Emp_Dep(
 
 CREATE Table Horario(
   ID SERIAL UNIQUE,
-  Constraint Pk_Horario PRIMARY KEY (ID),
+  Constraint Pk_Horario PRIMARY KEY (ID)
   );
   
 CREATE Table Emp_Hor(
   ID SERIAL UNIQUE,
-  Constraint Pk_Emp_Hor PRIMARY KEY (ID),
+  Constraint Pk_Emp_Hor PRIMARY KEY (ID)
   );
   
 CREATE Table Carnet(
@@ -126,7 +126,7 @@ CREATE Table Carnet(
   Codigo varchar(25) NOT NULL UNIQUE,
   Fk_Sucursal int NOT NULL,
   Constraint Pk_Carnet PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
   );
   
 CREATE Table Cliente(
@@ -149,7 +149,7 @@ CREATE Table Cliente(
 CREATE Table Marca(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
-  Constraint Pk_Marca PRIMARY KEY (ID),
+  Constraint Pk_Marca PRIMARY KEY (ID)
   );
   
 CREATE Table Modelo(
@@ -195,7 +195,48 @@ CREATE Table Avion(
   );
   
 CREATE Table Barco(
+  ID SERIAL UNIQUE,
+  Nombre varchar(30) NOT NULL,
+  Descripcion varchar(150),
+  Peso int NOT NULL,
+  Cap_C int NOT NULL,
+  Vmax int NOT NULL,
+  Long int NOT NULL,
+  Constraint Pk_Barco PRIMARY KEY (ID),
   );
+  
+CREATE Table Aeropuerto(
+  ID SERIAL UNIQUE,
+  Nombre varchar(100) NOT NULL,
+  Cant_T int NOT NULL,
+  Cant_P int NOT NULL,
+  Cap int NOT NULL,
+  Fk_Lugar int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  Constraint Pk_Aeropuerto PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
+  );
+  
+CREATE Table Puerto(
+  ID SERIAL UNIQUE,
+  Nombre varchar(100) NOT NULL,
+  Cant_P int NOT NULL,
+  Areas_T int NOT NULL, 
+  Areas_A int NOT NULL,
+  Cant_M int NOT NULL,
+  Long int NOT NULL,
+  Ancho int NOT NULL,
+  Calado int NOT NULL,
+  Uso int NOT NULL,
+  Fk_Lugar int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  Constraint Pk_puerto PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
+  );
+  
+
   
 
 
