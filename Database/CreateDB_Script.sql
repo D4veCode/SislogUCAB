@@ -236,7 +236,108 @@ CREATE Table Puerto(
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
   );
   
+CREATE Table Taller(
+  ID SERIAL UNIQUE,
+  Nombre varchar(50) NOT NULL,
+  Pg_Web varchar(150) UNIQUE,
+  Email varchar(50) NOT NULL,
+  Fk_Lugar int NOT NULL,
+  Constraint Pk_Taller PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
+  );
+  
+CREATE Table Falla(
+  ID SERIAL UNIQUE,
+  Nombre varchar(50) NOT NULL,
+  Constraint Pk_Taller PRIMARY KEY (ID)
+  );
 
+CREATE Table Veh_Fal(
+  ID SERIAL UNIQUE,
+  Fecha date NOT NULL,
+  Fk_Vehiculo int NOT NULL,
+  Fk_Falla int NOT NULL,
+  Constraint Pk_VF PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
+  FOREIGN KEY (Fk_Falla) REFERENCES Falla (ID)
+  );
+  
+CREATE Table Reparacion(
+  ID SERIAL UNIQUE,
+  Fecha_E date NOT NULL,
+  Fecha_S date NOT NULL,
+  Fecha_Rs date,
+  Prox_Rev date,
+  Monto int NOT NULL,
+  Fk_Taller int NOT NULL,
+  Fk_VF int NOT NULL,
+  Constraint Pk_Reparacion PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID),
+  FOREIGN KEY (Fk_VF) REFERENCES Veh_Fall (ID)
+  );
+  
+CREATE Table Contacto(
+  ID SERIAL UNIQUE,
+  Nombre varchar(30) NOT NULL,
+  Apellido varchar(30) NOT NULL,
+  Cedula int UNIQUE,
+  Fk_Taller int NOT NULL,
+  Constraint Pk_Contacto PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID)
+  );
+  
+CREATE Table Telefono(
+  ID SERIAL UNIQUE,
+  Cod_Op varchar(4) NOT NULL,
+  Num varchar(7) NOT NULL,
+  Fk_Emp int,
+  Fk_Sucursal int,
+  Fk_Contacto int,
+  Constraint Pk_Telefono PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID)
+  );
+  
+CREATE Table Suc_Met(
+  ID SERIAL UNIQUE,
+  Fk_Sucursal int NOT NULL,
+  Fk_Vehiculo int,
+  Fk_Avion int,
+  Fk_Barco int,
+  Constraint Pk_Suc_Met PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
+  FOREIGN KEY (Fk_Avion) REFERENCES Avion (ID),
+  FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID)
+  );
+  
+CREATE Table Gasto(
+  ID SERIAL UNIQUE,
+  Tipo varchar(30) NOT NULL UNIQUE,
+  Constraint Pk_Gasto PRIMARY KEY (ID),
+  );
+  
+CREATE Table Gas_Suc(
+  ID SERIAL UNIQUE,
+  Fk_Gasto int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  Monto int NOT NULL,
+  Constraint Pk_Gas_Suc PRIMARY KEY (ID),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Gasto) REFERENCES Gasto (ID),
+  );
   
 
+    
+    
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
