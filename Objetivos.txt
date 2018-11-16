@@ -1,0 +1,17 @@
+Planteamiento del problema: SislogUcab necesita un software capaz de manejar las compra-ventas de su empresa, al igual que el manejo de su inventario y flota vehicular a lo largo de todo el mundo.
+
+objetivo general: Sistematizar el servicio comercial de SislogUcab, gestionar su inventario y ofrecer reportes con los datos recolectados.
+
+objetivos especificos:
+	-Crear applicacion web capaz de manejar los servicios de la empresa
+	-Optimizar ruta de los paquetes
+	-Gestion de los vehiculos de la empresa
+	-Manejar nomiba empleados
+	-Control de gastos
+	-Estados inventario
+	-Control del seguimiento y estado de los paquetes enviados
+	-Creacion de carnet para usuarios
+	-Alertar cuando hay paquetes esperando
+	
+
+
