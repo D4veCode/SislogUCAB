@@ -111,14 +111,27 @@ CREATE Table Emp_Dep(
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID)
   };
 
-CREATE Table Horario(
+CREATE Table Dia(
+  ID int NOT NULL,
+  Nombre varchar(10) NOT NULL,
+  Constraint Pk_Dia PRIMARY KEY (ID),	
+  );
+	
+CREATE Table Hora(
   ID SERIAL UNIQUE,
+  Hora_E time NOT NULL,
+  Hora_S time NOT NULL,
   Constraint Pk_Horario PRIMARY KEY (ID)
   );
   
-CREATE Table Emp_Hor(
+CREATE Table Horario(
   ID SERIAL UNIQUE,
-  Constraint Pk_Emp_Hor PRIMARY KEY (ID)
+  Fk_Dia int NOT NULL,
+  Fk_Hor int NOT NULL,
+  Fk_Emp int NOT NULL,
+  FOREIGN KEY (Fk_Hor) REFERENCES Horario (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  Constraint Pk_Horario PRIMARY KEY (ID)
   );
   
 CREATE Table Carnet(
