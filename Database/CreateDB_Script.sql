@@ -328,6 +328,117 @@ CREATE Table Gas_Suc(
   FOREIGN KEY (Fk_Gasto) REFERENCES Gasto (ID),
   );
   
+Create Table Debito(
+	ID SERIAL UNIQUE,
+  Nombre_T varchar(50) NOT NULL,
+	Numero varchar(30) NOT NULL,
+	Cod_S varchar(10) NOT NULL,
+	Banco varchar(50) NOT NULL,
+	Constraint Pk_Debito PRIMARY KEY(ID)
+	);
+
+CREATE Table Credito(
+	ID SERIAL UNIQUE,
+	Nombre_T varchar(50) NOT NULL,
+  Cedula_T int NOT NULL,
+  Numero varchar(30) NOT NULL,
+  Fecha_V date NOT NULL,
+	Cod_S varchar(10) NOT NULL,
+	Banco varchar(50) NOT NULL,
+	Constraint Pk_Credito PRIMARY KEY(ID)
+  );
+  
+CREATE Table Cheque(
+	ID SERIAL UNIQUE,
+	Numero_C varchar(50) NOT NULL,
+	Fecha_D timestamp NOT NULL,
+	Banco varchar(50) NOT NULL,
+	Constraint Pk_Cheque PRIMARY KEY(ID)
+	);
+  
+CREATE Table Transferencia(
+  ID SERIAL UNIQUE,
+  Nombre_T varchar(50) NOT NULL,
+  Num_R varchar(20) NOT NULL,
+  Rif varchar(30) NOT NULL,
+  Banco varchar(50) NOT NULL,
+  Constraint Pk_Transferencia PRIMARY KEY(ID)
+  );
+  
+CREATE Table Tipo_Trans(
+  ID SERIAL UNIQUE,
+  Tipo char(20) NOT NULL,
+  Constraint Pk_Tipo_Trans PRIMARY KEY(ID)
+  );
+  
+CREATE Table Ruta(
+  ID SERIAL UNIQUE,
+  Fk_Origen int NOT NULL,
+  Fk_Destino int NOT NULL
+  Fk_TipoT int NOT NULL,
+  Tiempo int NOT NULL,
+  FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_TipoT) REFERENCES Tipo_Trans (ID),
+  Constraint Pk_Ruta PRIMARY KEY(ID)
+  );
+  
+CREATE Table Paquete(
+  ID SERIAL UNIQUE,
+  Num_G int NOT NULL UNIQUE,
+  Peso int NOT NULL,
+  Monto int,
+  Tipo_P varchar(50), NOT NULL,
+  Fk_Cliente int NOT NULL,
+  FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
+  Constraint Pk_Paquete PRIMARY KEY(ID)
+  );
+  
+CREATE Table Tracking(
+  ID SERIAL UNIQUE,
+  Fecha_L date NOT NULL,
+  Fecha_S date,
+  Fk_Ruta int,
+  Fk_Paq int NOT NULL,
+  Fk_Suc int NOT NULL,
+  FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
+  FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD),
+  Constraint Pk_Tracking PRIMARY KEY(ID)
+  );
+  
+CREATE Table Facturacion(
+  ID SERIAL UNIQUE,
+  Fecha date NOT NULL,
+  Fk_Tacking int NOT NULL,
+  Fk_Deb int,
+  Fk_Cre int,
+  Fk_Che int,
+  Fk_Trans int,
+  FOREIGN KEY (Fk_Deb) REFERENCES Debito (ID),
+  FOREIGN KEY (Fk_Cre) REFERENCES Credito (ID),
+  FOREIGN KEY (Fk_Che) REFERENCES Cheque (ID),
+  FOREIGN KEY (Fk_Trans) REFERENCES Transferencia (ID),
+  FOREIGN KEY (Fk_Tacking) REFERENCES Tracking (ID),
+  Constraint Pk_Facturacion PRIMARY KEY(ID)
+  );
+
+CREATE Table Status(
+  ID SERIAL UNIQUE,
+  Descripcion varchar(100),
+  Tipo varchar(50) NOT NULL UNIQUE,
+  Constraint Pk_Facturacion PRIMARY KEY(ID)
+  );
+  
+CREATE Table Sta_Tra(
+  ID SERIAL UNIQUE,
+  Fecha date NOT NULL,
+  Fk_Status int NOT NULL,
+  Fk_Tracking int NOT NULL,
+  FOREIGN KEY (Fk_Status) REFERENCES Status (ID),
+  FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
+  Constraint Pk_Sta_Tra PRIMARY KEY(ID)
+  );
 
     
     
