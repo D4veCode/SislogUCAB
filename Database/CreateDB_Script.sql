@@ -3,7 +3,6 @@ Create Database SislogUCAB;
 DROP schema public cascade;
 CREATE schema public;
 
-
 CREATE Table Lugar(
   ID int,
   Tipo varchar(3) NOT NULL,
@@ -17,7 +16,7 @@ CREATE Table Rol(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
   Tipo varchar(100) NOT NULL,
-  Constraint Pk_Rol PRIMARY KEY(ID),
+  Constraint Pk_Rol PRIMARY KEY(ID)
   );
   
 CREATE Table Privilegio(
@@ -50,7 +49,7 @@ CREATE Table Accion(
 CREATE Table Sucursal(
   COD SERIAL UNIQUE,
   Nombre varchar(150) NOT NULL,
-  Email varchar(150) NOT NULL
+  Email varchar(150) NOT NULL,
   Cap_M2 int NOT NULL,
   Cap_Alm int NOT NULL,
   Tamaño_D int NOT NULL,
@@ -80,7 +79,7 @@ CREATE Table Empleado(
   Email_E varchar(150) NOT NULL UNIQUE,
   Fecha_N Date NOT NULL,
   Nivel_Acd varchar(150) NOT NULL,
-  Edo_C char(1) NOT NULL
+  Edo_C char(1) NOT NULL,
   Profecion varchar(150) NOT NULL,
   Num_H int NOT NULL,
   Fk_Lugar int NOT NULL,
@@ -104,24 +103,24 @@ CREATE Table Emp_Suc(
 CREATE Table Emp_Dep(
   ID SERIAL UNIQUE,
   Fecha date NOT NULL,
-  Fk_Dep int NOT NULL
-  Fk_Emp int NOT NULL
+  Fk_Dep int NOT NULL,
+  Fk_Emp int NOT NULL,
   Constraint Pk_Emp_Dep PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Dep) REFERENCES Departamento (COD),
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID)
-  };
+  );
 
 CREATE Table Dia(
   ID int NOT NULL,
   Nombre varchar(10) NOT NULL,
-  Constraint Pk_Dia PRIMARY KEY (ID),	
+  Constraint Pk_Dia PRIMARY KEY (ID)
   );
 	
 CREATE Table Hora(
   ID SERIAL UNIQUE,
   Hora_E time NOT NULL,
   Hora_S time NOT NULL,
-  Constraint Pk_Horario PRIMARY KEY (ID)
+  Constraint Pk_Hora PRIMARY KEY (ID)
   );
   
 CREATE Table Horario(
@@ -145,7 +144,7 @@ CREATE Table Carnet(
 CREATE Table Cliente(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
-  Apellido varchar(100) NOT NULL
+  Apellido varchar(100) NOT NULL,
   Fecha_N Date Not NULL,
   Edo_C char(1) NOT NULL,
   Nombre_E varchar(100),
@@ -190,7 +189,7 @@ CREATE Table Vehiculo(
   
 CREATE Table Avion(
   ID SERIAL UNIQUE,
-  Nombre
+  Nombre varchar(50) NOT NULL,
   Peso int NOT NULL,
   Cap_C int NOT NULL,
   Descripcion varchar(150),
@@ -215,7 +214,7 @@ CREATE Table Barco(
   Cap_C int NOT NULL,
   Vmax int NOT NULL,
   Long int NOT NULL,
-  Constraint Pk_Barco PRIMARY KEY (ID),
+  Constraint Pk_Barco PRIMARY KEY (ID)
   );
   
 CREATE Table Aeropuerto(
@@ -262,7 +261,7 @@ CREATE Table Taller(
 CREATE Table Falla(
   ID SERIAL UNIQUE,
   Nombre varchar(50) NOT NULL,
-  Constraint Pk_Taller PRIMARY KEY (ID)
+  Constraint Pk_Falla PRIMARY KEY (ID)
   );
 
 CREATE Table Veh_Fal(
@@ -286,7 +285,7 @@ CREATE Table Reparacion(
   Fk_VF int NOT NULL,
   Constraint Pk_Reparacion PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID),
-  FOREIGN KEY (Fk_VF) REFERENCES Veh_Fall (ID)
+  FOREIGN KEY (Fk_VF) REFERENCES Veh_Fal (ID)
   );
   
 CREATE Table Contacto(
@@ -328,7 +327,7 @@ CREATE Table Suc_Met(
 CREATE Table Gasto(
   ID SERIAL UNIQUE,
   Tipo varchar(30) NOT NULL UNIQUE,
-  Constraint Pk_Gasto PRIMARY KEY (ID),
+  Constraint Pk_Gasto PRIMARY KEY (ID)
   );
   
 CREATE Table Gas_Suc(
@@ -338,7 +337,7 @@ CREATE Table Gas_Suc(
   Monto int NOT NULL,
   Constraint Pk_Gas_Suc PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Gasto) REFERENCES Gasto (ID),
+  FOREIGN KEY (Fk_Gasto) REFERENCES Gasto (ID)
   );
   
 Create Table Debito(
@@ -387,7 +386,7 @@ CREATE Table Tipo_Trans(
 CREATE Table Ruta(
   ID SERIAL UNIQUE,
   Fk_Origen int NOT NULL,
-  Fk_Destino int NOT NULL
+  Fk_Destino int NOT NULL,
   Fk_TipoT int NOT NULL,
   Tiempo int NOT NULL,
   FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
@@ -401,7 +400,7 @@ CREATE Table Paquete(
   Num_G int NOT NULL UNIQUE,
   Peso int NOT NULL,
   Monto int,
-  Tipo_P varchar(50), NOT NULL,
+  Tipo_P varchar(50) NOT NULL,
   Fk_Cliente int NOT NULL,
   FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
@@ -440,7 +439,7 @@ CREATE Table Status(
   ID SERIAL UNIQUE,
   Descripcion varchar(100),
   Tipo varchar(50) NOT NULL UNIQUE,
-  Constraint Pk_Facturacion PRIMARY KEY(ID)
+  Constraint Pk_Status PRIMARY KEY(ID)
   );
   
 CREATE Table Sta_Tra(
@@ -452,16 +451,3 @@ CREATE Table Sta_Tra(
   FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
   Constraint Pk_Sta_Tra PRIMARY KEY(ID)
   );
-
-    
-    
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
