@@ -128,17 +128,10 @@ CREATE Table Horario(
   Fk_Dia int NOT NULL,
   Fk_Hor int NOT NULL,
   Fk_Emp int NOT NULL,
+  FOREIGN KEY (Fk_Dia) REFERENCES Dia (ID),
   FOREIGN KEY (Fk_Hor) REFERENCES Horario (ID),
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
   Constraint Pk_Horario PRIMARY KEY (ID)
-  );
-  
-CREATE Table Carnet(
-  ID SERIAL UNIQUE,
-  Codigo varchar(25) NOT NULL UNIQUE,
-  Fk_Sucursal int NOT NULL,
-  Constraint Pk_Carnet PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
   );
   
 CREATE Table Cliente(
@@ -151,11 +144,9 @@ CREATE Table Cliente(
   L_VIP int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_User int NOT NULL UNIQUE,
-  Fk_Carnet int UNIQUE,
   Constraint Pk_Cliente PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
-  FOREIGN KEY (Fk_Carnet) REFERENCES Carnet (ID)
+  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID)
   );
 
 CREATE Table Marca(
@@ -169,7 +160,7 @@ CREATE Table Modelo(
   Nombre varchar(100) NOT NULL,
   Fk_Marca int NOT NULL,
   Constraint Pk_Modelo PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Marca) REFERENCES Carnet (ID)
+  FOREIGN KEY (Fk_Marca) REFERENCES Marca (ID)
   );
 
 CREATE Table Vehiculo(
@@ -184,7 +175,7 @@ CREATE Table Vehiculo(
   Serial_C varchar(30) NOT NULL,
   Fk_Mod int NOT NULL,
   Constraint Pk_Vehiculo PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Mod) REFERENCES Marca (ID)
+  FOREIGN KEY (Fk_Mod) REFERENCES Modelo (ID)
   );  
   
 CREATE Table Avion(
@@ -341,23 +332,23 @@ CREATE Table Gas_Suc(
   );
   
 Create Table Debito(
-	ID SERIAL UNIQUE,
+  ID SERIAL UNIQUE,
   Nombre_T varchar(50) NOT NULL,
-	Numero varchar(30) NOT NULL,
-	Cod_S varchar(10) NOT NULL,
-	Banco varchar(50) NOT NULL,
-	Constraint Pk_Debito PRIMARY KEY(ID)
-	);
+  Numero varchar(30) NOT NULL,
+  Cod_S varchar(10) NOT NULL,
+  Banco varchar(50) NOT NULL,
+  Constraint Pk_Debito PRIMARY KEY(ID)
+  );
 
 CREATE Table Credito(
-	ID SERIAL UNIQUE,
-	Nombre_T varchar(50) NOT NULL,
+  ID SERIAL UNIQUE,
+  Nombre_T varchar(50) NOT NULL,
   Cedula_T int NOT NULL,
   Numero varchar(30) NOT NULL,
   Fecha_V date NOT NULL,
-	Cod_S varchar(10) NOT NULL,
-	Banco varchar(50) NOT NULL,
-	Constraint Pk_Credito PRIMARY KEY(ID)
+  Cod_S varchar(10) NOT NULL,
+  Banco varchar(50) NOT NULL,
+  Constraint Pk_Credito PRIMARY KEY(ID)
   );
   
 CREATE Table Cheque(
@@ -377,10 +368,10 @@ CREATE Table Transferencia(
   Constraint Pk_Transferencia PRIMARY KEY(ID)
   );
   
-CREATE Table Tipo_Trans(
+CREATE Table Tipo_Transp(
   ID SERIAL UNIQUE,
   Tipo char(20) NOT NULL,
-  Constraint Pk_Tipo_Trans PRIMARY KEY(ID)
+  Constraint Pk_Tipo_Transp PRIMARY KEY(ID)
   );
   
 CREATE Table Ruta(
@@ -391,7 +382,7 @@ CREATE Table Ruta(
   Tiempo int NOT NULL,
   FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
   FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_TipoT) REFERENCES Tipo_Trans (ID),
+  FOREIGN KEY (Fk_TipoT) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Ruta PRIMARY KEY(ID)
   );
   
