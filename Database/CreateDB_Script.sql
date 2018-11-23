@@ -315,20 +315,21 @@ CREATE Table Suc_Met(
   FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID)
   );
   
-CREATE Table Gasto(
+CREATE Table Servicio(
   ID SERIAL UNIQUE,
   Tipo varchar(30) NOT NULL UNIQUE,
-  Constraint Pk_Gasto PRIMARY KEY (ID)
+  Constraint Pk_Servicio PRIMARY KEY (ID)
   );
   
-CREATE Table Gas_Suc(
+CREATE Table Ser_Suc(
   ID SERIAL UNIQUE,
-  Fk_Gasto int NOT NULL,
+  Fk_Servicio int NOT NULL,
   Fk_Sucursal int NOT NULL,
   Monto int NOT NULL,
+  Fecha date NOT NULL,
   Constraint Pk_Gas_Suc PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Gasto) REFERENCES Gasto (ID)
+  FOREIGN KEY (Fk_Servicio) REFERENCES Servicio (ID)
   );
   
 Create Table Debito(
@@ -352,12 +353,12 @@ CREATE Table Credito(
   );
   
 CREATE Table Cheque(
-	ID SERIAL UNIQUE,
-	Numero_C varchar(50) NOT NULL,
-	Fecha_D timestamp NOT NULL,
-	Banco varchar(50) NOT NULL,
-	Constraint Pk_Cheque PRIMARY KEY(ID)
-	);
+  ID SERIAL UNIQUE,
+  Numero_C varchar(50) NOT NULL,
+  Fecha_D timestamp NOT NULL,
+  Banco varchar(50) NOT NULL,
+  Constraint Pk_Cheque PRIMARY KEY(ID)
+  );
   
 CREATE Table Transferencia(
   ID SERIAL UNIQUE,
