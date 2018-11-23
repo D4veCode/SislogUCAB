@@ -23,9 +23,16 @@ CREATE Table Privilegio(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
   Tipo varchar(100) NOT NULL,
-  Fk_rol int NOT NULL,
   Constraint Pk_Privilegio PRIMARY KEY(ID),
-  FOREIGN KEY (Fk_rol) REFERENCES Rol (ID)
+  );
+  
+CREATE Table Rol_Priv(
+  ID SERIAL UNIQUE,
+  Fk_privilegio int NOT NULL,
+  Fk_rol int NOT NULL,
+  FOREIGN KEY (Fk_rol) REFERENCES Rol (ID),
+  FOREIGN KEY (Fk_privilegio) REFERENCES Privilegio (ID),
+  Constraint Pk_Rol_Priv PRIMARY KEY(ID)	
   );
 
 CREATE Table Usuario(
@@ -39,6 +46,7 @@ CREATE Table Usuario(
   
 CREATE Table Accion(
   ID SERIAL UNIQUE,
+  Fecha timestamp without time zone default (now() at time zone 'utc'),
   FK_Privilegio int NOT NULL,
   FK_User int NOT NULL,
   Constraint Pk_Accion PRIMARY KEY (ID),
@@ -74,7 +82,7 @@ CREATE Table Empleado(
   S_Nombre varchar(150),
   P_Apellido varchar(150) NOT NULL,
   S_Apellido varchar(150),
-  Cedula int NOT NULL UNIQUE,
+  Cedula varchar(10) NOT NULL UNIQUE,
   Email_P varchar(150) UNIQUE,
   Email_E varchar(150) NOT NULL UNIQUE,
   Fecha_N Date NOT NULL,
@@ -82,6 +90,7 @@ CREATE Table Empleado(
   Edo_C char(1) NOT NULL,
   Profecion varchar(150) NOT NULL,
   Num_H int NOT NULL,
+  Salario int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_Emp int,
   Fk_User int NOT NULL UNIQUE,
@@ -139,6 +148,7 @@ CREATE Table Cliente(
   Nombre varchar(100) NOT NULL,
   Apellido varchar(100) NOT NULL,
   Fecha_N Date Not NULL,
+  Cedula varchar(10) NOT NULL UNIQUE,
   Edo_C char(1) NOT NULL,
   Nombre_E varchar(100),
   L_VIP int NOT NULL,
@@ -283,7 +293,7 @@ CREATE Table Contacto(
   ID SERIAL UNIQUE,
   Nombre varchar(30) NOT NULL,
   Apellido varchar(30) NOT NULL,
-  Cedula int UNIQUE,
+  Cedula Varchar(10) UNIQUE,
   Fk_Taller int NOT NULL,
   Constraint Pk_Contacto PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID)
@@ -386,16 +396,45 @@ CREATE Table Ruta(
   FOREIGN KEY (Fk_TipoT) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Ruta PRIMARY KEY(ID)
   );
-  
+ 
+CREATE Table Tipo_Producto(
+  ID SERIAL UNIQUE,
+  Tipo varchar(30) NOT NULL,
+  Constraint Pk_Tipo_Producto PRIMARY KEY(ID)
+  );
+
+CREATE Table Paq_Prod(
+  ID SERIAL UNIQUE,
+  Fk_Paq int NOT NULL,
+  Fk_TP NOT NULL,
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
+  FOREIGN KEY (Fk_TP) REFERENCES Tipo_Producto (ID)
+  Constraint Pk_Paq_Prod PRIMARY KEY(ID)
+  );
+
 CREATE Table Paquete(
   ID SERIAL UNIQUE,
   Num_G int NOT NULL UNIQUE,
   Peso int NOT NULL,
-  Monto int,
-  Tipo_P varchar(50) NOT NULL,
+  Monto int NOT NULL,
+  Ancho int NOT NULL,
+  Largo int NOT NULL,
+  Alto int NOT NULL,
+  Fk_Trans int NOT NULL,
   Fk_Cliente int NOT NULL,
   FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
+  FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
+  );
+  
+CREATE Table Destinatario(
+  ID SERIAL UNIQUE,
+  Nombre varchar(50) NOT NULL,
+  Apellido varchar(50) NOT NULL,
+  Cedula varchar(10) NOT NULL,
+  Fk_Paq int NOT NULL,
+  FOREIGN KEY (Fk_Paq) REFERENCES Destinatario (ID),
+  Constraint Pk_Destinatario PRIMARY KEY(ID)
   );
   
 CREATE Table Tracking(
@@ -415,6 +454,7 @@ CREATE Table Facturacion(
   ID SERIAL UNIQUE,
   Fecha date NOT NULL,
   Fk_Tacking int NOT NULL,
+  Monto int NOT NULL,
   Fk_Deb int,
   Fk_Cre int,
   Fk_Che int,
