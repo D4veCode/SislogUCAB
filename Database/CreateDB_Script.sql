@@ -8,8 +8,8 @@ CREATE Table Lugar(
   Tipo varchar(3) NOT NULL,
   Nombre varchar(40) NOT NULL,
   Fk_Lugar int,
-  Constraint Pk_Lugar PRIMARY KEY(ID),
-  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  Constraint Pk_Lugar PRIMARY KEY(ID)
   );
 
 CREATE Table Rol(
@@ -40,8 +40,8 @@ CREATE Table Usuario(
   Username varchar(30) UNIQUE,
   Password varchar(150) NOT NULL,
   Fk_Rol int NOT NULL,
-  Constraint Pk_Usuario PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Rol) REFERENCES Rol (ID)
+  FOREIGN KEY (Fk_Rol) REFERENCES Rol (ID),
+  Constraint Pk_Usuario PRIMARY KEY (ID)
   );
   
 CREATE Table Accion(
@@ -49,9 +49,9 @@ CREATE Table Accion(
   Fecha timestamp without time zone default (now() at time zone 'utc'),
   FK_Privilegio int NOT NULL,
   FK_User int NOT NULL,
-  Constraint Pk_Accion PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Privilegio) REFERENCES Privilegio (ID),
-  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID)
+  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
+  Constraint Pk_Accion PRIMARY KEY (ID)
   );
   
 CREATE Table Sucursal(
@@ -62,8 +62,8 @@ CREATE Table Sucursal(
   Cap_Alm int NOT NULL,
   Tamaño_D int NOT NULL,
   Fk_Lugar int NOT NULL,
-  Constraint Pk_Sucursal PRIMARY KEY (COD),
-  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  Constraint Pk_Sucursal PRIMARY KEY (COD)
   );
   
 Create Table Departamento(
@@ -72,8 +72,8 @@ Create Table Departamento(
   Descripcin varchar(150),
   Area_D int NOT NULL,
   Fk_Sucursal int NOT NULL,
-  Constraint Pk_Departamento PRIMARY KEY (COD),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  Constraint Pk_Departamento PRIMARY KEY (COD)
   );
 
 CREATE Table Empleado(
@@ -94,19 +94,19 @@ CREATE Table Empleado(
   Fk_Lugar int NOT NULL,
   Fk_Emp int,
   Fk_User int NOT NULL UNIQUE,
-  Constraint Pk_Empleado PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
-  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID)
+  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
+  Constraint Pk_Empleado PRIMARY KEY (ID)
   );
   
 CREATE Table Emp_Suc(
   ID SERIAL UNIQUE,
   Fk_Suc int NOT NULL,
   Fk_Emp int NOT NULL,
-  Constraint Pk_Emp_Suc PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID)
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  Constraint Pk_Emp_Suc PRIMARY KEY (ID)
   );
   
 CREATE Table Emp_Dep(
@@ -114,9 +114,9 @@ CREATE Table Emp_Dep(
   Fecha date NOT NULL,
   Fk_Dep int NOT NULL,
   Fk_Emp int NOT NULL,
-  Constraint Pk_Emp_Dep PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Dep) REFERENCES Departamento (COD),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID)
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  Constraint Pk_Emp_Dep PRIMARY KEY (ID)	
   );
 
 CREATE Table Dia(
@@ -154,9 +154,9 @@ CREATE Table Cliente(
   L_VIP int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_User int NOT NULL UNIQUE,
-  Constraint Pk_Cliente PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID)
+  FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
+  Constraint Pk_Cliente PRIMARY KEY (ID)
   );
 
 CREATE Table Marca(
@@ -169,8 +169,8 @@ CREATE Table Modelo(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
   Fk_Marca int NOT NULL,
-  Constraint Pk_Modelo PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Marca) REFERENCES Marca (ID)
+  FOREIGN KEY (Fk_Marca) REFERENCES Marca (ID),
+  Constraint Pk_Modelo PRIMARY KEY (ID)
   );
 
 CREATE Table Vehiculo(
@@ -184,8 +184,8 @@ CREATE Table Vehiculo(
   Serial_M varchar(30) NOT NULL,
   Serial_C varchar(30) NOT NULL,
   Fk_Mod int NOT NULL,
-  Constraint Pk_Vehiculo PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Mod) REFERENCES Modelo (ID)
+  FOREIGN KEY (Fk_Mod) REFERENCES Modelo (ID),
+  Constraint Pk_Vehiculo PRIMARY KEY (ID)
   );  
   
 CREATE Table Avion(
@@ -226,9 +226,9 @@ CREATE Table Aeropuerto(
   Cap int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_Sucursal int NOT NULL,
-  Constraint Pk_Aeropuerto PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  Constraint Pk_Aeropuerto PRIMARY KEY (ID)
   );
   
 CREATE Table Puerto(
@@ -244,9 +244,9 @@ CREATE Table Puerto(
   Uso int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_Sucursal int NOT NULL,
-  Constraint Pk_puerto PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD)
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  Constraint Pk_puerto PRIMARY KEY (ID)
   );
   
 CREATE Table Taller(
@@ -255,8 +255,8 @@ CREATE Table Taller(
   Pg_Web varchar(150) UNIQUE,
   Email varchar(50) NOT NULL,
   Fk_Lugar int NOT NULL,
-  Constraint Pk_Taller PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID)
+  FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
+  Constraint Pk_Taller PRIMARY KEY (ID)
   );
   
 CREATE Table Falla(
@@ -270,9 +270,9 @@ CREATE Table Veh_Fal(
   Fecha date NOT NULL,
   Fk_Vehiculo int NOT NULL,
   Fk_Falla int NOT NULL,
-  Constraint Pk_VF PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
-  FOREIGN KEY (Fk_Falla) REFERENCES Falla (ID)
+  FOREIGN KEY (Fk_Falla) REFERENCES Falla (ID),
+  Constraint Pk_VF PRIMARY KEY (ID)
   );
   
 CREATE Table Reparacion(
@@ -284,9 +284,9 @@ CREATE Table Reparacion(
   Monto int NOT NULL,
   Fk_Taller int NOT NULL,
   Fk_VF int NOT NULL,
-  Constraint Pk_Reparacion PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID),
-  FOREIGN KEY (Fk_VF) REFERENCES Veh_Fal (ID)
+  FOREIGN KEY (Fk_VF) REFERENCES Veh_Fal (ID),
+  Constraint Pk_Reparacion PRIMARY KEY (ID)
   );
   
 CREATE Table Contacto(
@@ -295,8 +295,8 @@ CREATE Table Contacto(
   Apellido varchar(30) NOT NULL,
   Cedula Varchar(10) UNIQUE,
   Fk_Taller int NOT NULL,
+  FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID),
   Constraint Pk_Contacto PRIMARY KEY (ID),
-  FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID)
   );
   
 CREATE Table Telefono(
@@ -306,10 +306,10 @@ CREATE Table Telefono(
   Fk_Emp int,
   Fk_Sucursal int,
   Fk_Contacto int,
-  Constraint Pk_Telefono PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID)
+  FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID),
+  Constraint Pk_Telefono PRIMARY KEY (ID)
   );
   
 CREATE Table Suc_Met(
@@ -318,11 +318,11 @@ CREATE Table Suc_Met(
   Fk_Vehiculo int,
   Fk_Avion int,
   Fk_Barco int,
-  Constraint Pk_Suc_Met PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
   FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
   FOREIGN KEY (Fk_Avion) REFERENCES Avion (ID),
-  FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID)
+  FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID),
+  Constraint Pk_Suc_Met PRIMARY KEY (ID)
   );
   
 CREATE Table Servicio(
@@ -337,9 +337,9 @@ CREATE Table Ser_Suc(
   Fk_Sucursal int NOT NULL,
   Monto int NOT NULL,
   Fecha date NOT NULL,
-  Constraint Pk_Gas_Suc PRIMARY KEY (ID),
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Servicio) REFERENCES Servicio (ID)
+  FOREIGN KEY (Fk_Servicio) REFERENCES Servicio (ID),
+  Constraint Pk_Gas_Suc PRIMARY KEY (ID)
   );
   
 Create Table Debito(
@@ -385,6 +385,15 @@ CREATE Table Tipo_Transp(
   Constraint Pk_Tipo_Transp PRIMARY KEY(ID)
   );
   
+CREATE Table Ruta(
+  ID SERIAL UNIQUE,
+  Fk_Origen int NOT NULL,
+  Fk_Destino int NOT NULL,
+  FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
+  Constraint Pk_Ruta PRIMARY KEY(ID)
+  );
+ 
 CREATE Table Ruta_Trans(
   ID SERIAL UNIQUE,
   Fk_TT
@@ -393,15 +402,6 @@ CREATE Table Ruta_Trans(
   FOREIGN KEY (Fk_TT) REFERENCES Tipo_Transp (ID),
   FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),  
   Constraint Pk_Ruta_Trans PRIMARY KEY(ID)
-  );
-  
-CREATE Table Ruta(
-  ID SERIAL UNIQUE,
-  Fk_Origen int NOT NULL,
-  Fk_Destino int NOT NULL,
-  FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
-  Constraint Pk_Ruta PRIMARY KEY(ID)
   );
  
 CREATE Table Tipo_Producto(
@@ -448,10 +448,10 @@ CREATE Table Tracking(
   ID SERIAL UNIQUE,
   Fecha_L date NOT NULL,
   Fecha_S date,
-  Fk_Ruta int,
+  Fk_RT int,
   Fk_Paq int NOT NULL,
   Fk_Suc int NOT NULL,
-  FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),
+  FOREIGN KEY (Fk_RT) REFERENCES Ruta_Trans (ID),
   FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
   FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD),
   Constraint Pk_Tracking PRIMARY KEY(ID)
