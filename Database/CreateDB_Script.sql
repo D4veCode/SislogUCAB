@@ -385,15 +385,22 @@ CREATE Table Tipo_Transp(
   Constraint Pk_Tipo_Transp PRIMARY KEY(ID)
   );
   
+CREATE Table Ruta_Trans(
+  ID SERIAL UNIQUE,
+  Fk_TT
+  Fk_Ruta
+  Tiempo int NOT NULL,
+  FOREIGN KEY (Fk_TT) REFERENCES Tipo_Transp (ID),
+  FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),  
+  Constraint Pk_Ruta_Trans PRIMARY KEY(ID)
+  );
+  
 CREATE Table Ruta(
   ID SERIAL UNIQUE,
   Fk_Origen int NOT NULL,
   Fk_Destino int NOT NULL,
-  Fk_TipoT int NOT NULL,
-  Tiempo int NOT NULL,
   FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
   FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_TipoT) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Ruta PRIMARY KEY(ID)
   );
  
