@@ -42,3 +42,8 @@ def paginate(max_per_page=100):
             return result, 200
         return wrapped
     return decorator
+
+def check_password(user, password):
+
+
+    return True

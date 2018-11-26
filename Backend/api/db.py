@@ -23,3 +23,12 @@ def agregarCliente(user, nombre, ci, apellido, email, lvip, fk_lugar, f_nacimien
         "insert into Cliente(FK_Usuario, Nombre, ci, apellido, email, estado_civil, nombre_empresa, lvip, FK_Lugar, FK_Carnet, fecha_nacimiento) values ($1,$2,$3,$4,$5,$6,$7,$8, $9, $10, $11)",
         (user, nombre, ci, apellido, email, est_civil, nombre_empresa, lvip, fk_lugar, fk_carnet, f_nacimiento,))
     con.close()
+
+def getCliente(id):
+    con = connect()
+
+    cliente = con.query("select * from cliente where cod = $1", (id, )).dictresult()
+
+    con.close()
+
+    return cliente
