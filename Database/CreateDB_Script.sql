@@ -1,5 +1,3 @@
-Create Database SislogUCAB;
-
 DROP schema public cascade;
 CREATE schema public;
 
@@ -23,7 +21,7 @@ CREATE Table Privilegio(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
   Tipo varchar(100) NOT NULL,
-  Constraint Pk_Privilegio PRIMARY KEY(ID),
+  Constraint Pk_Privilegio PRIMARY KEY(ID)
   );
   
 CREATE Table Rol_Priv(
@@ -296,7 +294,7 @@ CREATE Table Contacto(
   Cedula Varchar(10) UNIQUE,
   Fk_Taller int NOT NULL,
   FOREIGN KEY (Fk_Taller) REFERENCES Taller (ID),
-  Constraint Pk_Contacto PRIMARY KEY (ID),
+  Constraint Pk_Contacto PRIMARY KEY (ID)
   );
   
 CREATE Table Telefono(
@@ -396,8 +394,8 @@ CREATE Table Ruta(
  
 CREATE Table Ruta_Trans(
   ID SERIAL UNIQUE,
-  Fk_TT
-  Fk_Ruta
+  Fk_TT int NOT NULL,
+  Fk_Ruta int NOT NULL,
   Tiempo int NOT NULL,
   FOREIGN KEY (Fk_TT) REFERENCES Tipo_Transp (ID),
   FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),  
@@ -408,15 +406,6 @@ CREATE Table Tipo_Producto(
   ID SERIAL UNIQUE,
   Tipo varchar(30) NOT NULL,
   Constraint Pk_Tipo_Producto PRIMARY KEY(ID)
-  );
-
-CREATE Table Paq_Prod(
-  ID SERIAL UNIQUE,
-  Fk_Paq int NOT NULL,
-  Fk_TP NOT NULL,
-  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
-  FOREIGN KEY (Fk_TP) REFERENCES Tipo_Producto (ID)
-  Constraint Pk_Paq_Prod PRIMARY KEY(ID)
   );
 
 CREATE Table Paquete(
@@ -433,6 +422,15 @@ CREATE Table Paquete(
   FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
   );
+ 
+ CREATE Table Paq_Prod(
+  ID SERIAL UNIQUE,
+  Fk_Paq int NOT NULL,
+  Fk_TP int NOT NULL,
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
+  FOREIGN KEY (Fk_TP) REFERENCES Tipo_Producto (ID),
+  Constraint Pk_Paq_Prod PRIMARY KEY(ID)
+  );
   
 CREATE Table Destinatario(
   ID SERIAL UNIQUE,
@@ -440,7 +438,7 @@ CREATE Table Destinatario(
   Apellido varchar(50) NOT NULL,
   Cedula varchar(10) NOT NULL,
   Fk_Paq int NOT NULL,
-  FOREIGN KEY (Fk_Paq) REFERENCES Destinatario (ID),
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
   Constraint Pk_Destinatario PRIMARY KEY(ID)
   );
   
