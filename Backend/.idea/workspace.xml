@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="88c8cf6f-bcd8-4c2a-bbcf-4a5aac401032" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Resources/Avion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Resources/Barco.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Resources/Lugar.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Resources/Sucursal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/Resources/Vehiculo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Resources/Cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/Resources/Cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/Resources/controllers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/Resources/Empleado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes.py" afterDir="false" />
-    </list>
+    <list default="true" id="88c8cf6f-bcd8-4c2a-bbcf-4a5aac401032" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +46,7 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/Resources/Barco.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="226">
+                <state relative-caret-position="265">
                   <caret line="39" column="58" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
                   <folding>
                     <element signature="e#0#61#0" expanded="true" />
@@ -227,7 +214,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="834" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2181357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -364,7 +350,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/Resources/Barco.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
+        <state relative-caret-position="265">
           <caret line="39" column="58" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
