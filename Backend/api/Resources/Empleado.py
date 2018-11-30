@@ -81,9 +81,9 @@ class Empleado(Resource):
                 args['fecha_nac'], args['nivel_acad'], args['edo_civil'], args['profesion'], args['num_h'], args['fk_lugar'], args['fk_user'], args['fk_emp'], args['email_p'])
             return {"status": "success", "message": "The Employee has been updated."}
 
-        except Exception:
+        except Exception as e:
 
-            return {"status": "fail", "error": "Employee not found"}, 404
+            return {"status": "fail", "error": str(e)}, 500
 
 
     def delete(self, id):

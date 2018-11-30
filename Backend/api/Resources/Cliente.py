@@ -44,6 +44,7 @@ class ClienteList(Resource):
 
 
 class RegistroCliente(Resource):
+
     def post(self):
 
         args = cli_parse.parse_args()

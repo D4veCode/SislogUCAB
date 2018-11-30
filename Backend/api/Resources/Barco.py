@@ -19,13 +19,18 @@ bar_fields = {
 
 class BarcoList(Resource):
 
-    def get(self):
+    def get(self, suc=None):
 
         try:
+            if suc:
+                barcos = database.getBarcos(suc)
 
-            barcos = database.getBarcos()
+                return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
+            else:
 
-            return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
+                barcos = database.getBarcos()
+
+                return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
 
         except Exception as e:
 
@@ -36,8 +41,10 @@ class BarcoList(Resource):
         try:
             args = barco_parse.parse_args()
 
-            database.agregarBarco(args['sucursal'], args['nombre'], args['descripcion'], args['peso'], args['cap_c'],
+            idBarco = database.crearBarco(args['nombre'], args['descripcion'], args['peso'], args['cap_c'],
                                   args['vmax'], args['long'])
+
+            database.agregarBarco(idBarco, args['sucursal'])
 
             return {"status": "success", "message": "Boat created."}, 200
 
@@ -45,3 +52,44 @@ class BarcoList(Resource):
 
             return {"status": "fail", "error": str(e)}, 500
 
+
+class Barco(Resource):
+
+    def get(self, suc, id):
+
+        try:
+
+            barco = database.getBarco(suc, id)[0]
+
+            return {"status": "success", "barco": marshal(barco, bar_fields)}
+
+        except Exception:
+
+            return{"status": "fail", "error": "Boat in office {suc} not found."}, 404
+
+    def put(self, suc, id):
+
+        try:
+
+            args= barco_parse.parse_args()
+
+            database.updateBarco(suc, id, args['nombre'], args['descripcion'], args['peso'], args['cap_c'],
+                                args['vmax'], args['long'])
+
+            return {"status": "success", "message": "Boat updated."}
+
+        except Exception as e:
+
+            return {"status": "fail", "error": str(e)}, 500
+
+    def delete(self, suc, id):
+
+        try:
+
+            database.deleteBarco(suc, id)
+
+            return {"status": "success", "message":  "The boat has been deleted."}
+
+        except Exception as e:
+
+            return {"status": "fail", "error": str(e)}, 500
