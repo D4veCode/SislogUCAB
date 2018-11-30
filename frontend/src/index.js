@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-//import '../node_modules/jquery/dist/jquery.min.js';
+import '../node_modules/jquery/dist/jquery.min.js';
+import '../node_modules/popper.js/dist/popper.min.js';
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));

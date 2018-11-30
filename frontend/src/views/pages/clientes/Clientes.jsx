@@ -10,17 +10,33 @@ export default class Sucursal extends Component{
     constructor(props){
         super(props)
         this.state = {
-            clientes : {}
+            clientes : []
         } 
     }
     componentDidMount(){
-        /* axios.get(`http://127.0.0.1:8000/api/`)
+         axios.get('http://127.0.0.1:8000/api/v1/clientes')
         .then(response =>{
-            this.setState({sucursales: response.data})
-        }) */
+            this.setState({clientes: response.data.clientes})
+            console.log(this.state.clientes);
+        })
     }
 
     render(){
+        var client = this.state.clientes.map(function(cliente){
+            return <tr key={cliente.ID}>
+                        <th scope="row"><Link to={{
+                            pathname: "/cliente/"+cliente.ID
+                        }} className="btn btn-info">{ cliente.ID }</Link></th>
+                        <td>{ cliente.FK_User }</td>
+                        <td>{ cliente.Nombre }</td>
+                        <td>{ cliente.Apellido }</td>
+                        <td>{ cliente.Cedula }</td>
+                        <td>{ cliente.Nombre_E }</td>
+                        <td>{ cliente.Edo_C }</td>
+                        <td>{ cliente.L_VIP }</td>
+                        <td>{ cliente.Fecha_N }</td>
+                    </tr>
+        })
         return(
             <div className="wrapper">
             <Sidemenu/>
@@ -33,11 +49,10 @@ export default class Sucursal extends Component{
                 <h2 className="text-center m-3"> SisLogUCAB Clientes DataTable</h2>
             
                 <table className="table table-hover w-100">
-                    <thead>
+                    <thead className="thead-dark">
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">  Username  </th>
-                        <th scope="col">  Password  </th>
                         <th scope="col">  Nombre  </th>
                         <th scope="col">  Apellido  </th>
                         <th scope="col">  Cedula </th>
@@ -48,44 +63,7 @@ export default class Sucursal extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row"><Link to={{
-                            pathname: "/cliente/1"
-                        }} className="btn btn-info">1</Link></th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        </tr>
+                        { client }
                     </tbody>
                 </table>
             </div>

@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FormCliente from './FormCliente';
+import FormEmpleado from './FormEmpleado';
 import Sidemenu from '../../containers/Sidemenu';
 import MenuAdmin from '../../containers/MenuAdmin';
 import '../../css/account.css';
 
-export default class SucursalDetail extends Component{
+export default class EmpleadoDetail extends Component{
     constructor(props){
         super(props)
         this.state = {
-            sucursal : {}
+            empleado : {}
         } 
     }
     componentDidMount(){
-        const clienteID = this.props.match.params.clienteID;
-        /* axios.get(`http://127.0.0.1:8000/${clienteID}`)
+        const empleadoID = this.props.match.params.empleadoID;
+        /* axios.get(`http://127.0.0.1:8000/${empleadoID}`)
         .then(response =>{
-            this.setState({sucursal: response.data})
+            this.setState({empleado: response.data})
         }) */
     }
 
@@ -24,7 +24,7 @@ export default class SucursalDetail extends Component{
         return(  
         <div>          
             <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Cliente Detail</h2>
+                <h2 className="text-center m-3"> SisLogUCAB Empleado Detail</h2>
                 
                 <div className="card">
                     <div className="card-header">
@@ -41,9 +41,9 @@ export default class SucursalDetail extends Component{
             <br/>
 
             <div className="m-3">
-                <FormCliente
+                <FormEmpleado
                     requestType="put"
-                    // clienteID={this.props.match.params.clienteID}
+                    // sucursalID={this.props.match.params.empleadoID}
                     btnText="Update"
                 />
             </div>

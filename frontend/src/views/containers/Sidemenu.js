@@ -26,6 +26,14 @@ export default class Sidemenu extends Component{
                             </li>
                         </ul> 
                     </li>
+                    <li className="active">
+                        <a href="#empleados" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Empleados</a>
+                        <ul className="collapse list-unstyled" id="empleados">
+                            <li>
+                                <a href="#"><Link to="/empleados">Info Empleados</Link></a>
+                            </li>
+                        </ul> 
+                    </li>
                 </ul>
             </nav>
         );

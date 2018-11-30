@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class FormCliente extends Component{
+export default class FormEmpleado extends Component{
 
-    handleFormSubmit = (event, requestType, clienteID) => {
+    handleFormSubmit = (event, requestType, empleadoID) => {
         event.preventDefault();
         const Nombre = event.target.elements.Nombre.value;
         const Apellido = event.target.elements.Apellido.value;
@@ -27,7 +27,7 @@ export default class FormCliente extends Component{
 
         switch(requestType){
             case 'post':
-                return axios.post('http://127.0.0.1:8000/api/v1/clientes/post',{
+                return axios.post('',{
                     Nombre: Nombre,
                     Apellido: Apellido,
                     Fecha_N: Fecha_N,
@@ -35,15 +35,13 @@ export default class FormCliente extends Component{
                     Edo_C: Edo_C,
                     Nombre_E: Nombre_E,
                     L_VIP: L_VIP,
-                    FK_User:1,
-                    FK_Lugar:2
-                    //Username: Username,
-                    //Password: Password,
+                    Username: Username,
+                    Password: Password,
                 })
                 .then(response => console.log(response))
                 .catch(error => console.log(error))
             case 'put':
-                return axios.put(`http:/${clienteID}/`,{
+                return axios.put(`http:/${empleadoID}/`,{
                     Nombre: Nombre,
                     Apellido: Apellido,
                     Fecha_N: Fecha_N,
@@ -51,8 +49,8 @@ export default class FormCliente extends Component{
                     Edo_C: Edo_C,
                     Nombre_E: Nombre_E,
                     L_VIP: L_VIP,
-                   // Username: Username,
-                    //Password: Password,
+                    Username: Username,
+                    Password: Password,
                 })
                 .then(response => console.log(response))
                 .catch(error => console.log(error))
@@ -73,48 +71,47 @@ export default class FormCliente extends Component{
                     </div>
                     <div className="form-group col-md-6">
                     <label htmlFor="Password">Password</label>
-                    <input type="password" name="Password" className="form-control" id="inputPassword4" placeholder="Password"/>
+                    <input type="email" name="Password" className="form-control" id="inputPassword4" placeholder="Password"/>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-4">
                     <label htmlFor="Nombre">Nombre</label>
-                    <input type="text" name="Nombre" className="form-control" />
+                    <input type="text" name="Nombre" className="form-control" id="inputCity"/>
                     </div>
                     <div className="form-group col-md-4">
                     <label htmlFor="Apellido">Apellido</label>
-                    <input type="text" name="Apellido" className="form-control" />
+                    <input type="text" name="Apellido" className="form-control" id="inputCity"/>
                     </div>
                     <div className="form-group col-md-4">
                     <label htmlFor="Cedula">Cedula</label>
-                    <input type="text" name="Cedula" className="form-control" />
+                    <input type="text" name="Cedula" className="form-control" id="inputCity"/>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-3">
                     <label htmlFor="Nombre_E">Nombre Empresa</label>
-                    <input type="text" name="Nombre_E" className="form-control" />
+                    <input type="text" name="Nombre_E" className="form-control" id="inputCity"/>
                     </div>
                     <div className="form-group col-md-3">
                     <label htmlFor="Fecha_N">Nacimiento</label>
-                    <input type="date" name="Fecha_N" className="form-control" />
+                    <input type="date" name="Fecha_N" className="form-control" id="inputCity"/>
                     </div>
                     <div class="form-group col-md-3">
                     <label htmlFor="L_VIP">L_VIP</label>
                     <select id="inputState" class="form-control" name="L_VIP">
                         <option selected>Choose...</option>
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
+                        <option>Si</option>
+                        <option>No</option>
                     </select>
                     </div>
                     <div class="form-group col-md-3">
                     <label htmlFor="Edo_C">Estado Civil</label>
-                    <select class="form-control" name="Edo_C">
+                    <select id="inputState" class="form-control" name="Edo_C">
                         <option selected>Choose...</option>
-                        <option value="c">Casado</option>
-                        <option value="s">Soltero</option>
-                        <option value="v">Viudo</option>
-                        <option value="d">Divorciado</option>
+                        <option>Casado</option>
+                        <option>Soltero</option>
+                        <option>Viudo</option>
                     </select>
                     </div>
                 </div>

@@ -1,63 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import './css/login.css';
 
 class Login extends Component {
   render() {
     return (
-      <div className="app flex-row align-items-center">
-        <Container>
-          <Row className="justify-content-center">
-            <Col md="8">
-              <CardGroup>
-                <Card className="p-4">
-                  <CardBody>
-                    <Form>
-                      <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
-                      <InputGroup className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="icon-user"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="username" />
-                      </InputGroup>
-                      <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="icon-lock"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="current-password" />
-                      </InputGroup>
-                      <Row>
-                        <Col xs="6">
-                          <Button color="primary" className="px-4">Login</Button>
-                        </Col>
-                        <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </CardBody>
-                </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
-                      </Link>
+      <div className="page login-page">
+        <div className="container d-flex align-items-center">
+          <div className="form-holder has-shadow">
+            <div className="row">
+              
+              <div className="col-lg-6">
+                <div className="info d-flex align-items-center">
+                  <div className="content">
+                    <div className="logo">
+                      <h1>Dashboard</h1>
                     </div>
-                  </CardBody>
-                </Card>
-              </CardGroup>
-            </Col>
-          </Row>
-        </Container>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="col-lg-6 bg-white">
+                <div className="form d-flex align-items-center">
+                  <div className="content">
+                    <form method="post" className="form-validate">
+                      <div className="form-group">
+                        <input id="login-username" type="text" name="loginUsername" required data-msg="Please enter your username" className="input-material"/>
+                        <label for="login-username" className="label-material">User Name</label>
+                      </div>
+                      <div className="form-group">
+                        <input id="login-password" type="password" name="loginPassword" required data-msg="Please enter your password" className="input-material"/>
+                        <label for="login-password" className="label-material">Password</label>
+                      </div><a id="login" href="index.html" className="btn btn-primary">Login</a>
+                      
+                    </form><a href="" className="forgot-pass">Forgot Password?</a><br/><small>Do not have an account? </small><a href="" className="signup"><Link to="/register">Signup</Link></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

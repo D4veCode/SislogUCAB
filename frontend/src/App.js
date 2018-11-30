@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Loadable from 'react-loadable';
-import '../node_modules/jquery/dist/jquery.min.js';
-import '../node_modules/popper.js/dist/popper.min.js';
-import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 // importando los respectivos componentes
 import Home from './views/Home';
 import Sucursal from './views/pages/sucursal/Sucursal';
 import SucursalDetail from './views/pages/sucursal/SucursalDetail';
-import Clientes from './views/pages/clientes/Clientes';
-import ClienteDetail from './views/pages/clientes/ClienteDetail';
+import Clientes from './views/pages/clientes/Clientes.jsx';
+import ClienteDetail from './views/pages/clientes/ClienteDetail.jsx';
+import Empleados from './views/pages/empleados/Empleados';
+import EmpleadoDetail from './views/pages/empleados/EmpleadoDetail';
 
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
@@ -44,6 +43,8 @@ class App extends Component {
               <Route path="/sucursal/:sucursal" component={SucursalDetail}/>
               <Route path="/clientes" component={Clientes}/>
               <Route path="/cliente/:cliente" component={ClienteDetail}/>
+              <Route path="/empleados" component={Empleados}/>
+              <Route path="/empleado/:empleado" component={EmpleadoDetail}/>
             </div> 
         </Router>
       </div>
