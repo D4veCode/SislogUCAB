@@ -1,7 +1,8 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
-from api.helpers import check_password
+from api.helpers import check_password, encrypt_password
 from api.Resources.Cliente import login_parser
+
 emp_parse = reqparse.RequestParser()
 
 emp_parse.add_argument('p_nombre', required=True)
@@ -16,12 +17,14 @@ emp_parse.add_argument('nivel_acad', required=True)
 emp_parse.add_argument('edo_civil', required=True)
 emp_parse.add_argument('profesion', required=True)
 emp_parse.add_argument('num_h', required=True)
+emp_parse.add_argument('salario', required=True)
 emp_parse.add_argument('fk_lugar', required=True)
-emp_parse.add_argument('fk_user')
+emp_parse.add_argument('username', required=True)
+emp_parse.add_argument('password', required=True)
 emp_parse.add_argument('fk_emp')
 
 emp_fields = {
-    'cod': fields.Integer,
+    'id': fields.Integer,
     'p_nombre': fields.String,
     's_nombre': fields.String,
     'p_apellido': fields.String,
@@ -29,16 +32,15 @@ emp_fields = {
     'cedula': fields.String,
     'email_p': fields.String,
     'email_e': fields.String,
-    'fecha_nac': fields.DateTime('iso8601'),
-    'edo_civil': fields.String,
+    'fecha_n': fields.DateTime('iso8601'),
+    'edo_c': fields.String,
     'profesion': fields.String,
     'num_h': fields.Integer,
-    'fk_lugar': fields.Integer,
-    'fk_user': fields.Integer,
+    'salario': fields.Float,
+    'Direccion': fields.Integer,
+    'username': fields.Integer,
     'fk_emp': fields.Integer,
 }
-
-
 
 
 class HelloWorld(Resource):
@@ -71,6 +73,7 @@ class Empleado(Resource):
             return {"status": "success", "empleado": marshal(empleado, emp_fields)}
 
         except Exception:
+
             return {"status": "fail", "error": "Employee not found"}, 404
 
     def put(self, id):
@@ -85,13 +88,12 @@ class Empleado(Resource):
 
             return {"status": "fail", "error": str(e)}, 500
 
-
     def delete(self, id):
 
         try:
             database.deleteEmpleado(id)
 
-            return {"status": "successs", "message": "Employee deleted."}
+            return {"status": "success", "message": "Employee deleted."}
 
         except Exception as e:
 
@@ -124,9 +126,9 @@ class RegistroEmpleado(Resource):
 
         try:
             args = emp_parse.parse_args()
-
+            user = database.agregarUser(args['username'], encrypt_password(args['password']), 1)[0].get("id")
             database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'], args['cedula'], args['email_e'],
-                args['fecha_nac'], args['nivel_acad'], args['edo_civil'], args['profesion'], args['num_h'], args['fk_lugar'], args['fk_user'],
+                args['fecha_n'], args['nivel_acd'], args['edo_c'], args['profesion'], args['num_h'], args['fk_lugar'], user,
                 args['fk_emp'], args['email_p'])
 
             return {"status": "success", "message": "Employee registered."}, 201

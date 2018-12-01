@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
-from api.helpers import check_password
+from api.helpers import check_password, encrypt_password
 
 cli_parse = reqparse.RequestParser()
 
@@ -8,23 +8,26 @@ cli_parse.add_argument('nombre', required=True)
 cli_parse.add_argument('apellido', required=True)
 cli_parse.add_argument('ci', required=True)
 cli_parse.add_argument('email', required=True)
-cli_parse.add_argument('est_civil', choices=('soltero', 'casado', 'divorciado', 'viudo'))
+cli_parse.add_argument('est_civil', choices=('s', 'c', 'd', 'v'))
 cli_parse.add_argument('nombre_empresa')
 cli_parse.add_argument('l_vip', default=False)
 cli_parse.add_argument('f_nacimiento')
 cli_parse.add_argument('fk_lugar', type=int)
 cli_parse.add_argument('fk_usuario', type=int)
 cli_parse.add_argument('fk_carnet', type=int)
+cli_parse.add_argument('username', required=True)
+cli_parse.add_argument('password', required=True)
 
 cli_fields = {
-    'cod': fields.Integer,
+    'id': fields.Integer,
     'nombre': fields.String,
     'apellido': fields.String,
-    'ci': fields.String,
-    'estado_civil': fields.String,
-    'nombre_empresa': fields.String,
-    'lvip': fields.Boolean,
-    'fecha_nacimiento': fields.DateTime('iso8601')
+    'cedula': fields.String,
+    'edo_c': fields.String,
+    'nombre_e': fields.String,
+    'l_vip': fields.Boolean,
+    'fecha_n': fields.DateTime('iso8601'),
+    'username': fields.String
 }
 
 login_parser = reqparse.RequestParser()
@@ -46,22 +49,29 @@ class ClienteList(Resource):
 class RegistroCliente(Resource):
 
     def post(self):
+        try:
+            args = cli_parse.parse_args()
 
-        args = cli_parse.parse_args()
-        db = database
+            if args['est_civil']:
 
-        if args['est_civil']:
+                password = encrypt_password(args['password'])
+                user = database.agregarUser(args['username'], password,1)[0].get("id")
+                database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
+                                  args['fk_lugar'], args['f_nacimiento'], args['est_civil'])
 
-            db.agregarCliente(3, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
-                              args['fk_lugar'], args['f_nacimiento'], args['est_civil'])
-            return {"success": True}, 201
+                return {"status": "success", "message": "Client registered"}, 201
 
-        elif (args['nombre_empresa']):
+            elif args['nombre_empresa']:
 
-            db.agregarCliente(3, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
-                              args['fk_lugar'], args['f_nacimiento'], None, args['nombre_empresa'])
+                password = encrypt_password(args['password'])
+                user = database.agregarUser(args['username'], password, 1)
+                database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
+                                  args['fk_lugar'], args['f_nacimiento'], None, args['nombre_empresa'])
 
-            return {'success': True}, 201
+                return {'status': "success", "message": "Client registered"}, 201
+
+        except Exception as e:
+            return {"status": "fail", "error": str(e)}, 500
 
 
 class LoginCliente(Resource):
@@ -73,12 +83,13 @@ class LoginCliente(Resource):
             user = database.getUser(args['username'])[0]
 
             if user:
-                if check_password(user, args['password']):
+                if check_password(user['password'], args['password']):
                     return {"status": "success"}
                 else:
                     return {"status": "fail", "message": "Incorrect Password"}, 401
             else:
-                return {"status": "fail", "message": "This user does not exist"}
+                return {"status": "fail", "message": "This user does not exist"}, 404
+
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 503
 
@@ -89,10 +100,14 @@ class Cliente(Resource):
 
         try:
             cliente = database.getCliente(id)[0]
+            print(cliente)
             return {"cliente": marshal(cliente, cli_fields)}
 
-        except Exception:
-            return {"status": "fail", "error": "Client not found"}, 404
+        except Exception as e:
+            if e == IndexError:
+                return {"status": "fail", "error": "Client not found"}, 404
+            else:
+                return {"status": "fail", "error": str(e)}, 500
 
     def put(self, id):
 

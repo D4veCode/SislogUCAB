@@ -1,6 +1,6 @@
 import functools
 from flask import request, url_for
-
+import bcrypt
 
 def paginate(max_per_page=100):
     def decorator(func):
@@ -43,7 +43,12 @@ def paginate(max_per_page=100):
         return wrapped
     return decorator
 
-def check_password(user, password):
+def check_password(hashed, password):
+
+    return bcrypt.checkpw(password, hashed)
+
+def encrypt_password(password):
+
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
-    return True
