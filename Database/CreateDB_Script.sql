@@ -35,7 +35,7 @@ CREATE Table Rol_Priv(
 
 CREATE Table Usuario(
   ID SERIAL UNIQUE,
-  Username varchar(30) UNIQUE,
+  Username varchar(30) NOT NULL UNIQUE,
   Password varchar(150) NOT NULL,
   Fk_Rol int NOT NULL,
   FOREIGN KEY (Fk_Rol) REFERENCES Rol (ID),
