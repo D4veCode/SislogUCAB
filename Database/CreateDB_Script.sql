@@ -146,6 +146,7 @@ CREATE Table Cliente(
   Nombre varchar(100) NOT NULL,
   Apellido varchar(100) NOT NULL,
   Fecha_N Date Not NULL,
+  E-mail varchar(150) NOT NULL UNIQUE,
   Cedula varchar(10) NOT NULL UNIQUE,
   Edo_C char(1) NOT NULL,
   Nombre_E varchar(100),
