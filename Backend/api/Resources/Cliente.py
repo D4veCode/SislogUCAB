@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse, fields, marshal
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_claims
 import api.db as database
 from api.helpers import check_password, encrypt_password
+
 
 cli_parse = reqparse.RequestParser()
 
@@ -37,7 +39,7 @@ login_parser.add_argument('password', required=True)
 
 
 class ClienteList(Resource):
-
+    @jwt_required
     def get(self):
         try:
             clientes = database.getClientes()
@@ -58,8 +60,8 @@ class RegistroCliente(Resource):
                 user = database.agregarUser(args['username'], password,1)[0].get("id")
                 database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
                                   args['fk_lugar'], args['f_nacimiento'], args['est_civil'])
-
-                return {"status": "success", "message": "Client registered"}, 201
+                token = create_access_token(identity=args['username'])
+                return {"status": "success", "message": "Client registered", "token": token}, 201
 
             elif args['nombre_empresa']:
 
@@ -67,7 +69,7 @@ class RegistroCliente(Resource):
                 user = database.agregarUser(args['username'], password, 1)
                 database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
                                   args['fk_lugar'], args['f_nacimiento'], None, args['nombre_empresa'])
-
+                token = create_access_token(identity=args['username'])
                 return {'status': "success", "message": "Client registered"}, 201
 
         except Exception as e:
@@ -81,26 +83,26 @@ class LoginCliente(Resource):
         try:
             args = login_parser.parse_args()
             user = database.getUser(args['username'])[0]
-
+            print(user['password'])
             if user:
                 if check_password(user['password'], args['password']):
-                    return {"status": "success"}
+                    token = create_access_token(identity=args['username'])
+                    return {"status": "success", "token": token}
                 else:
                     return {"status": "fail", "message": "Incorrect Password"}, 401
             else:
                 return {"status": "fail", "message": "This user does not exist"}, 404
 
         except Exception as e:
-            return {"status": "fail", "error": str(e)}, 503
+            return {"status": "fail", "error": str(e)}, 500
 
 
 class Cliente(Resource):
-
+    @jwt_required
     def get(self, id):
 
         try:
             cliente = database.getCliente(id)[0]
-            print(cliente)
             return {"cliente": marshal(cliente, cli_fields)}
 
         except Exception as e:

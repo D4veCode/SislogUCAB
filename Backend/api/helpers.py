@@ -43,9 +43,11 @@ def paginate(max_per_page=100):
         return wrapped
     return decorator
 
+
 def check_password(hashed, password):
 
-    return bcrypt.checkpw(password, hashed)
+    return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+
 
 def encrypt_password(password):
 
