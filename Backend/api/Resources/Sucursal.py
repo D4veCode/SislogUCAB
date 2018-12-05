@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
+from flask_jwt_extended import jwt_required
 
 sucu_parse = reqparse.RequestParser()
 
@@ -20,7 +21,7 @@ suc_fields ={
 }
 
 class SucursalList(Resource):
-
+    @jwt_required
     def get(self):
 
         try:
@@ -34,7 +35,7 @@ class SucursalList(Resource):
             return {"status": "fail", "error": str(e)}, 500
 
 class Sucursal(Resource):
-
+    @jwt_required
     def get(self, id):
 
         try:

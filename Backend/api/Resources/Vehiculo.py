@@ -1,4 +1,5 @@
 from flask_restful import Resource, reqparse, fields, marshal
+from flask_jwt_extended import jwt_required
 import api.db as database
 
 veh_parse = reqparse.RequestParser()
@@ -29,7 +30,7 @@ veh_fields = {
 
 
 class VehiculoList(Resource):
-
+    @jwt_required
     def get(self, suc=None):
 
         try:
@@ -67,7 +68,7 @@ class VehiculoList(Resource):
 
 
 class Vehiculo(Resource):
-
+    @jwt_required
     def get(self, suc, id):
 
         try:

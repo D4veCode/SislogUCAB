@@ -1,4 +1,5 @@
 from flask_restful import Resource, reqparse, fields, marshal
+from flask_jwt_extended import jwt_required
 import api.db as database
 
 barco_parse = reqparse.RequestParser()
@@ -13,12 +14,18 @@ barco_parse.add_argument('sucursal', required=True)
 
 
 bar_fields = {
-
+    'id': fields.Integer,
+    'nombre': fields.String,
+    'descripcion': fields.String,
+    'peso': fields.Integer,
+    'cap_c': fields.Integer,
+    'vmax':  fields.Integer,
+    'long': fields.Integer
 }
 
 
 class BarcoList(Resource):
-
+    @jwt_required
     def get(self, suc=None):
 
         try:
@@ -54,7 +61,7 @@ class BarcoList(Resource):
 
 
 class Barco(Resource):
-
+    @jwt_required
     def get(self, suc, id):
 
         try:
