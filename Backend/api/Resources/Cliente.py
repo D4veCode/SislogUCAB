@@ -8,15 +8,13 @@ cli_parse = reqparse.RequestParser()
 
 cli_parse.add_argument('nombre', required=True)
 cli_parse.add_argument('apellido', required=True)
-cli_parse.add_argument('ci', required=True)
+cli_parse.add_argument('cedula', required=True)
 cli_parse.add_argument('email', required=True)
-cli_parse.add_argument('est_civil', choices=('s', 'c', 'd', 'v'))
-cli_parse.add_argument('nombre_empresa')
+cli_parse.add_argument('edo_c', choices=('s', 'c', 'd', 'v'))
+cli_parse.add_argument('nombre_e')
 cli_parse.add_argument('l_vip', default=False)
-cli_parse.add_argument('f_nacimiento')
+cli_parse.add_argument('fecha_n')
 cli_parse.add_argument('fk_lugar', type=int)
-cli_parse.add_argument('fk_usuario', type=int)
-cli_parse.add_argument('fk_carnet', type=int)
 cli_parse.add_argument('username', required=True)
 cli_parse.add_argument('password', required=True)
 
@@ -43,7 +41,7 @@ class ClienteList(Resource):
     def get(self):
         try:
             clientes = database.getClientes()
-            return {"clientes": [marshal(cli, cli_fields) for cli in clientes]}, 201
+            return {"clientes": [marshal(cli, cli_fields) for cli in clientes]}, 200
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 500
 
@@ -52,25 +50,24 @@ class RegistroCliente(Resource):
 
     def post(self):
         try:
-            args = cli_parse.parse_args()
+            data = cli_parse.parse_args()
+            if data['edo_c']:
 
-            if args['est_civil']:
-
-                password = encrypt_password(args['password'])
-                user = database.agregarUser(args['username'], password,1)[0].get("id")
-                database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
-                                  args['fk_lugar'], args['f_nacimiento'], args['est_civil'])
-                token = create_access_token(identity=args['username'])
+                password = encrypt_password(data['password'])
+                user = database.agregarUser(data['username'], password,1)[0].get("id")
+                database.agregarCliente(user, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
+                                  data['fk_lugar'], data['fecha_n'], data['edo_c'])
+                token = create_access_token(identity=data['username'])
                 return {"status": "success", "message": "Client registered", "token": token}, 201
 
-            elif args['nombre_empresa']:
+            elif data['nombre_e']:
 
-                password = encrypt_password(args['password'])
-                user = database.agregarUser(args['username'], password, 1)
-                database.agregarCliente(user, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
-                                  args['fk_lugar'], args['f_nacimiento'], None, args['nombre_empresa'])
-                token = create_access_token(identity=args['username'])
-                return {'status': "success", "message": "Client registered"}, 201
+                password = encrypt_password(data['password'])
+                user = database.agregarUser(data['username'], password, 1)
+                database.agregarCliente(user, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
+                                  data['fk_lugar'], data['fecha_n'], None, data['nombre_e'])
+                token = create_access_token(identity=data['username'])
+                return {'status': "success", "message": "Client registered", "token": token}, 201
 
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 500
@@ -81,12 +78,12 @@ class LoginCliente(Resource):
     def post(self):
 
         try:
-            args = login_parser.parse_args()
-            user = database.getUser(args['username'])[0]
+            data = login_parser.parse_args()
+            user = database.getUser(data['username'])[0]
             print(user['password'])
             if user:
-                if check_password(user['password'], args['password']):
-                    token = create_access_token(identity=args['username'])
+                if check_password(user['password'], data['password']):
+                    token = create_access_token(identity=data['username'])
                     return {"status": "success", "token": token}
                 else:
                     return {"status": "fail", "message": "Incorrect Password"}, 401
@@ -114,9 +111,9 @@ class Cliente(Resource):
     def put(self, id):
 
             try:
-                args = cli_parse.parse_args()
-                database.updateCliente(id, args['nombre'], args['ci'], args['apellido'], args['email'], args['l_vip'],
-                                   args['fk_lugar'], args['f_nacimiento'], args['est_civil'], args['nombre_empresa'])
+                data = cli_parse.parse_args()
+                database.updateCliente(id, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
+                                   data['fk_lugar'], data['fecha_n'], data['edo_c'], data['nombre_e'])
 
                 return {"status": "success", "message": "The client has been updated."}
 
