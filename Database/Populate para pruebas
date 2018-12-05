@@ -1539,3 +1539,7 @@ insert into empleado(P_Nombre,S_Nombre,P_Apellido,S_Apellido,Cedula,Email_P,Emai
 ('Fernando',NULL,'Rodriguez','Vazquez','24210861','ferdy.rod23@gmail.com','frodriguez3@gmail.com','23/04/1996','Bachillerato','s','Estudiante',0,5000,1098,2,15),
 ('Raul','Antoine','Villarroel',NULL,'26125521','raul.antonio98@gmail.com','rvillaroel4@gmail.com','30/08/1998','Bachillerato','s','Estudiante',0,5000,1471,1,6),
 ('Manuel','Andres','Urbina','Fher','22864781','manuel.urbina96@gmail.com','murbina5@gmail.com','04/06/1998','Tecnico Superior','c','Computista',0,5000,1100,4,10);
+
+insert into cliente(Nombre,Apellido,Fecha_N,Email,Cedula,Edo_C,Nombre_E,L_VIP,Fk_Lugar,Fk_User)values
+('Fernando','Rodriguez','23/04/96','ferdy_rod@hotmail.com','24210861','s',NULL,0,1098,2),
+('Raul','Villarroel','07/02/98','raul.villaroel98@gmail.com','27255077','s',NULL,0,1471,3);
