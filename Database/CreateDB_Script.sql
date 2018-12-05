@@ -86,7 +86,7 @@ CREATE Table Empleado(
   Fecha_N Date NOT NULL,
   Nivel_Acd varchar(150) NOT NULL,
   Edo_C char(1) NOT NULL,
-  Profecion varchar(150) NOT NULL,
+  Profesion varchar(150) NOT NULL,
   Num_H int NOT NULL,
   Salario int NOT NULL,
   Fk_Lugar int NOT NULL,
