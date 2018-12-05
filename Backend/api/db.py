@@ -48,3 +48,10 @@ def agregarUser(username, password, rol):
     con.close()
 
     return user
+
+def getUser(username):
+    con = connect()
+    user = con.query("select * from usuario where username = $1", username).dictresult()
+
+    con.close()
+    return user
