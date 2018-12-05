@@ -1531,3 +1531,4 @@ insert into sucursal(nombre,email,cap_M2,cap_alm,Tamaño_D,fk_lugar)values
 ('Sislog Higuerote','sislog.higuerote@gmail.com',60,20,20,1101),
 ('Sislog Puerto la cruz','sislog.ptolacruz@gmail.com',70,25,25,537),
 ('Sislog Maracaibo','sislog.maracaibo@gmail.com',70,25,25,479);
+('Sislog Catia la mar','sislog.catialamar@gmail.com',100,40,40,1469);
