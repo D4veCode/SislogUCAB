@@ -1543,3 +1543,7 @@ insert into empleado(P_Nombre,S_Nombre,P_Apellido,S_Apellido,Cedula,Email_P,Emai
 insert into cliente(Nombre,Apellido,Fecha_N,Email,Cedula,Edo_C,Nombre_E,L_VIP,Fk_Lugar,Fk_User)values
 ('Fernando','Rodriguez','23/04/96','ferdy_rod@hotmail.com','24210861','s',NULL,0,1098,2),
 ('Raul','Villarroel','07/02/98','raul.villaroel98@gmail.com','27255077','s',NULL,0,1471,3);
+
+insert into Emp_Suc(Fk_Suc,Fk_Emp) values
+(1,1),(1,2),(1,3),(7,4),(7,5);
+
