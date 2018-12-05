@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
+from flask_jwt_extended import jwt_required
 from api.helpers import check_password, encrypt_password
 from api.Resources.Cliente import login_parser
 
@@ -12,9 +13,9 @@ emp_parse.add_argument('s_apellido')
 emp_parse.add_argument('cedula', required=True)
 emp_parse.add_argument('email_p', )
 emp_parse.add_argument('email_e', required=True)
-emp_parse.add_argument('fecha_nac', required=True)
-emp_parse.add_argument('nivel_acad', required=True)
-emp_parse.add_argument('edo_civil', required=True)
+emp_parse.add_argument('fecha_n', required=True)
+emp_parse.add_argument('nivel_acd', required=True)
+emp_parse.add_argument('edo_c', required=True)
 emp_parse.add_argument('profesion', required=True)
 emp_parse.add_argument('num_h', required=True)
 emp_parse.add_argument('salario', required=True)
@@ -50,7 +51,7 @@ class HelloWorld(Resource):
 
 
 class EmpleadoList(Resource):
-
+    @jwt_required
     def get(self):
 
         try:
@@ -64,7 +65,7 @@ class EmpleadoList(Resource):
             return {"status": "fail", "error": str(e)}, 500
 
 class Empleado(Resource):
-
+    @jwt_required
     def get(self, id):
 
         try:
