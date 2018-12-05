@@ -5,9 +5,20 @@ insert into Rol(Nombre,Tipo)values
 ('Empaquetador','adm');
 
 insert into usuario(username,password,fk_rol)values
-('ferrod','23041996',2),
 ('Devemeter','soygay',1),
+('ferrod','23041996',2),
+('WhiteBlack','r123r123',2),
 ('Yisus','123456789',3),
+('Frean','Pato94',3),
+('Raulantoine','321r321r',3),
+('Josph','trapmoney',3),
+('SoS','Challenger',3),
+('Danyboy','Nestea',3),
+('Manik96','04061996',4),
+('Silverbat','f23041996F',4),
+('Mnaik96','m04061996M',4),
+('Belzelga','230496',4),
+('kirito','123456',4),
 ('Broncebat','#f230419976f',4);
 
 INSERT INTO Lugar (ID, Tipo, Nombre ) VALUES
