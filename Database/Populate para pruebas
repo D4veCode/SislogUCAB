@@ -1532,3 +1532,10 @@ insert into sucursal(nombre,email,cap_M2,cap_alm,Tamaño_D,fk_lugar)values
 ('Sislog Puerto la cruz','sislog.ptolacruz@gmail.com',70,25,25,537),
 ('Sislog Maracaibo','sislog.maracaibo@gmail.com',70,25,25,479);
 ('Sislog Catia la mar','sislog.catialamar@gmail.com',100,40,40,1469);
+
+insert into empleado(P_Nombre,S_Nombre,P_Apellido,S_Apellido,Cedula,Email_P,Email_E,Fecha_N,Nivel_Acd,Edo_C,Profesion,Num_H,Salario,Fk_Lugar,Fk_Emp,Fk_User)values
+('David',NULL,'Serrada',NULL,'29555111','d4vecode.98@hotmail.com','dserrada1@gmail.com','12/02/1998','Licenciatura','c','Ingeniero Informatico',0,20000,1122,NULL,1),
+('Jesus',NULL,'De Abreu',NULL,'25225077','jesus.cristo@gmail.com','jdeabreu2@gmail.com','02/11/1998','Bachillerato','s',NULL,0,5000,1611,1,4),
+('Fernando',NULL,'Rodriguez','Vazquez','24210861','ferdy.rod23@gmail.com','frodriguez3@gmail.com','23/04/1996','Bachillerato','s','Estudiante',0,5000,1098,2,15),
+('Raul','Antoine','Villarroel',NULL,'26125521','raul.antonio98@gmail.com','rvillaroel4@gmail.com','30/08/1998','Bachillerato','s','Estudiante',0,5000,1471,1,6),
+('Manuel','Andres','Urbina','Fher','22864781','manuel.urbina96@gmail.com','murbina5@gmail.com','04/06/1998','Tecnico Superior','c','Computista',0,5000,1100,4,10);
