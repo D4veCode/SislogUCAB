@@ -2,7 +2,7 @@ from api import app
 from flask_restful import Api
 
 import api.Resources.Cliente as cli
-import api.Resources.Empleado as cont
+import api.Resources.Empleado as emp
 import api.Resources.Sucursal as suc
 import api.Resources.Barco as barco
 import api.Resources.Vehiculo as veh
@@ -12,7 +12,9 @@ import api.Resources.Lugar as lug
 
 api = Api(app, prefix='/api/v1')
 
-api.add_resource(cont.HelloWorld, '/')
+api.add_resource(emp.HelloWorld, '/')
+api.add_resource(emp.EmpleadoList, '/empleados')
+api.add_resource(emp.Empleado, '/empleado/<int:id>')
 api.add_resource(cli.ClienteList, '/clientes')
 api.add_resource(cli.RegistroCliente, '/cliente/registro')
 api.add_resource(cli.LoginCliente, '/cliente/login')
