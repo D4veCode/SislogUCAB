@@ -43,11 +43,12 @@ def agregarUser(username, password, rol):
     con = connect()
 
     user = con.query("insert into usuario(username, password, fk_rol) values($1, $2, $3) returning id",
-              (username, password, rol)).dictresult()
+                     (username, password, rol)).dictresult()
 
     con.close()
 
     return user
+
 
 def getUser(username):
     con = connect()
@@ -55,3 +56,13 @@ def getUser(username):
 
     con.close()
     return user
+
+
+def updateCliente(user, nombre, cedula, apellido, email, fk_lugar, l_vip, fecha_n, edo_c, nombre_e=None):
+    con = connect()
+
+    con.query("update cliente set nombre = $1, cedula = $2, apellido = $3, email = $4, fk_lugar = $5, l_vip = $6,"
+              "fecha_n = $7, edo_c = $8, nombre_e = $9 where id = $10", (nombre, cedula, apellido, email, fk_lugar,
+                                                                         l_vip, fecha_n, edo_c, nombre_e, user))
+
+    con.close()
