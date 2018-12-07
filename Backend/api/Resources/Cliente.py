@@ -24,6 +24,7 @@ cli_fields = {
     'apellido': fields.String,
     'cedula': fields.String,
     'edo_c': fields.String,
+    'email': fields.String,
     'nombre_e': fields.String,
     'l_vip': fields.Boolean,
     'fecha_n': fields.DateTime('iso8601'),
