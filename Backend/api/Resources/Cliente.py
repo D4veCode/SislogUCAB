@@ -6,17 +6,17 @@ from api.helpers import check_password, encrypt_password
 
 cli_parse = reqparse.RequestParser()
 
-cli_parse.add_argument('nombre', required=True)
-cli_parse.add_argument('apellido', required=True)
-cli_parse.add_argument('cedula', required=True)
-cli_parse.add_argument('email', required=True)
+cli_parse.add_argument('nombre', required=True, help="Nombre Required.")
+cli_parse.add_argument('apellido', required=True, help="Apellido Required.")
+cli_parse.add_argument('cedula', required=True, help="Cedula Required.")
+cli_parse.add_argument('email', required=True, help="Email Required.")
 cli_parse.add_argument('edo_c', choices=('s', 'c', 'd', 'v'))
 cli_parse.add_argument('nombre_e')
 cli_parse.add_argument('l_vip', default=False)
 cli_parse.add_argument('fecha_n')
 cli_parse.add_argument('fk_lugar', type=int)
-cli_parse.add_argument('username', required=True)
-cli_parse.add_argument('password', required=True)
+cli_parse.add_argument('username', required=True, help="Username Required.")
+cli_parse.add_argument('password', required=True, help="Password Required.")
 
 cli_fields = {
     'id': fields.Integer,
@@ -36,7 +36,6 @@ login_parser = reqparse.RequestParser()
 login_parser.add_argument('username', required=True)
 login_parser.add_argument('password', required=True)
 
-
 class ClienteList(Resource):
     @jwt_required
     def get(self):
@@ -52,6 +51,7 @@ class RegistroCliente(Resource):
     def post(self):
         try:
             data = cli_parse.parse_args()
+
             if data['edo_c']:
 
                 password = encrypt_password(data['password'])
@@ -64,7 +64,7 @@ class RegistroCliente(Resource):
             elif data['nombre_e']:
 
                 password = encrypt_password(data['password'])
-                user = database.agregarUser(data['username'], password, 1)
+                user = database.agregarUser(data['username'], password, 1)[0].get("id")
                 database.agregarCliente(user, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
                                   data['fk_lugar'], data['fecha_n'], None, data['nombre_e'])
                 token = create_access_token(identity=data['username'])
@@ -81,7 +81,6 @@ class LoginCliente(Resource):
         try:
             data = login_parser.parse_args()
             user = database.getUser(data['username'])[0]
-            print(user['password'])
             if user:
                 if check_password(user['password'], data['password']):
                     token = create_access_token(identity=data['username'])
@@ -103,21 +102,39 @@ class Cliente(Resource):
             cliente = database.getCliente(id)[0]
             return {"cliente": marshal(cliente, cli_fields)}
 
-        except Exception as e:
-            if e == IndexError:
-                return {"status": "fail", "error": "Client not found"}, 404
-            else:
-                return {"status": "fail", "error": str(e)}, 500
+        except Exception:
+            return {"status": "fail", "error": "Client not found"}, 404
 
     def put(self, id):
 
             try:
+
                 data = cli_parse.parse_args()
+
                 database.updateCliente(id, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
                                    data['fk_lugar'], data['fecha_n'], data['edo_c'], data['nombre_e'])
+
+                user = database.getCliente(id)[0].get("username")
+                pw = database.getUser(user)[0].get("password")
+
+                if pw == data['password']:
+                    database.updateUser(user, data['username'], data['password'])
+                else:
+                    passw = encrypt_password(data['password'])
+                    database.updateUser(user, data['username'], passw)
 
                 return {"status": "success", "message": "The client has been updated."}
 
             except Exception as e:
 
                 return {"status": "fail", "error": str(e)}, 500
+
+    def delete(self, id):
+
+        try:
+            username = database.getCliente(id)[0].get("username")
+            database.deleteCliente(id, username)
+            return {"status": "success", "message": "Client Deleted"}
+
+        except Exception as e:
+            return {"status": "fail", "error": str(e)}, 500

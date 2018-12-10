@@ -40,7 +40,7 @@ emp_fields = {
     'salario': fields.Float,
     'Direccion': fields.Integer,
     'username': fields.Integer,
-    'fk_emp': fields.Integer,
+    'fk_emp': fields.String,
 }
 
 

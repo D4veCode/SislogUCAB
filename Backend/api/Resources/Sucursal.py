@@ -8,7 +8,7 @@ sucu_parse.add_argument('nombre', required=True)
 sucu_parse.add_argument('email', required=True)
 sucu_parse.add_argument('cap_m2', required=True)
 sucu_parse.add_argument('cap_alm', required=True)
-sucu_parse.add_argument('tamano', required=True)
+sucu_parse.add_argument('tamano_d', required=True)
 sucu_parse.add_argument('fk_lugar', required=True)
 
 suc_fields ={
@@ -17,7 +17,7 @@ suc_fields ={
     'cap_m2': fields.Integer,
     'cap_alm': fields.Integer,
     'email': fields.String,
-    'tamano': fields.Integer,
+    'tamano_d': fields.Integer,
     'fk_lugar': fields.Integer
 }
 
@@ -31,6 +31,17 @@ class SucursalList(Resource):
 
             return {"status": "success", "sucursales": [marshal(suc, suc_fields) for suc in sucursales]}
 
+        except Exception as e:
+
+            return {"status": "fail", "error": str(e)}, 500
+
+    def post(self):
+
+        try:
+            data = sucu_parse.parse_args()
+
+            database.agregarSucursal(data['nombre'], data['cap_m2'], data['cap_alm'], data['email'], data['tamano_d'], data['fk_lugar'])
+            return {"status": "success", "message": "Office Created. "}, 201
         except Exception as e:
 
             return {"status": "fail", "error": str(e)}, 500
@@ -53,8 +64,8 @@ class Sucursal(Resource):
 
         try:
             args = sucu_parse.parse_args()
-            database.updateSucursal(id, args['nombre'], args['nombre'], args['nombre'], args['nombre'],
-                                    args['nombre'], args['nombre'])
+            database.updateSucursal(id, args['nombre'], args['cap_m2'], args['cap_alm'], args['email'],
+                                    args['tamano'], args['fk_lugar'])
             return {"status": "success", "message": "Office updated."}, 201
 
         except Exception as e:

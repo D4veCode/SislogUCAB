@@ -16,7 +16,7 @@ class EstadoList(Resource):
 
             estados = database.getEstados()
 
-            return {"status": "success", "estados": [marshal(est, lugar_fields) for est in estados]}
+            return {"status": "success", "lugar": [marshal(est, lugar_fields) for est in estados]}
 
         except Exception as e:
 
@@ -31,7 +31,7 @@ class MunicipioList(Resource):
 
             municipios = database.getMunicipios(id)
 
-            return {"status": "success", "municipios": [marshal(mun, lugar_fields) for mun in municipios]}
+            return {"status": "success", "lugar": [marshal(mun, lugar_fields) for mun in municipios]}
 
         except Exception as e:
 
@@ -46,7 +46,7 @@ class ParroquiaList(Resource):
 
             parroquias = database.getParroquias(id)
 
-            return {"status": "success", "parroquias": [marshal(parr, lugar_fields) for parr in parroquias]}
+            return {"status": "success", "lugar": [marshal(parr, lugar_fields) for parr in parroquias]}
 
         except Exception as e:
 
