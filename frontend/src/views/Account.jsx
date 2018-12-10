@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './css/account.css';
-import Sidemenu from './containers/Sidemenu';
+import Sidemenu from './containers/Sidemenu.jsx';
 import MenuAdmin from './containers/MenuAdmin';
 
 export default class Account extends Component{
     render(){
         return(
-        <div class="wrapper">
+        <div className="wrapper">
             <Sidemenu/>
             
-            <div class="content">
+            <div className="content">
                 <MenuAdmin/>
             
             

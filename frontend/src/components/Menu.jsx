@@ -19,7 +19,7 @@ export default class Menu extends Component{
 								<li><a href="#project">Project</a></li>
 								<li><a href="#price">Price</a></li>
 								<li><a href="#blog">Blog</a></li>
-								<li><Link to='/login'>Login</Link></li>
+								<li><Link to='/cliente/login'>Login</Link></li>
 							</ul>
 						</nav>	    		
 					</div>

@@ -14,7 +14,7 @@ export default class Sidemenu extends Component{
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Sucursal</a>
                         <ul className="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a href="#"><Link to="/sucursal">Info Sucursal</Link></a>
+                                <Link to="admin/sucursales">Info Sucursales</Link>
                             </li>
                         </ul> 
                     </li>
@@ -22,7 +22,9 @@ export default class Sidemenu extends Component{
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Clientes</a>
                         <ul className="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                            <a href="#"><Link to="/clientes">Info Clientes</Link></a>
+                                <Link to="admin/clientes">Info Clientes</Link>
+                                <Link to="admin/clientes/registro/natural">Registro Natural</Link>
+                                <Link to="admin/clientes/registro/juridico">Registro Juridico</Link>
                             </li>
                         </ul> 
                     </li>
@@ -30,7 +32,7 @@ export default class Sidemenu extends Component{
                         <a href="#empleados" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Empleados</a>
                         <ul className="collapse list-unstyled" id="empleados">
                             <li>
-                                <a href="#"><Link to="/empleados">Info Empleados</Link></a>
+                               <Link to="admin/empleados">Info Empleados</Link>
                             </li>
                         </ul> 
                     </li>
