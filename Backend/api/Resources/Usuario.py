@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required
 user_fields = {
     'id': fields.Integer,
     'username': fields.String,
-    'rol': fields.String
+    'fk_rol': fields.String
 }
 
 
