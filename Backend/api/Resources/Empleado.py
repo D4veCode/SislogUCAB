@@ -35,11 +35,12 @@ emp_fields = {
     'email_e': fields.String,
     'fecha_n': fields.DateTime('iso8601'),
     'edo_c': fields.String,
+    'nivel_acd': fields.String,
     'profesion': fields.String,
     'num_h': fields.Integer,
     'salario': fields.Float,
-    'Direccion': fields.Integer,
-    'username': fields.Integer,
+    'direccion': fields.String,
+    'username': fields.String,
     'fk_emp': fields.String,
 }
 
@@ -73,9 +74,9 @@ class Empleado(Resource):
             empleado = database.getEmpleado(id)[0]
             return {"status": "success", "empleado": marshal(empleado, emp_fields)}
 
-        except Exception:
+        except Exception as e:
 
-            return {"status": "fail", "error": "Employee not found"}, 404
+            return {"status": "fail", "error": "Employee not found", "msg": str(e)}, 404
 
     def put(self, id):
 
@@ -129,7 +130,7 @@ class RegistroEmpleado(Resource):
             args = emp_parse.parse_args()
             user = database.agregarUser(args['username'], encrypt_password(args['password']), 1)[0].get("id")
             database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'], args['cedula'], args['email_e'],
-                args['fecha_n'], args['nivel_acd'], args['edo_c'], args['profesion'], args['num_h'], args['fk_lugar'], user,
+                args['fecha_n'], args['nivel_acd'], args['edo_c'], args['profesion'], args['num_h'], args['salario'], args['fk_lugar'], user,
                 args['fk_emp'], args['email_p'])
 
             return {"status": "success", "message": "Employee registered."}, 201
