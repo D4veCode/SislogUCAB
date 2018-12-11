@@ -65,7 +65,7 @@ class Sucursal(Resource):
         try:
             args = sucu_parse.parse_args()
             database.updateSucursal(id, args['nombre'], args['cap_m2'], args['cap_alm'], args['email'],
-                                    args['tamano'], args['fk_lugar'])
+                                    args['tamano_d'], args['fk_lugar'])
             return {"status": "success", "message": "Office updated."}, 201
 
         except Exception as e:
@@ -82,4 +82,4 @@ class Sucursal(Resource):
 
         except Exception as e:
 
-            return {"status": "success", "error": str(e)}, 500
+            return {"status": "fail", "error": str(e)}, 500
