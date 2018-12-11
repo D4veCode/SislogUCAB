@@ -10,7 +10,7 @@ def connect():
 def getClientes():
     con = connect()
 
-    clientes = con.query("select c.id, c.nombre, c.apellido, c.cedula, c.edo_c, c.nombre_e, c.fecha_n, c.l_vip, u.username from cliente c, usuario u where u.id=c.fk_user").dictresult()
+    clientes = con.query("select c.id, c.nombre, c.apellido, c.email, c.cedula, c.edo_c, c.nombre_e, c.fecha_n, c.l_vip, u.username from cliente c, usuario u where u.id=c.fk_user").dictresult()
 
     con.close()
 
