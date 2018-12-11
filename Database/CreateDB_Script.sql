@@ -93,7 +93,7 @@ CREATE Table Empleado(
   Fk_Emp int,
   Fk_User int NOT NULL UNIQUE,
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
   Constraint Pk_Empleado PRIMARY KEY (ID)
   );
@@ -103,7 +103,7 @@ CREATE Table Emp_Suc(
   Fk_Suc int NOT NULL,
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD) ON DELETE CASCADE,
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Emp_Suc PRIMARY KEY (ID)
   );
   
@@ -113,7 +113,7 @@ CREATE Table Emp_Dep(
   Fk_Dep int NOT NULL,
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Dep) REFERENCES Departamento (COD),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Emp_Dep PRIMARY KEY (ID)	
   );
 
@@ -137,7 +137,7 @@ CREATE Table Horario(
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Dia) REFERENCES Dia (ID),
   FOREIGN KEY (Fk_Hor) REFERENCES Horario (ID),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Horario PRIMARY KEY (ID)
   );
   
@@ -305,7 +305,7 @@ CREATE Table Telefono(
   Fk_Emp int,
   Fk_Sucursal int,
   Fk_Contacto int,
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID),
   Constraint Pk_Telefono PRIMARY KEY (ID)
@@ -459,7 +459,7 @@ CREATE Table Tracking(
 CREATE Table Facturacion(
   ID SERIAL UNIQUE,
   Fecha date NOT NULL,
-  Fk_Tacking int NOT NULL,
+  Fk_Tracking int NOT NULL,
   Monto real NOT NULL,
   Fk_Deb int,
   Fk_Cre int,
@@ -469,7 +469,7 @@ CREATE Table Facturacion(
   FOREIGN KEY (Fk_Cre) REFERENCES Credito (ID),
   FOREIGN KEY (Fk_Che) REFERENCES Cheque (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Transferencia (ID),
-  FOREIGN KEY (Fk_Tacking) REFERENCES Tracking (ID),
+  FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
   Constraint Pk_Facturacion PRIMARY KEY(ID)
   );
 
