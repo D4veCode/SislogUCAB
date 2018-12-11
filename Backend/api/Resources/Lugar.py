@@ -29,9 +29,9 @@ class MunicipioList(Resource):
 
         try:
 
-            mun = database.getMunicipio(id)[0]
+            municipios = database.getMunicipio(id)
 
-            return {"status": "success", "lugar": marshal(mun, lugar_fields)}
+            return {"status": "success", "lugar": [marshal(mun, lugar_fields) for mun in municipios]}
 
         except Exception as e:
 

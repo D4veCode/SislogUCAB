@@ -268,3 +268,14 @@ def deleteEmpleado(id):
     con.query("DELETE FROM empleado WHERE id=$1", (id,))
 
     con.close()
+
+
+def getRutas():
+    con =connect()
+
+    rutas = con.query("select r.id, (select nombre as suc_origen from sucursal where id = r.fk_origen), "
+                      "(select nombre as suc_dest from sucursal where id=r.fk_destino), "
+                      "(select t.tipo as tipo_trans from tipo_transp as t, ruta_trans as rt "
+                      "where r.id = rt.fk_ruta and rt.fk_tt = t.id ) from ruta as r ").dictresult()
+    con.close()
+    return rutas
