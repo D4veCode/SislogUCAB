@@ -15,7 +15,7 @@ class UsuarioList(Resource):
 
         try:
 
-            users = database.getUsuarios()
+            users = database.getUsers()
 
             return {"status": "success", "users": [marshal(user, user_fields) for user in users]}
 
