@@ -124,7 +124,9 @@ def getSucursales():
 def getSucursal(id):
     con = connect()
 
-    suc = con.query("select * from sucursal where cod = $1", (id,)).dictresult()
+    suc = con.query("select  s.cod, s.nombre, s.email, s.cap_m2, s.cap_alm, s.tamaño_d, "
+                    "(select nombre as fk_lugar from lugar where id = s.fk_lugar) from sucursal as s where s.cod = $1",
+                    (id,)).dictresult()
     con.close()
 
     return suc
