@@ -67,7 +67,7 @@ CREATE Table Sucursal(
 Create Table Departamento(
   COD SERIAL UNIQUE,
   Nombre varchar(150) NOT NULL,
-  Descripcin varchar(150),
+  Descripcion varchar(150),
   Area_D int NOT NULL,
   Fk_Sucursal int NOT NULL,
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
