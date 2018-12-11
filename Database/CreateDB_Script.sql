@@ -109,7 +109,6 @@ CREATE Table Emp_Suc(
   
 CREATE Table Emp_Dep(
   ID SERIAL UNIQUE,
-  Fecha date NOT NULL,
   Fk_Dep int NOT NULL,
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Dep) REFERENCES Departamento (COD),
