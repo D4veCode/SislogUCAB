@@ -17,7 +17,7 @@ suc_fields ={
     'cap_m2': fields.Integer,
     'cap_alm': fields.Integer,
     'email': fields.String,
-    'tamano_d': fields.Integer,
+    'tamaño_d': fields.Integer,
     'fk_lugar': fields.String
 }
 
