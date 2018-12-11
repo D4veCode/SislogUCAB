@@ -135,7 +135,7 @@ def getSucursal(id):
 def updateSucursal(id, nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
     con = connect()
 
-    con.query("update sucursal set nombre = $1, cap_m2 = $2, cap_alm = $3, email = $4, tamano_d = $5, fk_lugar = $6 "
+    con.query("update sucursal set nombre = $1, cap_m2 = $2, cap_alm = $3, email = $4, tamaño_d = $5, fk_lugar = $6 "
               "where cod = $7", (nombre, cap_m2, cap_alm, email, tamano, fk_lugar, id))
     con.close()
 
@@ -150,7 +150,7 @@ def deleteSucursal(id):
 def agregarSucursal(nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
     con = connect()
 
-    con.query("insert into sucursal(nombre, cap_m2, cap_alm, email, tamano_d, fk_lugar) values "
+    con.query("insert into sucursal(nombre, cap_m2, cap_alm, email, tamaño_d, fk_lugar) values "
               "($1, $2, $3, $4, $5, $6)", (nombre, cap_m2, cap_alm, email, tamano, fk_lugar))
 
     con.close()
@@ -159,7 +159,8 @@ def agregarSucursal(nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
 def getUsers():
     con = connect()
 
-    users = con.query("select * from usuario").dictresult()
+    users = con.query("select u.id, u.username, (select nombre as fk_rol from rol where id=u.fk_rol) "
+                      "from usuario as u").dictresult()
 
     con.close()
 
