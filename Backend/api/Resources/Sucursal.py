@@ -18,7 +18,7 @@ suc_fields ={
     'cap_alm': fields.Integer,
     'email': fields.String,
     'tamano_d': fields.Integer,
-    'fk_lugar': fields.Integer
+    'fk_lugar': fields.String
 }
 
 class SucursalList(Resource):
