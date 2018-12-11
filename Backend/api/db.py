@@ -93,13 +93,14 @@ def getEstados():
     con.close()
     return estados
 
-def getMunicipios(fk_lugar):
+
+def getMunicipio(fk_lugar):
     con = connect()
 
-    municipios = con.query("select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) from lugar as l "
-              "where fk_lugar = $1", (fk_lugar,)).dictresult()
+    municipio = con.query("select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) from lugar as l "
+              "where id = $1", (fk_lugar,)).dictresult()
     con.close()
-    return municipios
+    return municipio
 
 def getParroquias(fk_lugar):
     con = connect()
@@ -112,7 +113,8 @@ def getParroquias(fk_lugar):
 def getSucursales():
     con = connect()
 
-    sucs = con.query("select * from sucursales").dictresult()
+    sucs = con.query("SELECT s.cod, s.nombre, s.email, s.cap_m2, s.cap_alm, s.tamaño_d, (select nombre as fk_lugar from lugar where id = s.fk_lugar) "
+                     "FROM sucursal as s;").dictresult()
 
     con.close()
 
