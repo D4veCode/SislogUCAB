@@ -6,17 +6,17 @@ from api.helpers import check_password, encrypt_password
 
 cli_parse = reqparse.RequestParser()
 
-cli_parse.add_argument('nombre', required=True, help="Nombre Required.")
-cli_parse.add_argument('apellido', required=True, help="Apellido Required.")
-cli_parse.add_argument('cedula', required=True, help="Cedula Required.")
-cli_parse.add_argument('email', required=True, help='Email Required.')
+cli_parse.add_argument('nombre')
+cli_parse.add_argument('apellido')
+cli_parse.add_argument('cedula')
+cli_parse.add_argument('email')
 cli_parse.add_argument('edo_c', choices=('s', 'c', 'd', 'v'))
 cli_parse.add_argument('nombre_e')
 cli_parse.add_argument('l_vip', default=False)
 cli_parse.add_argument('fecha_n')
 cli_parse.add_argument('fk_lugar', type=int)
-cli_parse.add_argument('username', required=True, help="Username Required.")
-cli_parse.add_argument('password', required=True, help="Password Required.")
+cli_parse.add_argument('username')
+cli_parse.add_argument('password')
 
 cli_fields = {
     'id': fields.Integer,
