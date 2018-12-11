@@ -152,7 +152,7 @@ def agregarSucursal(nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
     con.close()
 
 
-def getUsuarios():
+def getUsers():
     con = connect()
 
     users = con.query("select * from usuario").dictresult()
