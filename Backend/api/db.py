@@ -10,18 +10,21 @@ def connect():
 def getClientes():
     con = connect()
 
-    clientes = con.query("select c.id, c.nombre, c.apellido, c.email, c.cedula, c.edo_c, c.nombre_e, c.fecha_n, c.l_vip, u.username from cliente c, usuario u where u.id=c.fk_user").dictresult()
+    clientes = con.query("select c.id, c.nombre, c.apellido, c.email, c.cedula, c.edo_c, c.nombre_e, c.fecha_n, "
+                         "c.l_vip, u.username from cliente c, usuario u where u.id=c.fk_user").dictresult()
 
     con.close()
 
     return clientes
 
 
-def agregarCliente(user, nombre, ci, apellido, email, lvip, fk_lugar, f_nacimiento , est_civil=None, nombre_empresa=None):
+def agregarCliente(user, nombre, ci, apellido, email, lvip, fk_lugar, f_nacimiento, est_civil=None,
+                   nombre_empresa=None):
     con = connect()
 
     con.query(
-        "insert into Cliente(FK_User, Nombre, cedula, apellido, email, edo_c, nombre_e, l_vip, FK_Lugar, fecha_n) values ($1,$2,$3,$4,$5,$6,$7,$8, $9, $10)",
+        "insert into Cliente(FK_User, Nombre, cedula, apellido, email, edo_c, nombre_e, l_vip, FK_Lugar, fecha_n) "
+        "values ($1,$2,$3,$4,$5,$6,$7,$8, $9, $10)",
         (user, nombre, ci, apellido, email, est_civil, nombre_empresa, lvip, fk_lugar, f_nacimiento))
 
     con.close()
@@ -30,8 +33,9 @@ def agregarCliente(user, nombre, ci, apellido, email, lvip, fk_lugar, f_nacimien
 def getCliente(id):
     con = connect()
 
-    cliente = con.query("select c.id, c.nombre, c.apellido, c.cedula, c.email, c.edo_c, c.nombre_e, c.fecha_n, c.l_vip, "
-                        "u.username username from cliente c, usuario u where u.id=c.fk_user and c.id=$1", (id, )).dictresult()
+    cliente = con.query(
+        "select c.id, c.nombre, c.apellido, c.cedula, c.email, c.edo_c, c.nombre_e, c.fecha_n, c.l_vip, "
+        "u.username username from cliente c, usuario u where u.id=c.fk_user and c.id=$1", (id,)).dictresult()
 
     con.close()
 
@@ -39,7 +43,6 @@ def getCliente(id):
 
 
 def agregarUser(username, password, rol):
-
     con = connect()
 
     user = con.query("insert into usuario(username, password, fk_rol) values($1, $2, $3) returning id",
@@ -97,23 +100,28 @@ def getEstados():
 def getMunicipio(fk_lugar):
     con = connect()
 
-    municipio = con.query("select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) from lugar as l "
-              "where id = $1", (fk_lugar,)).dictresult()
+    municipio = con.query("select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) "
+                          "from lugar as l "
+                          "where fk_lugar = $1", (fk_lugar,)).dictresult()
     con.close()
     return municipio
+
 
 def getParroquias(fk_lugar):
     con = connect()
 
-    parr = con.query("select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) from lugar as l "
-              "where fk_lugar = $1", (fk_lugar,)).dictresult()
+    parr = con.query(
+        "select l.id, l.tipo, l.nombre, (select nombre as fk_lugar from lugar where id=l.fk_lugar) from lugar as l "
+        "where fk_lugar = $1", (fk_lugar,)).dictresult()
     con.close()
     return parr
+
 
 def getSucursales():
     con = connect()
 
-    sucs = con.query("SELECT s.cod, s.nombre, s.email, s.cap_m2, s.cap_alm, s.tamaño_d, (select nombre as fk_lugar from lugar where id = s.fk_lugar) "
+    sucs = con.query("SELECT s.cod, s.nombre, s.email, s.cap_m2, s.cap_alm, s.tamaño_d, "
+                     "(select nombre as fk_lugar from lugar where id = s.fk_lugar) "
                      "FROM sucursal as s;").dictresult()
 
     con.close()
@@ -138,6 +146,7 @@ def updateSucursal(id, nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
     con.query("update sucursal set nombre = $1, cap_m2 = $2, cap_alm = $3, email = $4, tamaño_d = $5, fk_lugar = $6 "
               "where cod = $7", (nombre, cap_m2, cap_alm, email, tamano, fk_lugar, id))
     con.close()
+
 
 def deleteSucursal(id):
     con = connect()
@@ -183,6 +192,7 @@ def agregarRol(nombre, tipo):
 
     con.close()
 
+
 def getRol(id):
     con = connect()
 
@@ -204,5 +214,57 @@ def deleteRol(id):
     con = connect()
 
     con.query("delete from rol where id=$1", (id,))
+
+    con.close()
+
+
+def getEmpleados():
+    con = connect()
+
+    empleados = con.query("select e.*, (select nombre as direccion from lugar where id=e.fk_lugar), "
+                          "(select username as username from usuario where id=e.fk_user) from empleado e").dictresult()
+
+    con.close()
+    return empleados
+
+
+def agregarEmpleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c, profesion,
+                    num_h, salario, fk_lugar, user, fk_emp=None, email_p=None):
+    con = connect()
+
+    con.query("INSERT INTO empleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, "
+              "edo_c, profesion, num_h, salario, fk_lugar, fk_user, fk_emp, email_p) VALUES "
+              "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+              (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
+               profesion, num_h, salario, fk_lugar, user, fk_emp, email_p))
+    con.close()
+
+
+def getEmpleado(id):
+    con = connect()
+
+    emp = con.query("select e.*, (select nombre as direccion from lugar where id=e.fk_lugar), "
+                    "(select username as username from usuario where id=e.fk_user) from empleado e where id = $1",
+                    (id,)).dictresult()
+    con.close()
+    return emp
+
+
+def updateEmpleado(id, p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
+                   profesion,
+                   num_h, salario, fk_lugar, fk_emp=None, email_p=None):
+    con = connect()
+
+    con.query("UPDATE empleado SET  p_nombre=$1, s_nombre=$2, p_apellido=$3, s_apellido=$4, cedula=$5, email_e=$6, "
+              "fecha_n=$7, nivel_acd=$8, edo_c=$9, profesion=$10, num_h=$11, salario=$12, fk_lugar=$13, fk_emp=$14, "
+              "email_p=$15, WHERE id=$16", (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n,
+                                            nivel_acd, edo_c, profesion, num_h, salario, fk_lugar, fk_emp, email_p, id))
+    con.close()
+
+
+def deleteEmpleado(id):
+    con = connect()
+
+    con.query("DELETE FROM empleado WHERE id=$1", (id,))
 
     con.close()
