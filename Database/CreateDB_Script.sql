@@ -204,7 +204,7 @@ CREATE Table Avion(
   Vmax int NOT NULL,
   Fuel_C int NOT NULL,
   Motor varchar(150) NOT NULL,
-  Area int NOT NULL
+  Area int NOT NULL,
   Fk_Sucursal int NOT NULL,
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Avion PRIMARY KEY (ID)
