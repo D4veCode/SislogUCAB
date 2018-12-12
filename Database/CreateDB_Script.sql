@@ -214,7 +214,6 @@ CREATE Table Barco(
   ID SERIAL UNIQUE,
   Nombre varchar(30) NOT NULL,
   Descripcion varchar(150),
-  Cap_C real NOT NULL,
   Vmax int NOT NULL,
   Long real NOT NULL,
   Fk_Sucursal int NOT NULL,
