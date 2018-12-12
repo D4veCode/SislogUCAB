@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/account.css';
 import Sidemenu from './containers/Sidemenu.jsx';
-import MenuAdmin from './containers/MenuAdmin';
+//import MenuAdmin from './containers/MenuAdmin';
 
 export default class Account extends Component{
     render(){
@@ -10,7 +10,7 @@ export default class Account extends Component{
             <Sidemenu/>
             
             <div className="content">
-                <MenuAdmin/>
+              {/* <MenuAdmin/> */}
             
             
             <div className="m-3 ">

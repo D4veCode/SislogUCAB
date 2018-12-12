@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Sidemenu from "../../containers/Sidemenu.jsx";
-import MenuAdmin from '../../containers/MenuAdmin';
+// import MenuAdmin from '../../containers/MenuAdmin';
 import '../../css/account.css';
 
 export default class ClienteDetail extends Component {
@@ -18,7 +18,7 @@ export default class ClienteDetail extends Component {
         axios.get("http://localhost:3001/api/v1/cliente/" + this.state.clienteID,
             {
               headers: {
-                Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQzODE3NTQsIm5iZiI6MTU0NDM4MTc1NCwianRpIjoiMzU5ZGVjMDItOWYzYS00OWZmLTk0ZTEtMDg0YjBlMmNlZjBmIiwiZXhwIjoxNTQ0NDI2NzU0LCJpZGVudGl0eSI6ImhpdDMiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.jaFwfrR1GApJvM5Upot0jLxEmZiohsJonv7vqAgkkbs",
+                  Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
                 "Content-Type": "application/json"
               }
             }
@@ -51,7 +51,7 @@ export default class ClienteDetail extends Component {
                     fecha_n: Fecha_N,
                     cedula: Cedula,
                     edo_c: Edo_C,
-                    nombre_e: Nombre_E,
+                    nombre_e: Nombre_E || null,
                     email: Email,
                     l_vip: L_VIP,
                     fk_lugar: 1,
@@ -59,7 +59,7 @@ export default class ClienteDetail extends Component {
                     password: Password
                 })
 
-            console.log(datas);
+            //console.log(datas);
 
             axios.put(`http://localhost:3001/api/v1/cliente/${clienteID}`,datas,
                 {
@@ -79,7 +79,7 @@ export default class ClienteDetail extends Component {
         axios.get("http://localhost:3001/api/v1/cliente/" +this.state.clienteID, {
               headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQzNjM4NjcsIm5iZiI6MTU0NDM2Mzg2NywianRpIjoiOTRmYzE0ZTktMTU5OS00ZDdhLWI4OTUtOTExYThhMTU4OGU0IiwiZXhwIjoxNTQ0NDA4ODY3LCJpZGVudGl0eSI6ImhpdDIiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.P_cVpJ7pCuATRBE55EtdZOSFEzgrz0wu5Cm5oEaHgmQ",
+                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
                 "Content-Type": "application/json"
               }
             }
@@ -111,7 +111,7 @@ export default class ClienteDetail extends Component {
             <Sidemenu />
 
             <div className="container-fluid m-0 p-0">
-                <MenuAdmin />
+                    {/* <MenuAdmin/> */}
 
             <div className="m-3 w-100">
               <h2 className="text-center m-3"> SisLogUCAB Cliente {this.state.cliente.id} Detalle </h2>
@@ -122,6 +122,7 @@ export default class ClienteDetail extends Component {
                     <th scope="col" className="text-center" > Username </th>
                     <th scope="col" className="text-center" > Nombre Y Apellido </th>
                     <th scope="col" className="text-center" > Cedula </th>
+                    <th scope="col" className="text-center" > Email </th>
                     <th scope="col" className="text-center" > Empresa </th>
                     <th scope="col" className="text-center" > Edo. Civil </th>
                     <th scope="col" className="text-center" > L_VIP </th>
@@ -133,6 +134,7 @@ export default class ClienteDetail extends Component {
                     <td className="text-center" >{this.state.cliente.username}</td>
                     <td className="text-center" >{this.state.cliente.nombre} {this.state.cliente.apellido}</td>
                     <td className="text-center" >{this.state.cliente.cedula}</td>
+                    <td className="text-center" >{this.state.cliente.email}</td>
                     <td className="text-center" >{this.state.cliente.nombre_e}</td>
                     <td className="text-center" >{Edo_Civil}</td>
                     <td className="text-center" >{VIP}</td>

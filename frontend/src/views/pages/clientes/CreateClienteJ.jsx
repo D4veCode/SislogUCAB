@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
 export default class CreateClienteJ extends Component{
-    state = {
-        redirect: false
-    }
     handleFormSubmit = (event) => {
         event.preventDefault();
         const Nombre = event.target.elements.Nombre.value;
@@ -35,7 +31,7 @@ export default class CreateClienteJ extends Component{
 
         axios.post('http://127.0.0.1:3001/api/v1/cliente/registro', data, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQyMzE4NzYsIm5iZiI6MTU0NDIzMTg3NiwianRpIjoiNDgxZTU3ZjMtNWU2Yy00NzViLTlkMDUtM2ZmMTlmZmE3OWQ0IiwiZXhwIjoxNTQ0Mjc2ODc2LCJpZGVudGl0eSI6ImhpdCIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.eCmzEYLPxj084PRBEgAvRbLzGlT2RbnAB8EtYvOUL9g',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY',
                 'Content-Type': 'application/json'
             }
         })
@@ -43,12 +39,6 @@ export default class CreateClienteJ extends Component{
         .catch(function (error) {
              console.log(error.response);
         });
-
-        this.setState({redirect : true})
-
-        if (this.state.redirect) {
-            return <Redirect to="/admin/clientes" />;
-        }
 
     }
     render(){

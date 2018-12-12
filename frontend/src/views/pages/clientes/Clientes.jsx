@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Sidemenu from '../../containers/Sidemenu.jsx';
-import MenuAdmin from '../../containers/MenuAdmin';
+//import MenuAdmin from '../../containers/MenuAdmin';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../../css/account.css';
@@ -18,14 +18,14 @@ export default class Sucursal extends Component{
          axios.get("http://127.0.0.1:3001/api/v1/clientes", {
              headers: {
                Authorization:
-               "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQzODE3NTQsIm5iZiI6MTU0NDM4MTc1NCwianRpIjoiMzU5ZGVjMDItOWYzYS00OWZmLTk0ZTEtMDg0YjBlMmNlZjBmIiwiZXhwIjoxNTQ0NDI2NzU0LCJpZGVudGl0eSI6ImhpdDMiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.jaFwfrR1GApJvM5Upot0jLxEmZiohsJonv7vqAgkkbs",
+               "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
                "Content-Type": "application/json"
              }
            }).then(response => {
              this.setState({ clientes: response.data.clientes });
              console.log(this.state.clientes)
            }).catch(function(error) {
-             console.log(error);
+             console.log(error.response);
            });     
     }
 
@@ -213,7 +213,19 @@ export default class Sucursal extends Component{
                     return(
                         <button className="btn btn-danger"
                             onClick={() =>{
-                                console.log(props)
+                                axios.delete('http://localhost:3001/api/v1/cliente/'+props.original.id,
+                                    {
+                                        headers: {
+                                            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                                            "Content-Type": "application/json"
+                                        }
+                                    }
+                                ).then(response => {
+                                    console.log(response.data)
+                                })
+                                .catch(function (error) {
+                                    console.log(error.response);
+                                });
                             }}
                         >Delete</button> 
                     )   
@@ -232,8 +244,8 @@ export default class Sucursal extends Component{
             <Sidemenu/>
             
             <div className="container-fluid m-0 p-0">
-                <MenuAdmin/>
-            
+                {/* <MenuAdmin/> */}
+                
             <div className="m-2 w-100">
                 <h2 className="text-center"> SisLogUCAB Clientes DataTable</h2>
             

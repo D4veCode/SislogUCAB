@@ -1,106 +1,260 @@
 import React, { Component } from 'react';
-import FormSucursal from './FormSucursal.jsx';
 import Sidemenu from '../../containers/Sidemenu';
-import MenuAdmin from '../../containers/MenuAdmin';
+//import MenuAdmin from '../../containers/MenuAdmin';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../../css/account.css';
+import ReactTable from 'react-table';
+import "react-table/react-table.css";
 
 export default class Sucursal extends Component{
     constructor(props){
         super(props)
         this.state = {
-            sucursales : {},
-            Ubicacion:[]
+            sucursales : [],
         } 
     }
     componentDidMount(){
-        axios.get("http://127.0.0.1:8000/api/v1/sucursales", {
+        axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
             headers: {
-              Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQzNjM4NjcsIm5iZiI6MTU0NDM2Mzg2NywianRpIjoiOTRmYzE0ZTktMTU5OS00ZDdhLWI4OTUtOTExYThhMTU4OGU0IiwiZXhwIjoxNTQ0NDA4ODY3LCJpZGVudGl0eSI6ImhpdDIiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.P_cVpJ7pCuATRBE55EtdZOSFEzgrz0wu5Cm5oEaHgmQ",
-              "Content-Type": "application/json"
+                Authorization:
+                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                "Content-Type": "application/json"
             }
           })
           .then(response => {
             this.setState({ sucursales: response.data.sucursales });
           })
-          .then(response => console.log(this.state.sucursales))
           .catch(function(error) {
-            console.log(error);
+            console.log(error.response);
           });  ///parroquias/   
+    }
+    handleFormSubmit = (event) => {
+        event.preventDefault();
+        const Nombre = event.target.elements.Nombre.value;
+        const Email = event.target.elements.Email.value;
+        const Cap_M2 = parseInt(event.target.elements.Cap_M2.value);
+        const Cap_Alm = parseInt(event.target.elements.Cap_Alm.value);
+        const Tamaño_D = parseInt(event.target.elements.Tamaño_D.value);
+        const Fk_Lugar = 100;
+
+        let data = JSON.stringify({
+            nombre: Nombre,
+            email: Email,
+            cap_m2: Cap_M2,
+            cap_alm: Cap_Alm,
+            tamano_d: Tamaño_D,
+            fk_lugar: Fk_Lugar,
+        })
+
+        console.log(data)
+
+        axios.post("http://127.0.0.1:3001/api/v1/sucursales", data, {
+            headers: {
+                Authorization:
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => console.log(response))
+            .catch(function (error) {
+                console.log(error.response);
+            });
     }
 
     render(){
-        var sucur = this.state.sucursales.map(function (sucurl) {
-            axios.get("http://127.0.0.1:8000/api/v1/parroquias/" + sucurl.fk_lugar, {
-                  headers: {
-                    Authorization:
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQzNjM4NjcsIm5iZiI6MTU0NDM2Mzg2NywianRpIjoiOTRmYzE0ZTktMTU5OS00ZDdhLWI4OTUtOTExYThhMTU4OGU0IiwiZXhwIjoxNTQ0NDA4ODY3LCJpZGVudGl0eSI6ImhpdDIiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.P_cVpJ7pCuATRBE55EtdZOSFEzgrz0wu5Cm5oEaHgmQ",
-                    "Content-Type": "application/json"
-                  }
-                }
-              )
-              .then(response => {
-                this.setState({ Ubicacion: response.data });
-              })
-              .then(response => console.log(this.state.Ubicacion))
-              .catch(function(error) {
-                console.log(error);
-              });
-
-            return <tr key={sucurl.cod}>
-                <th scope="row">
-                    <Link to={{ pathname: "/sucursal/" + sucurl.cod, state: { sucursalID: sucurl.cod } }} className="btn btn-info">
-                    {sucurl.cod}
-                  </Link>
-                </th>
-                <td className="text-center">{sucurl.nombre}</td>
-                <td className="text-center">{sucurl.email}</td>
-                <td className="text-center">{sucurl.cap_m2}</td>
-                <td className="text-center">{sucurl.cap_alm}</td>
-                <td className="text-center">{sucurl.tamano}</td>
-                <td className="text-center">{this.state.Ubicacion}</td>
-              </tr>;
-        });
+        const columns = [{
+            Header: '#',
+            Cell: props => {
+                return (
+                    <Link to={{
+                        pathname: "/admin/sucursal/" + props.original.cod,
+                        state: {
+                            sucursalID: props.original.cod,
+                        }
+                    }} className="btn btn-info">{props.original.cod}</Link>
+                )
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 50,
+            maxWidth: 50,
+            minWidth: 50,
+        },
+        {
+            Header: 'Nombre',
+            accessor: 'nombre',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 100,
+            maxWidth: 100,
+            minWidth: 100,
+        },
+        {
+            Header: 'Capacidad M2',
+            accessor: 'cap_m2',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 150,
+            maxWidth: 150,
+            minWidth: 150,
+        },
+        {
+            Header: 'Capacidad Almacenamiento',
+            accessor: 'cap_alm',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
+        },
+        {
+            Header: 'Email',
+            accessor: 'email',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 225,
+            maxWidth: 225,
+            minWidth: 225,
+        },
+        {
+            Header: 'Tamaño',
+            accessor: 'tamaño_d',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 110,
+            maxWidth: 110,
+            minWidth: 110,
+        },
+        {
+            Header: 'Ubicacion',
+            accessor: 'fk_lugar',
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            width: 110,
+            maxWidth: 110,
+            minWidth: 110,
+        },
+        {
+            Header: 'Action',
+            Cell: props => {
+                return (
+                    <button className="btn btn-danger"
+                        onClick={() => {
+                            axios.delete('http://localhost:3001/api/v1/sucursal/' + props.original.cod,
+                                {
+                                    headers: {
+                                        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                                        "Content-Type": "application/json"
+                                    }
+                                }
+                            ).then(response => {
+                               console.log(response.data)
+                            })
+                                .catch(function (error) {
+                                    console.log(error.response);
+                                });
+                        }}
+                    >Delete</button>
+                )
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 90,
+            maxWidth: 90,
+            minWidth: 90,
+        }]
         return(
             <div className="wrapper">
             <Sidemenu/>
             
             <div className="container-fluid m-0 p-0">
-                <MenuAdmin/>
+                {/* <MenuAdmin/> */}
             
             
             <div className="m-3 w-100">
                 <h2 className="text-center m-3"> SisLogUCAB Sucursal DataTable</h2>
             
-                <table className="table table-hover w-100">
-                    <thead className="thead-dark">
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"> Nombre </th>
-                        <th scope="col"> Email </th>
-                        <th scope="col"> Metros2  </th>
-                        <th scope="col"> Almacenamiento </th>
-                        <th scope="col"> Tamaño </th>
-                        <th scope="col"> Ubicación </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { sucur }
-                    </tbody>
-                </table>
-            </div>
-            <br/>
+                <ReactTable className="mr-3"
+                    columns={columns}
+                    data={this.state.sucursales}
+                    defaultPageSize={5}
+                    filterable={false}
+                    noDataText="No Posee Registro Alguno!"
+                    showPageSizeOptions={false}
+                ></ReactTable>
 
-            <div className="m-3">
-                <FormSucursal
-                    requestType="post"
-                    sucursalID={null}
-                    btnText="Create"
-                />
             </div>
-            
+
+                <div>
+                    <form onSubmit={(event) => this.handleFormSubmit(event)}>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="nombre">Nombre</label>
+                                    <input type="text" name="Nombre" className="form-control" id="inputEmail4" placeholder="Nombre Sucursal" />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" name="Email" className="form-control" id="inputPassword4" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Cap_M2">Capacidad Metros Cuadrados</label>
+                                    <input type="text" name="Cap_M2" className="form-control" id="inputCity" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Cap_Alm">Capacidad de Almacenamiento</label>
+                                    <input type="text" name="Cap_Alm" className="form-control" id="inputCity" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Tamaño_D">Tamaño de Almacenamiento</label>
+                                    <input type="text" name="Tamaño_D" className="form-control" id="inputCity" />
+                                </div>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Registro</button>
+                        </form>
+                </div>
         
             </div>
         </div>
