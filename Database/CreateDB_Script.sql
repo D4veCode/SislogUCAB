@@ -394,6 +394,7 @@ CREATE Table Ruta_Trans(
   Fk_TT int NOT NULL,
   Fk_Ruta int NOT NULL,
   Tiempo int NOT NULL,
+  Precio int NOT NULL,
   FOREIGN KEY (Fk_TT) REFERENCES Tipo_Transp (ID),
   FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),  
   Constraint Pk_Ruta_Trans PRIMARY KEY(ID)
