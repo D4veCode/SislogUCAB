@@ -346,7 +346,6 @@ Create Table Debito(
   Nombre_T varchar(50) NOT NULL,
   Numero varchar(30) NOT NULL,
   Cod_S varchar(10) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Debito PRIMARY KEY(ID)
   );
 
@@ -357,7 +356,6 @@ CREATE Table Credito(
   Numero varchar(30) NOT NULL,
   Fecha_V date NOT NULL,
   Cod_S varchar(10) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Credito PRIMARY KEY(ID)
   );
   
@@ -365,7 +363,6 @@ CREATE Table Cheque(
   ID SERIAL UNIQUE,
   Numero_C varchar(50) NOT NULL,
   Fecha_D timestamp NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Cheque PRIMARY KEY(ID)
   );
   
@@ -374,7 +371,6 @@ CREATE Table Transferencia(
   Nombre_T varchar(50) NOT NULL,
   Num_R varchar(20) NOT NULL,
   Rif varchar(30) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Transferencia PRIMARY KEY(ID)
   );
   
