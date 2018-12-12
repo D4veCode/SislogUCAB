@@ -16,6 +16,7 @@ api = Api(app, prefix='/api/v1')
 
 api.add_resource(emp.HelloWorld, '/')
 api.add_resource(emp.EmpleadoList, '/empleados')
+api.add_resource(emp.RegistroEmpleado, '/empleado/registro')
 api.add_resource(emp.Empleado, '/empleado/<int:id>')
 api.add_resource(cli.ClienteList, '/clientes')
 api.add_resource(cli.RegistroCliente, '/cliente/registro')

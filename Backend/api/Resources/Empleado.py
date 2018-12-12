@@ -18,7 +18,6 @@ emp_parse.add_argument('nivel_acd', required=True)
 emp_parse.add_argument('edo_c', required=True)
 emp_parse.add_argument('profesion', required=True)
 emp_parse.add_argument('num_h', required=True)
-emp_parse.add_argument('salario', required=True)
 emp_parse.add_argument('fk_lugar', required=True)
 emp_parse.add_argument('username', required=True)
 emp_parse.add_argument('password', required=True)
@@ -38,7 +37,6 @@ emp_fields = {
     'nivel_acd': fields.String,
     'profesion': fields.String,
     'num_h': fields.Integer,
-    'salario': fields.Float,
     'direccion': fields.String,
     'username': fields.String,
     'fk_emp': fields.String,
@@ -65,6 +63,7 @@ class EmpleadoList(Resource):
 
             return {"status": "fail", "error": str(e)}, 500
 
+
 class Empleado(Resource):
     @jwt_required
     def get(self, id):
@@ -82,8 +81,10 @@ class Empleado(Resource):
 
         try:
             args = emp_parse.parse_args()
-            database.updateEmpleado(id, args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'], args['cedula'], args['email_e'],
-                args['fecha_nac'], args['nivel_acad'], args['edo_civil'], args['profesion'], args['num_h'], args['fk_lugar'], args['fk_user'], args['fk_emp'], args['email_p'])
+            database.updateEmpleado(id, args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'],
+                                    args['cedula'], args['email_e'], args['fecha_nac'], args['nivel_acad'],
+                                    args['edo_civil'], args['profesion'], args['num_h'], args['fk_lugar'],
+                                    args['fk_user'], args['fk_emp'], args['email_p'])
             return {"status": "success", "message": "The Employee has been updated."}
 
         except Exception as e:
@@ -129,9 +130,10 @@ class RegistroEmpleado(Resource):
         try:
             args = emp_parse.parse_args()
             user = database.agregarUser(args['username'], encrypt_password(args['password']), 1)[0].get("id")
-            database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'], args['cedula'], args['email_e'],
-                args['fecha_n'], args['nivel_acd'], args['edo_c'], args['profesion'], args['num_h'], args['salario'], args['fk_lugar'], user,
-                args['fk_emp'], args['email_p'])
+            database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'],
+                                     args['cedula'], args['email_e'], args['fecha_n'], args['nivel_acd'],
+                                     args['edo_c'], args['profesion'], args['num_h'], args['salario'], args['fk_lugar'],
+                                     user, args['fk_emp'], args['email_p'])
 
             return {"status": "success", "message": "Employee registered."}, 201
         except Exception as e:
