@@ -271,7 +271,7 @@ def deleteEmpleado(id):
 
 
 def getRutas():
-    con =connect()
+    con = connect()
 
     rutas = con.query("select r.id, (select nombre as suc_origen from sucursal where id = r.fk_origen), "
                       "(select nombre as suc_dest from sucursal where id=r.fk_destino), "
