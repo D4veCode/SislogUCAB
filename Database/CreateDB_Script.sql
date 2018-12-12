@@ -182,6 +182,8 @@ CREATE Table Vehiculo(
   Serial_M varchar(30) NOT NULL,
   Serial_C varchar(30) NOT NULL,
   Fk_Mod int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Mod) REFERENCES Modelo (ID),
   Constraint Pk_Vehiculo PRIMARY KEY (ID)
   );  
@@ -203,6 +205,9 @@ CREATE Table Avion(
   Fuel_C int NOT NULL,
   Motor varchar(150) NOT NULL,
   Area int NOT NULL
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
+  Constraint Pk_Avion PRIMARY KEY (ID)
   );
   
 CREATE Table Barco(
@@ -213,6 +218,8 @@ CREATE Table Barco(
   Cap_C real NOT NULL,
   Vmax int NOT NULL,
   Long real NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Barco PRIMARY KEY (ID)
   );
   
@@ -308,19 +315,6 @@ CREATE Table Telefono(
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID),
   Constraint Pk_Telefono PRIMARY KEY (ID)
-  );
-  
-CREATE Table Suc_Met(
-  ID SERIAL UNIQUE,
-  Fk_Sucursal int NOT NULL,
-  Fk_Vehiculo int,
-  Fk_Avion int,
-  Fk_Barco int,
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
-  FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
-  FOREIGN KEY (Fk_Avion) REFERENCES Avion (ID),
-  FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID),
-  Constraint Pk_Suc_Met PRIMARY KEY (ID)
   );
   
 CREATE Table Servicio(
