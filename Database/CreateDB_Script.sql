@@ -146,7 +146,7 @@ CREATE Table Asistencia(
   Hora_S timestamp,
   Fk_Empleado int NOT NULL,
   FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID),
-  Constraint Pk_Asistencia PRIMARY KEY(ID);
+  Constraint Pk_Asistencia PRIMARY KEY(ID)
 );
   
 CREATE Table Cliente(
@@ -426,7 +426,7 @@ CREATE Table Paquete(
   Fk_Cliente int NOT NULL,
   Fk_Dim int NOT NULL,
   FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
-  FOREIGN KEY (Fk_Dimension) REFERENCES Dimension (ID),
+  FOREIGN KEY (Fk_Dim) REFERENCES Dimension (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
   );
