@@ -10,6 +10,9 @@ export default class SucursalDetail extends Component {
         this.state = { 
             sucursal: {},
             sucursalID: this.props.location.state.sucursalID,
+            estados: [],
+            municipios: [],
+            parroquias: []
          }
     }
     componentDidMount() {
@@ -25,6 +28,19 @@ export default class SucursalDetail extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+        
+        axios.get("http://127.0.0.1:3001/api/v1/estados", {
+            headers: {
+                Authorization:
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            this.setState({ estados: response.data.lugar });
+            console.log(this.state.estados)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
        
     }
 
@@ -35,7 +51,7 @@ export default class SucursalDetail extends Component {
         const Cap_M2 = parseInt(event.target.elements.Cap_M2.value);
         const Cap_Alm = parseInt(event.target.elements.Cap_Alm.value);
         const Tamaño_D = parseInt(event.target.elements.Tamaño_D.value);
-        const Fk_Lugar=100;
+        const Fk_Lugar = parseInt(event.target.elements.Municipios.value);
         //console.log(nombre, email, Cap_M2, Cap_Alm, Tamaño_D);
         if (requestType === "put") {
             let datas = JSON.stringify({
@@ -79,7 +95,45 @@ export default class SucursalDetail extends Component {
            
     } 
 
+    onGetMunicipios() {
+        console.log(this.refs.Estados.value);
+        axios.get('http://localhost:3001/api/v1/municipios/' + this.refs.Estados.value, {
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            this.setState({ municipios: response.data.lugar });
+            console.log(this.state.municipios)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    }
+
+    onGetParroquias() {
+        console.log(this.refs.Municipios.value);
+        axios.get('http://localhost:3001/api/v1/parroquias/' + this.refs.Municipios.value, {
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            this.setState({ parroquias: response.data.lugar });
+            console.log(this.state.parroquias)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    }
     render() {
+        var Est = this.state.estados.map(function (estado) {
+            return <option value={estado.id} key={`option_${estado.id}`} > {estado.nombre} </option>
+        });
+        var Municipios = this.state.municipios.map(function (muni) {
+            return <option value={muni.id} key={`option_${muni.id}`}> {muni.nombre}</option>
+        });
+        var Parroquias = this.state.parroquias.map(function (parro) {
+            return <option value={parro.id} key={`option_${parro.id}`}> {parro.nombre}</option>
+        });
         return <div className="wrapper">
             <Sidemenu />
 
@@ -128,6 +182,29 @@ export default class SucursalDetail extends Component {
                             <div className="form-group col-md-6">
                                 <label htmlFor="email">Email</label>
                                 <input type="email" name="Email" className="form-control" id="inputPassword4" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-4">
+                                <label htmlform="estados">Estados</label>
+                                <select ref="Estados" className="form-control" name="Estados" onChange={(e) => { this.onGetMunicipios(); }}>
+                                    <option readOnly>Seleccione...</option>
+                                    {Est}
+                                </select>
+                            </div>
+                            <div className="form-group col-md-4">
+                                <label htmlform="municipios">Municipios</label>
+                                <select ref="Municipios" className="form-control" name="Municipios" onChange={(e) => { this.onGetParroquias(); }}>
+                                    <option readOnly>Seleccione...</option>
+                                    {Municipios}
+                                </select>
+                            </div>
+                            <div className="form-group col-md-4">
+                                <label htmlform="parroquias">Parroquias</label>
+                                <select className="form-control" name="Parroquias">
+                                    <option readOnly>Seleccione...</option>
+                                    {Parroquias}
+                                </select>
                             </div>
                         </div>
                         <div className="form-row">

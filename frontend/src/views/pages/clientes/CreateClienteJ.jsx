@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class CreateClienteJ extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            estados: [],
+            municipios: [],
+            parroquias: []
+        }
+    }
+    componentDidMount() {
+        axios.get("http://127.0.0.1:3001/api/v1/estados", {
+            headers: {
+                Authorization:
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            this.setState({ estados: response.data.lugar });
+            console.log(this.state.estados)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    }
     handleFormSubmit = (event) => {
         event.preventDefault();
         const Nombre = event.target.elements.Nombre.value;
@@ -13,6 +35,7 @@ export default class CreateClienteJ extends Component{
         const Username = event.target.elements.Username.value;
         const Password = event.target.elements.Password.value;
         const Email = event.target.elements.Email.value;
+        const Fk_Lugar = parseInt(event.target.elements.Parroquias.value)
 
         let data = JSON.stringify({
             nombre: Nombre,
@@ -22,7 +45,7 @@ export default class CreateClienteJ extends Component{
             email: Email,
             nombre_e: Nombre_E,
             l_vip: L_VIP,
-            fk_lugar: 2,
+            fk_lugar: Fk_Lugar,
             username: Username,
             password: Password,
         })
@@ -41,7 +64,45 @@ export default class CreateClienteJ extends Component{
         });
 
     }
+    onGetMunicipios() {
+        console.log(this.refs.Estados.value);
+        axios.get('http://localhost:3001/api/v1/municipios/' + this.refs.Estados.value, {
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            this.setState({ municipios: response.data.lugar });
+            console.log(this.state.municipios)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    }
+
+    onGetParroquias() {
+        console.log(this.refs.Municipios.value);
+        axios.get('http://localhost:3001/api/v1/parroquias/' + this.refs.Municipios.value, {
+            headers: {
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            this.setState({ parroquias: response.data.lugar });
+            console.log(this.state.parroquias)
+        }).catch(function (error) {
+            console.log(error.response);
+        });
+    }
     render(){
+        var Est = this.state.estados.map(function (estado) {
+            return <option value={estado.id} key={`option_${estado.id}`} > {estado.nombre} </option>
+        });
+        var Municipios = this.state.municipios.map(function (muni) {
+            return <option value={muni.id} key={`option_${muni.id}`}> {muni.nombre}</option>
+        });
+        var Parroquias = this.state.parroquias.map(function (parro) {
+            return <option value={parro.id} key={`option_${parro.id}`}> {parro.nombre}</option>
+        });
         return(
             <div className="wrapper" keywords="registro clientes">
                 <div className="m-2 w-100">
@@ -77,6 +138,29 @@ export default class CreateClienteJ extends Component{
                                 <div className="form-group col-md-4">
                                     <label htmlform="Cedula">Cedula</label>
                                     <input type="text" name="Cedula" className="form-control" />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlform="estados">Estados</label>
+                                    <select ref="Estados" className="form-control" name="Estados" onChange={(e) => { this.onGetMunicipios(); }}>
+                                        <option readOnly>Seleccione...</option>
+                                        {Est}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="municipios">Municipios</label>
+                                    <select ref="Municipios" className="form-control" name="Municipios" onChange={(e) => { this.onGetParroquias(); }}>
+                                        <option readOnly>Seleccione...</option>
+                                        {Municipios}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="parroquias">Parroquias</label>
+                                    <select className="form-control" name="Parroquias">
+                                        <option readOnly>Seleccione...</option>
+                                        {Parroquias}
+                                    </select>
                                 </div>
                             </div>
                             <div className="form-row">
