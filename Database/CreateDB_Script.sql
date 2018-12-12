@@ -88,7 +88,6 @@ CREATE Table Empleado(
   Edo_C char(1) NOT NULL,
   Profesion varchar(150),
   Num_H int NOT NULL,
-  Salario int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_Emp int,
   Fk_User int NOT NULL UNIQUE,
@@ -100,6 +99,7 @@ CREATE Table Empleado(
   
 CREATE Table Emp_Suc(
   ID SERIAL UNIQUE,
+  Salario int NOT NULL,
   Fk_Suc int NOT NULL,
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD) ON DELETE CASCADE,
@@ -139,6 +139,15 @@ CREATE Table Horario(
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Horario PRIMARY KEY (ID)
   );
+  
+CREATE Table Asistencia(
+  ID SERIAL,
+  Hora_E timestamp NOT NULL,
+  Hora_S timestamp,
+  Fk_Empleado int NOT NULL,
+  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID),
+  Constraint Pk_Asistencia PRIMARY KEY(ID);
+);
   
 CREATE Table Cliente(
   ID SERIAL UNIQUE,
@@ -321,7 +330,7 @@ CREATE Table Servicio(
   Constraint Pk_Servicio PRIMARY KEY (ID)
   );
   
-CREATE Table Ser_Suc(
+CREATE Table Gasto(
   ID SERIAL UNIQUE,
   Fk_Servicio int NOT NULL,
   Fk_Sucursal int NOT NULL,
@@ -329,7 +338,7 @@ CREATE Table Ser_Suc(
   Fecha date NOT NULL,
   FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Servicio) REFERENCES Servicio (ID),
-  Constraint Pk_Gas_Suc PRIMARY KEY (ID)
+  Constraint Pk_Gasto PRIMARY KEY (ID)
   );
   
 Create Table Debito(
@@ -399,18 +408,25 @@ CREATE Table Tipo_Producto(
   Tipo varchar(30) NOT NULL,
   Constraint Pk_Tipo_Producto PRIMARY KEY(ID)
   );
+  
+ CREATE Table Dimension(
+  ID Serial UNIQUE,
+  Ancho real NOT NULL,
+  Alto real NOT NULL,
+  Largo real NOT NULL,
+  Constraint Pk_Dimension PRIMARY KEY(ID)
+);
 
 CREATE Table Paquete(
   ID SERIAL UNIQUE,
   Num_G int NOT NULL UNIQUE,
   Peso real NOT NULL,
   Monto real NOT NULL,
-  Ancho real NOT NULL,
-  Largo real NOT NULL,
-  Alto real NOT NULL,
   Fk_Trans int NOT NULL,
   Fk_Cliente int NOT NULL,
+  Fk_Dim int NOT NULL,
   FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
+  FOREIGN KEY (Fk_Dimension) REFERENCES Dimension (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
   );
@@ -433,7 +449,7 @@ CREATE Table Destinatario(
   FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
   Constraint Pk_Destinatario PRIMARY KEY(ID)
   );
-  
+
 CREATE Table Tracking(
   ID SERIAL UNIQUE,
   Fecha_L date NOT NULL,
