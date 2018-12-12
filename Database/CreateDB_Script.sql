@@ -145,7 +145,7 @@ CREATE Table Asistencia(
   Hora_E timestamp NOT NULL,
   Hora_S timestamp,
   Fk_Empleado int NOT NULL,
-  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID),
+  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID) ON DELETE CASCADE,
   Constraint Pk_Asistencia PRIMARY KEY(ID)
 );
   
@@ -239,7 +239,7 @@ CREATE Table Aeropuerto(
   Fk_Lugar int NOT NULL,
   Fk_Sucursal int NOT NULL,
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Aeropuerto PRIMARY KEY (ID)
   );
   
@@ -421,7 +421,7 @@ CREATE Table Paquete(
   Fk_Trans int NOT NULL,
   Fk_Cliente int NOT NULL,
   Fk_Dim int NOT NULL,
-  FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
+  FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Dim) REFERENCES Dimension (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
