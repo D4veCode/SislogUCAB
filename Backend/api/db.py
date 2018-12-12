@@ -229,14 +229,14 @@ def getEmpleados():
 
 
 def agregarEmpleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c, profesion,
-                    num_h, salario, fk_lugar, user, fk_emp=None, email_p=None):
+                    num_h, fk_lugar, user, fk_emp=None, email_p=None):
     con = connect()
 
     con.query("INSERT INTO empleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, "
-              "edo_c, profesion, num_h, salario, fk_lugar, fk_user, fk_emp, email_p) VALUES "
-              "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+              "edo_c, profesion, num_h, fk_lugar, fk_user, fk_emp, email_p) VALUES "
+              "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)",
               (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
-               profesion, num_h, salario, fk_lugar, user, fk_emp, email_p))
+               profesion, num_h, fk_lugar, user, fk_emp, email_p))
     con.close()
 
 
@@ -251,14 +251,13 @@ def getEmpleado(id):
 
 
 def updateEmpleado(id, p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
-                   profesion,
-                   num_h, salario, fk_lugar, fk_emp=None, email_p=None):
+                   profesion, num_h, fk_lugar, fk_emp=None, email_p=None):
     con = connect()
 
     con.query("UPDATE empleado SET  p_nombre=$1, s_nombre=$2, p_apellido=$3, s_apellido=$4, cedula=$5, email_e=$6, "
-              "fecha_n=$7, nivel_acd=$8, edo_c=$9, profesion=$10, num_h=$11, salario=$12, fk_lugar=$13, fk_emp=$14, "
-              "email_p=$15, WHERE id=$16", (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n,
-                                            nivel_acd, edo_c, profesion, num_h, salario, fk_lugar, fk_emp, email_p, id))
+              "fecha_n=$7, nivel_acd=$8, edo_c=$9, profesion=$10, num_h=$11, fk_lugar=$12, fk_emp=$13, "
+              "email_p=$14, WHERE id=$15", (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n,
+                                            nivel_acd, edo_c, profesion, num_h, fk_lugar, fk_emp, email_p, id))
     con.close()
 
 
@@ -279,3 +278,5 @@ def getRutas():
                       "where r.id = rt.fk_ruta and rt.fk_tt = t.id ) from ruta as r ").dictresult()
     con.close()
     return rutas
+
+def agregarRuta()
