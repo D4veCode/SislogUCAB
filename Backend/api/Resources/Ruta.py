@@ -13,7 +13,8 @@ ruta_field = {
     'id': fields.Integer,
     'suc_origen': fields.String,
     'suc_dest': fields.String,
-    'tipo_trans': fields.String
+    'tipo_trans': fields.String,
+    'tiempo': fields.Integer
 }
 
 met_trans_field = {
@@ -41,6 +42,38 @@ class RutaList(Resource):
             database.agregarRuta(data['origen'], data['destino'], data['m_trans'], data['tiempo'])
 
             return {"status": "success", "message": "Route registered. "}, 201
+
+        except Exception as e:
+            return {"status": "fail", "error": str(e)}, 500
+
+
+class Ruta(Resource):
+    @jwt_required
+    def get(self, id):
+
+        try:
+
+            ruta = database.getRuta(id)
+            return {"status": "success", "ruta": marshal(ruta, ruta_field)}
+
+        except Exception as e:
+            return {"status": "fail", "error": "Route not found. ", "msg": str(e)}, 404
+
+    def put(self, id):
+
+        try:
+            data = ruta_parse.parse_args()
+            database.updateRuta(id, data['origen'], data['destino'], data['tiempo'], data['m_trans'])
+            return {"status": "success", "message": "Route has been updated. "}
+
+        except Exception as e:
+            return {"status": "fail", "error": str(e)}, 500
+
+    def delete(self, id):
+
+        try:
+            database.deleteRuta(id)
+            return {"status": "fail", "message": "Route has been deleted"}
 
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 500

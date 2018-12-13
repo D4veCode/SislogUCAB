@@ -272,10 +272,13 @@ def deleteEmpleado(id):
 def getRutas():
     con = connect()
 
-    rutas = con.query("select r.id, (select nombre as suc_origen from sucursal where id = r.fk_origen), "
-                      "(select nombre as suc_dest from sucursal where id=r.fk_destino), "
-                      "(select t.tipo as tipo_trans from tipo_transp as t, ruta_trans as rt "
-                      "where r.id = rt.fk_ruta and rt.fk_tt = t.id ) from ruta as r ").dictresult()
+    rutas = con.query("select rt.id, "
+                      "(select s.nombre as suc_origen from sucursal as s, ruta as r "
+                      "where rt.fk_ruta=r.id and r.fk_origen=s.cod), "
+                      "(select s.nombre as suc_destino from sucursal as s, ruta as r "
+                      "where rt.fk_ruta=r.id and r.fk_destino=s.cod), "
+                      "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo "
+                      "from ruta_trans as rt ").dictresult()
     con.close()
     return rutas
 
@@ -286,7 +289,40 @@ def agregarRuta(origen, destino, m_trans, tiempo):
     ruta = con.query("INSERT INTO ruta(fk_origen, fk_destino) VALUES ($1, $2) returning id",
                      (origen, destino)).dictresult()[0].get("id")
 
-    con.query("INSERT INTO ruta_trans(fk_tt, fk_ruta, tiempo) VALUES ($1, $2, $3)",(m_trans, ruta, tiempo))
+    con.query("INSERT INTO ruta_trans(fk_tt, fk_ruta, tiempo) VALUES ($1, $2, $3)", (m_trans, ruta, tiempo))
+
+    con.close()
+
+
+def getRuta(id):
+    con = connect()
+
+    ruta = con.query("select rt.id, "
+                     "(select s.nombre as suc_origen from sucursal as s, ruta as r "
+                     "where rt.fk_ruta=r.id and r.fk_origen=s.cod), "
+                     "(select s.nombre as suc_destino from sucursal as s, ruta as r "
+                     "where rt.fk_ruta=r.id and r.fk_destino=s.cod), "
+                     "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo "
+                     "from ruta_trans as rt where rt.id=$1", (id,)).dictresult()
+    con.close()
+    return ruta
+
+
+def updateRuta(id, origen, destino, tiempo, m_trans):
+    con = connect()
+
+    rut = con.query("update ruta set fk_origen = $1, fk_destino = $2 "
+                    "where id = (select fk_ruta from ruta_trans where id=$3) returning id",
+                    (origen, destino, id)).dictresult()[0].get("id")
+    con.query("update ruta_trans fk_tt=$1, fk_ruta=$2, tiempo=$3", (m_trans, rut, tiempo))
+
+    con.close()
+
+
+def deleteRuta(id):
+    con = connect()
+
+    con.query("delete from ruta_trans where id=$1", (id,))
 
     con.close()
 
