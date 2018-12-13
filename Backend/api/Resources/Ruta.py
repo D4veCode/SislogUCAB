@@ -53,7 +53,7 @@ class Ruta(Resource):
 
         try:
 
-            ruta = database.getRuta(id)
+            ruta = database.getRuta(id)[0]
             return {"status": "success", "ruta": marshal(ruta, ruta_field)}
 
         except Exception as e:
