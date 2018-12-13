@@ -214,8 +214,6 @@ CREATE Table Barco(
   ID SERIAL UNIQUE,
   Nombre varchar(30) NOT NULL,
   Descripcion varchar(150),
-  Peso real NOT NULL,
-  Cap_C real NOT NULL,
   Vmax int NOT NULL,
   Long real NOT NULL,
   Fk_Sucursal int NOT NULL,
@@ -489,8 +487,9 @@ CREATE Table Sta_Tra(
   
 CREATE Table Asistencia(
   ID SERIAL,
-  Hora_E timestamp NOT NULL,
-  Hora_S timestamp,
+  Dia Date NOT NULL default (now() at time zone 'utc'),
+  Hora_E time NOT NULL,
+  Hora_S time,
   Fk_Empleado int NOT NULL,
   FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID) ON DELETE CASCADE,
   Constraint Pk_Asistencia PRIMARY KEY(ID)
