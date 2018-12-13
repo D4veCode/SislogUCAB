@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../css/account.css';
+import Sidemenu from "../../containers/Sidemenu.jsx";
 
 export default class VehiculoDetail extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class VehiculoDetail extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://127.0.0.1:3001/api/v1/avion/" + this.state.vehiculoID, {
+        axios.get("http://127.0.0.1:3001/api/v1/vehiculo/" + this.state.vehiculoID, {
             headers: {
                 Authorization:
                     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
@@ -125,104 +126,111 @@ export default class VehiculoDetail extends Component {
             return <option value={md.id} key={md.id}> {md.nombre} </option>
         })
         return (
-            <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Vehiculo {this.state.vehiculo.id} Info </h2>
+            <div className="wrapper" keywords="clientes">
+                <Sidemenu />
 
-                <table className="table table-hover w-100 mr-3">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col" className="text-center">Placa</th>
-                            <th scope="col" className="text-center">Peso</th>
-                            <th scope="col" className="text-center">Capacidad Carga</th>
-                            <th scope="col" className="text-center">Descripcion</th>
-                            <th scope="col" className="text-center">Color</th>
-                            <th scope="col" className="text-center">Fecha Vehiculo</th>
-                            <th scope="col" className="text-center">Serial Motor</th>
-                            <th scope="col" className="text-center">Serial Carroceria</th>
-                            <th scope="col" className="text-center">Modelo</th>
-                            <th scope="col" className="text-center">Sucursal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="text-center">{this.state.empleado.placa}</td>
-                            <td className="text-center">{this.state.empleado.peso}</td>
-                            <td className="text-center"> {this.state.empleado.cap_c}</td>
-                            <td className="text-center"> {this.state.empleado.descripcion} </td>
-                            <td className="text-center">{this.state.empleado.color}</td>
-                            <td className="text-center">{this.state.empleado.fecha_v}</td>
-                            <td className="text-center">{this.state.empleado.serial_m}</td>
-                            <td className="text-center">{this.state.empleado.serial_c}</td>
-                            <td className="text-center">{this.state.empleado.fk_mod}</td>
-                            <td className="text-center">{this.state.empleado.fk_sucursal}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br />
+                <div className="container-fluid m-0 p-0">
+                    {/* <MenuAdmin/> */}
+                <div className="m-3 w-100">
+                    <h2 className="text-center m-3"> SisLogUCAB Vehiculo {this.state.vehiculo.id} Info </h2>
 
-                <div className="m-3">
-                    <div>
-                        <form onSubmit={event => this.handleFormSubmit(event, "put", this.state.vehiculoID)}>
-                            <div className="form-row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="nombre">Nombre</label>
-                                    <input type="text" name="Nombre" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Peso">Peso</label>
-                                    <input type="text" name="Peso" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Cap_C">Capacidad Carga</label>
-                                    <input type="text" name="Cap_C" className="form-control" />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="Descripcion">Descripcion</label>
-                                    <input type="text" name="Descripcion" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="Color">Color</label>
-                                    <input type="text" name="Color" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="Fecha_V">Fecha Vehiculo</label>
-                                    <input type="date" name="Fecha_V" className="form-control" />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Serial_M">Serial Motor</label>
-                                    <input type="text" name="Serial_M" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Serial_C">Serial Carroceria</label>
-                                    <input type="text" name="Serial_C" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="sucursal">Sucursal</label>
-                                    <select className="form-control" name="sucursal">
-                                        <option >Choose...</option>
-                                        {sucursales}
-                                    </select>
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="modelos">Modelos</label>
-                                    <select className="form-control" name="modelos">
-                                        <option >Choose...</option>
-                                        {modelos}
-                                    </select>
-                                </div>
-                            </div>
+                    <table className="table table-hover w-100 mr-3">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col" className="text-center">Placa</th>
+                                <th scope="col" className="text-center">Peso</th>
+                                <th scope="col" className="text-center">Cap. Carga</th>
+                                <th scope="col" className="text-center">Descripcion</th>
+                                <th scope="col" className="text-center">Color</th>
+                                <th scope="col" className="text-center">Fecha Veh</th>
+                                <th scope="col" className="text-center">Serial Motor</th>
+                                <th scope="col" className="text-center">Serial Carroceria</th>
+                                <th scope="col" className="text-center">Modelo</th>
+                                <th scope="col" className="text-center">Sucursal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="text-center">{this.state.empleado.placa}</td>
+                                <td className="text-center">{this.state.empleado.peso}</td>
+                                <td className="text-center"> {this.state.empleado.cap_c}</td>
+                                <td className="text-center"> {this.state.empleado.descripcion} </td>
+                                <td className="text-center">{this.state.empleado.color}</td>
+                                <td className="text-center">{this.state.empleado.fecha_v}</td>
+                                <td className="text-center">{this.state.empleado.serial_m}</td>
+                                <td className="text-center">{this.state.empleado.serial_c}</td>
+                                <td className="text-center">{this.state.empleado.fk_mod}</td>
+                                <td className="text-center">{this.state.empleado.fk_sucursal}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
 
-                            <button type="submit" className="btn btn-primary">
-                                Update
-                            </button>
-                        </form>
+                    <div className="m-3">
+                        <div>
+                            <form onSubmit={event => this.handleFormSubmit(event, "put", this.state.vehiculoID)}>
+                                <div className="form-row">
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="nombre">Nombre</label>
+                                        <input type="text" name="Nombre" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Peso">Peso</label>
+                                        <input type="text" name="Peso" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Cap_C">Capacidad Carga</label>
+                                        <input type="text" name="Cap_C" className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Descripcion">Descripcion</label>
+                                        <input type="text" name="Descripcion" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Color">Color</label>
+                                        <input type="text" name="Color" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Fecha_V">Fecha Vehiculo</label>
+                                        <input type="date" name="Fecha_V" className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="Serial_M">Serial Motor</label>
+                                        <input type="text" name="Serial_M" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="Serial_C">Serial Carroceria</label>
+                                        <input type="text" name="Serial_C" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="sucursal">Sucursal</label>
+                                        <select className="form-control" name="sucursal">
+                                            <option >Choose...</option>
+                                            {sucursales}
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="modelos">Modelos</label>
+                                        <select className="form-control" name="modelos">
+                                            <option >Choose...</option>
+                                            {modelos}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" className="btn btn-primary">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }

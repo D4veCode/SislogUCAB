@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../../css/account.css';
+import Sidemenu from "../../containers/Sidemenu.jsx";
 
 export default class BarcoDetail extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ export default class BarcoDetail extends Component {
 
             console.log(datas);
 
-            axios.put(`http://localhost:3001/api/v1/avion/${barcoID}`, datas,
+            axios.put(`http://localhost:3001/api/v1/barco/${barcoID}`, datas,
                 {
                     headers: {
                         Authorization:
@@ -91,69 +92,76 @@ export default class BarcoDetail extends Component {
                 return <option value={av.id} key={av.id}> {av.nombre} </option>
         })
         return (
-            <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Barco {this.state.barco.id} Info </h2>
+            <div className = "wrapper" keywords = "clientes" >
+                <Sidemenu />
 
-                <table className="table table-hover w-100 mr-3">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col" className="text-center">Nombre</th>
-                            <th scope="col" className="text-center">Descripcion</th>
-                            <th scope="col" className="text-center">Longitud</th>
-                            <th scope="col" className="text-center">Velocidad Max</th>
-                            <th scope="col" className="text-center">Sucursal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className="text-center">{this.state.empleado.nombre}</td>
-                            <td className="text-center"> {this.state.empleado.descripcion} </td>
-                            <td className="text-center">{this.state.empleado.long}</td>
-                            <td className="text-center">{this.state.empleado.vmax}</td>
-                            <td className="text-center">{this.state.empleado.fk_sucursal}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br />
+                <div className="container-fluid m-0 p-0">
+                    {/* <MenuAdmin/> */}
+                <div className="m-3 w-100">
+                    <h2 className="text-center m-3"> SisLogUCAB Barco {this.state.barco.id} Info </h2>
 
-                <div className="m-3">
-                    <div>
-                        <form onSubmit={event => this.handleFormSubmit(event, "put", this.state.barcoID)}>
-                            <div className="form-row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="nombre">Nombre</label>
-                                    <input type="text" name="Nombre" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="Descripcion">Descripcion</label>
-                                    <input type="text" name="Descripcion" className="form-control" />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="Long">Longitud</label>
-                                    <input type="text" name="Long" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="Vmax"> Velocidad Max </label>
-                                    <input type="text" name="Vmax" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label htmlFor="sucursal">Sucursal</label>
-                                    <select className="form-control" name="sucursal">
-                                        <option >Choose...</option>
-                                        {sucursales}
-                                    </select>
-                                </div>
-                            </div>
+                    <table className="table table-hover w-100 mr-3">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th scope="col" className="text-center">Nombre</th>
+                                <th scope="col" className="text-center">Descripcion</th>
+                                <th scope="col" className="text-center">Longitud</th>
+                                <th scope="col" className="text-center">Velocidad Max</th>
+                                <th scope="col" className="text-center">Sucursal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="text-center">{this.state.barco.nombre}</td>
+                                <td className="text-center">{this.state.barco.descripcion}</td>
+                                <td className="text-center">{this.state.barco.long}</td>
+                                <td className="text-center">{this.state.barco.vmax}</td>
+                                <td className="text-center">{this.state.barco.fk_sucursal}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
 
-                            <button type="submit" className="btn btn-primary">
-                                Update
-                            </button>
-                        </form>
+                    <div className="m-3">
+                        <div>
+                            <form onSubmit={event => this.handleFormSubmit(event, "put", this.state.barcoID)}>
+                                <div className="form-row">
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="nombre">Nombre</label>
+                                        <input type="text" name="Nombre" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="Descripcion">Descripcion</label>
+                                        <input type="text" name="Descripcion" className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Long">Longitud</label>
+                                        <input type="text" name="Long" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="Vmax"> Velocidad Max </label>
+                                        <input type="text" name="Vmax" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-4">
+                                        <label htmlFor="sucursal">Sucursal</label>
+                                        <select className="form-control" name="sucursal">
+                                            <option >Choose...</option>
+                                            {sucursales}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" className="btn btn-primary">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }

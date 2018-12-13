@@ -4,6 +4,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import axios from 'axios';
 import '../../css/account.css';
+import Sidemenu from '../../containers/Sidemenu.jsx';
 
 export default class Barcos extends Component {
     constructor(props) {
@@ -92,9 +93,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 50,
-            maxWidth: 50,
-            minWidth: 50,
+            width: 80,
+            maxWidth: 80,
+            minWidth: 80,
         },
         {
             Header: 'Nombre',
@@ -107,9 +108,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
         },
         {
             Header: 'Descripcion',
@@ -122,9 +123,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 110,
-            maxWidth: 110,
-            minWidth: 110,
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
         },
         {
             Header: 'Longitud',
@@ -137,9 +138,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 120,
-            maxWidth: 120,
-            minWidth: 120,
+            width: 150,
+            maxWidth: 150,
+            minWidth: 150,
         },
         {
             Header: 'Velocidad M',
@@ -152,9 +153,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 80,
-            maxWidth: 80,
-            minWidth: 80,
+            width: 150,
+            maxWidth: 150,
+            minWidth: 150,
         },
         {
             Header: 'Sucursal',
@@ -167,9 +168,9 @@ export default class Barcos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 80,
-            maxWidth: 80,
-            minWidth: 80,
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
         },
         {
             Header: 'Action',
@@ -207,55 +208,63 @@ export default class Barcos extends Component {
                 return <option value={av.id} key={av.id}> {av.nombre} </option>
         })
         return (
+            <div className="wrapper" keywords="clientes">
+                <Sidemenu />
 
-            <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Barcos DataTable </h2>
+                <div className="container-fluid m-0 p-0">
+                    {/* <MenuAdmin/> */}
 
-                <ReactTable className="mr-4"
-                    columns={columns}
-                    data={this.state.barcos}
-                    defaultPageSize={5}
-                    filterable={false}
-                    noDataText="No Posee Registro Alguno!"
-                    showPageSizeOptions={false}
-                ></ReactTable>
-                <br />
-                <div>
-                    <form onSubmit={event => this.handleFormSubmit(event)}>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <label htmlFor="nombre">Nombre</label>
-                                <input type="text" name="Nombre" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="Descripcion">Descripcion</label>
-                                <input type="text" name="Descripcion" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Long">Longitud</label>
-                                <input type="text" name="Long" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Vmax"> Velocidad Max </label>
-                                <input type="text" name="Vmax" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="sucursal">Sucursal</label>
-                                <select className="form-control" name="sucursal">
-                                    <option >Choose...</option>
-                                    {sucursales}
-                                </select>
-                            </div>
-                        </div>
+                <div className="m-3 w-100">
+                    <h2 className="text-center m-3"> SisLogUCAB Barcos DataTable </h2>
 
-                        <button type="submit" className="btn btn-primary">
-                            Registro
-                            </button>
-                    </form>
+                    <ReactTable className="mr-4"
+                        columns={columns}
+                        data={this.state.barcos}
+                        defaultPageSize={5}
+                        filterable={false}
+                        noDataText="No Posee Registro Alguno!"
+                        showPageSizeOptions={false}
+                    ></ReactTable>
+
+                    <br />
+                    <div classNmae="mx-3 p-3">
+                        <form onSubmit={event => this.handleFormSubmit(event)}>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="nombre">Nombre</label>
+                                    <input type="text" name="Nombre" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="Descripcion">Descripcion</label>
+                                    <input type="text" name="Descripcion" className="form-control" />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Long">Longitud</label>
+                                    <input type="text" name="Long" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Vmax"> Velocidad Max </label>
+                                    <input type="text" name="Vmax" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="sucursal">Sucursal</label>
+                                    <select className="form-control" name="sucursal">
+                                        <option >Choose...</option>
+                                        {sucursales}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary">
+                                Registro
+                                </button>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </div>
         );
     }
 }

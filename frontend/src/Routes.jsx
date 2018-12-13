@@ -23,8 +23,10 @@ import Aviones from './views/pages/avion/Aviones.jsx';
 import AvionDetail from './views/pages/avion/AvionDetail.jsx';
 import Barcos from "./views/pages/barco/Barcos.jsx";
 import BarcoDetail from "./views/pages/barco/BarcoDetail.jsx";
+import Rutas from "./views/pages/rutas/Rutas.jsx";
+import RutaDetail from "./views/pages/rutas/RutaDetail.jsx";
 import Vehiculos from "./views/pages/vehiculo/Vehiculos.jsx";
-import VehiculoDetail from "./views/pages/barco/VehiculoDetail.jsx";
+import VehiculoDetail from "./views/pages/vehiculo/VehiculoDetail.jsx";
 import SucursalDetail from "./views/pages/sucursal/SucursalDetail.jsx";
 
 
@@ -53,6 +55,8 @@ class BaseRouter extends Component{
             <Route path="/admin/avion/:avion" component={AvionDetail} />
             <Route path="/admin/barcos" component={Barcos} />
             <Route path="/admin/barco/:barco" component={BarcoDetail} />
+            <Route path="/admin/rutas" component={Rutas} />
+            <Route path="/admin/ruta/:ruta" component={RutaDetail} />
             <Route path="/admin/vehiculos" component={Vehiculos} />
             <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
           </div>;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import Sidemenu from "../../containers/Sidemenu.jsx";
 import axios from 'axios';
 import '../../css/account.css';
 
@@ -149,12 +150,12 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
+            width: 80,
+            maxWidth:80,
+            minWidth: 80,
         },
         {
-            Header: 'Capacidad C',
+            Header: 'Cap. Crg',
             accessor: 'Cap_C',
             sortable: false,
             style: {
@@ -179,9 +180,9 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 110,
-            maxWidth: 110,
-            minWidth: 110,
+            width: 200,
+            maxWidth: 200,
+            minWidth: 200,
         },
         {
             Header: 'Color',
@@ -194,12 +195,12 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 120,
-            maxWidth: 120,
-            minWidth: 120,
+            width: 80,
+            maxWidth: 80,
+            minWidth: 80,
         },
         {
-            Header: 'Fecha Vehiculo',
+            Header: 'Fecha Veh',
             accessor: 'fecha_v',
             sortable: false,
             style: {
@@ -214,7 +215,7 @@ export default class Vehiculos extends Component {
             minWidth: 120,
         },
         {
-            Header: 'Serial Motor',
+            Header: 'Se. Motor',
             accessor: 'serial_m',
             sortable: false,
             style: {
@@ -224,12 +225,12 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
+            width: 120,
+            maxWidth: 120,
+            minWidth: 120,
         },
         {
-            Header: 'Serial Carroceria',
+            Header: 'Se. Carroceria',
             accessor: 'serial_c',
             sortable: false,
             style: {
@@ -239,9 +240,9 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 110,
-            maxWidth: 110,
-            minWidth: 110,
+            width: 120,
+            maxWidth: 120,
+            minWidth: 120,
         },
         {
             Header: 'Modelo',
@@ -269,9 +270,9 @@ export default class Vehiculos extends Component {
                 background: "black",
                 color: 'white',
             },
-            width: 80,
-            maxWidth: 80,
-            minWidth: 80,
+            width: 100,
+            maxWidth: 100,
+            minWidth: 100,
         },
         {
             Header: 'Action',
@@ -312,80 +313,86 @@ export default class Vehiculos extends Component {
             return <option value={md.id} key={md.id}> {md.nombre} </option>
         })
         return (
+            <div className="wrapper" keywords="clientes">
+                <Sidemenu />
 
-            <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Vehiculos DataTable </h2>
+                <div className="container-fluid m-0 p-0">
+                    {/* <MenuAdmin/> */}
+                <div className="m-3 w-100">
+                    <h2 className="text-center m-3"> SisLogUCAB Vehiculos DataTable </h2>
 
-                <ReactTable className="mr-4"
-                    columns={columns}
-                    data={this.state.vehiculos}
-                    defaultPageSize={5}
-                    filterable={false}
-                    noDataText="No Posee Registro Alguno!"
-                    showPageSizeOptions={false}
-                ></ReactTable>
-                <br />
-                <div>
-                    <form onSubmit={event => this.handleFormSubmit(event)}>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <label htmlFor="nombre">Nombre</label>
-                                <input type="text" name="Nombre" className="form-control" />
+                    <ReactTable className="mr-2"
+                        columns={columns}
+                        data={this.state.vehiculos}
+                        defaultPageSize={5}
+                        filterable={false}
+                        noDataText="No Posee Registro Alguno!"
+                        showPageSizeOptions={false}
+                    ></ReactTable>
+                    <br />
+                    <div>
+                        <form onSubmit={event => this.handleFormSubmit(event)}>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="nombre">Nombre</label>
+                                    <input type="text" name="Nombre" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Peso">Peso</label>
+                                    <input type="text" name="Peso" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Cap_C">Capacidad Carga</label>
+                                    <input type="text" name="Cap_C" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Peso">Peso</label>
-                                <input type="text" name="Peso" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Descripcion">Descripcion</label>
+                                    <input type="text" name="Descripcion" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Color">Color</label>
+                                    <input type="text" name="Color" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Fecha_V">Fecha Vehiculo</label>
+                                    <input type="date" name="Fecha_V" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Cap_C">Capacidad Carga</label>
-                                <input type="text" name="Cap_C" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Serial_M">Serial Motor</label>
+                                    <input type="text" name="Serial_M" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Serial_C">Serial Carroceria</label>
+                                    <input type="text" name="Serial_C" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="sucursal">Sucursal</label>
+                                    <select className="form-control" name="sucursal">
+                                        <option >Choose...</option>
+                                        {sucursales}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="modelos">Modelos</label>
+                                    <select className="form-control" name="modelos">
+                                        <option >Choose...</option>
+                                        {modelos}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Descripcion">Descripcion</label>
-                                <input type="text" name="Descripcion" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Color">Color</label>
-                                <input type="text" name="Color" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Fecha_V">Fecha Vehiculo</label>
-                                <input type="date" name="Fecha_V" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Serial_M">Serial Motor</label>
-                                <input type="text" name="Serial_M" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Serial_C">Serial Carroceria</label>
-                                <input type="text" name="Serial_C" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="sucursal">Sucursal</label>
-                                <select className="form-control" name="sucursal">
-                                    <option >Choose...</option>
-                                    {sucursales}
-                                </select>
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="modelos">Modelos</label>
-                                <select className="form-control" name="modelos">
-                                    <option >Choose...</option>
-                                    {modelos}
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <button type="submit" className="btn btn-primary">
-                            Registro
-                            </button>
-                    </form>
+                        
+                            <button type="submit" className="btn btn-primary">
+                                Registro
+                                </button>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </div>
         );
     }
 }
