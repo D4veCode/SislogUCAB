@@ -300,7 +300,7 @@ def getRuta(id):
     ruta = con.query("select rt.id, "
                      "(select s.nombre as suc_origen from sucursal as s, ruta as r "
                      "where rt.fk_ruta=r.id and r.fk_origen=s.cod), "
-                     "(select s.nombre as suc_destino from sucursal as s, ruta as r "
+                     "(select s.nombre as suc_dest from sucursal as s, ruta as r "
                      "where rt.fk_ruta=r.id and r.fk_destino=s.cod), "
                      "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo "
                      "from ruta_trans as rt where rt.id=$1", (id,)).dictresult()
