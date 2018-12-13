@@ -138,16 +138,7 @@ CREATE Table Horario(
   FOREIGN KEY (Fk_Hor) REFERENCES Horario (ID),
   FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Horario PRIMARY KEY (ID)
-  );
-  
-CREATE Table Asistencia(
-  ID SERIAL,
-  Hora_E timestamp NOT NULL,
-  Hora_S timestamp,
-  Fk_Empleado int NOT NULL,
-  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID) ON DELETE CASCADE,
-  Constraint Pk_Asistencia PRIMARY KEY(ID)
-);
+  ); 
   
 CREATE Table Cliente(
   ID SERIAL UNIQUE,
@@ -493,3 +484,12 @@ CREATE Table Sta_Tra(
   FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
   Constraint Pk_Sta_Tra PRIMARY KEY(ID)
   );
+  
+CREATE Table Asistencia(
+  ID SERIAL,
+  Hora_E timestamp NOT NULL,
+  Hora_S timestamp,
+  Fk_Empleado int NOT NULL,
+  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID) ON DELETE CASCADE,
+  Constraint Pk_Asistencia PRIMARY KEY(ID)
+);
