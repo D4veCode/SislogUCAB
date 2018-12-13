@@ -314,7 +314,7 @@ def updateRuta(id, origen, destino, tiempo, m_trans):
     rut = con.query("update ruta set fk_origen = $1, fk_destino = $2 "
                     "where id = (select fk_ruta from ruta_trans where id=$3) returning id",
                     (origen, destino, id)).dictresult()[0].get("id")
-    con.query("update ruta_trans fk_tt=$1, fk_ruta=$2, tiempo=$3", (m_trans, rut, tiempo))
+    con.query("update ruta_trans set fk_tt=$1, fk_ruta=$2, tiempo=$3 where id=$4", (m_trans, rut, tiempo, id))
 
     con.close()
 
