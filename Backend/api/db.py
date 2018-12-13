@@ -256,7 +256,7 @@ def updateEmpleado(id, p_nombre, s_nombre, p_apellido, s_apellido, cedula, email
 
     con.query("UPDATE empleado SET  p_nombre=$1, s_nombre=$2, p_apellido=$3, s_apellido=$4, cedula=$5, email_e=$6, "
               "fecha_n=$7, nivel_acd=$8, edo_c=$9, profesion=$10, num_h=$11, fk_lugar=$12, fk_emp=$13, "
-              "email_p=$14, WHERE id=$15", (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n,
+              "email_p=$14 WHERE id=$15", (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n,
                                             nivel_acd, edo_c, profesion, num_h, fk_lugar, fk_emp, email_p, id))
     con.close()
 
@@ -279,4 +279,22 @@ def getRutas():
     con.close()
     return rutas
 
-def agregarRuta()
+
+def agregarRuta(origen, destino, m_trans, tiempo):
+    con = connect()
+
+    ruta = con.query("INSERT INTO ruta(fk_origen, fk_destino) VALUES ($1, $2) returning id",
+                     (origen, destino)).dictresult()[0].get("id")
+
+    con.query("INSERT INTO ruta_trans(fk_tt, fk_ruta, tiempo) VALUES ($1, $2, $3)",(m_trans, ruta, tiempo))
+
+    con.close()
+
+
+def getMtransp():
+    con = connect()
+
+    m_trans = con.query("select * from tipo_transp").dictresult()
+
+    con.close()
+    return m_trans
