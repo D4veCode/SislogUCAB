@@ -52,15 +52,11 @@ export default class Barcos extends Component {
         const Descripcion = event.target.elements.Descripcion.value;
         const Long = parseInt(event.target.elements.Long.value);
         const Vmax = parseFloat(event.target.elements.Vmax.value);
-        const Peso = parseInt(event.target.elements.Peso.value);
-        const Cap_C = parseInt(event.target.elements.Cap_C.value);
         const Fk_Sucursal = parseInt(event.target.elements.sucursal.value);
 
         let datas = JSON.stringify({
             nombre: Nombre,
             descripcion: Descripcion,
-            peso: Peso,
-            cap_c: Cap_C,
             long: Long,
             vmax: Vmax,
             fk_sucursal: Fk_Sucursal
@@ -103,36 +99,6 @@ export default class Barcos extends Component {
         {
             Header: 'Nombre',
             accessor: 'nombre',
-            sortable: false,
-            style: {
-                textAlign: "center"
-            },
-            headerStyle: {
-                background: "black",
-                color: 'white',
-            },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
-        },
-        {
-            Header: 'Peso',
-            accessor: 'peso',
-            sortable: false,
-            style: {
-                textAlign: "center"
-            },
-            headerStyle: {
-                background: "black",
-                color: 'white',
-            },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
-        },
-        {
-            Header: 'Capacidad C',
-            accessor: 'Cap_C',
             sortable: false,
             style: {
                 textAlign: "center"
@@ -261,29 +227,21 @@ export default class Barcos extends Component {
                                 <label htmlFor="nombre">Nombre</label>
                                 <input type="text" name="Nombre" className="form-control" />
                             </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Peso">Peso</label>
-                                <input type="text" name="Peso" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Cap_C">Capacidad Carga</label>
-                                <input type="text" name="Cap_C" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-3">
+                            <div className="form-group col-md-6">
                                 <label htmlFor="Descripcion">Descripcion</label>
                                 <input type="text" name="Descripcion" className="form-control" />
                             </div>
-                            <div className="form-group col-md-3">
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-4">
                                 <label htmlFor="Long">Longitud</label>
                                 <input type="text" name="Long" className="form-control" />
                             </div>
-                            <div className="form-group col-md-3">
+                            <div className="form-group col-md-4">
                                 <label htmlFor="Vmax"> Velocidad Max </label>
                                 <input type="text" name="Vmax" className="form-control" />
                             </div>
-                            <div className="form-group col-md-3">
+                            <div className="form-group col-md-4">
                                 <label htmlFor="sucursal">Sucursal</label>
                                 <select className="form-control" name="sucursal">
                                     <option >Choose...</option>

@@ -12,7 +12,7 @@ export default class BarcoDetail extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://127.0.0.1:3001/api/v1/avion/" + this.state.avionID, {
+        axios.get("http://127.0.0.1:3001/api/v1/barco/" + this.state.barcoID, {
             headers: {
                 Authorization:
                     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
@@ -20,7 +20,7 @@ export default class BarcoDetail extends Component {
             }
         })
             .then(response => {
-                this.setState({ avion: response.data.avion })
+                this.setState({ barco: response.data.barco })
             })
 
         axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
@@ -46,16 +46,12 @@ export default class BarcoDetail extends Component {
         const Descripcion = event.target.elements.Descripcion.value;
         const Long = parseInt(event.target.elements.Long.value);
         const Vmax = parseFloat(event.target.elements.Vmax.value);
-        const Peso = parseInt(event.target.elements.Peso.value);
-        const Cap_C = parseInt(event.target.elements.Cap_C.value);
         const Fk_Sucursal = parseInt(event.target.elements.sucursal.value);
 
         if (requestType === "put") {
             let datas = JSON.stringify({
                 nombre: Nombre,
                 descripcion: Descripcion,
-                peso: Peso,
-                cap_c: Cap_C,
                 long: Long,
                 vmax: Vmax,
                 fk_sucursal: Fk_Sucursal
@@ -102,8 +98,6 @@ export default class BarcoDetail extends Component {
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col" className="text-center">Nombre</th>
-                            <th scope="col" className="text-center">Peso</th>
-                            <th scope="col" className="text-center">Capacidad Carga</th>
                             <th scope="col" className="text-center">Descripcion</th>
                             <th scope="col" className="text-center">Longitud</th>
                             <th scope="col" className="text-center">Velocidad Max</th>
@@ -113,8 +107,6 @@ export default class BarcoDetail extends Component {
                     <tbody>
                         <tr>
                             <td className="text-center">{this.state.empleado.nombre}</td>
-                            <td className="text-center">{this.state.empleado.peso}</td>
-                            <td className="text-center"> {this.state.empleado.cap_c}</td>
                             <td className="text-center"> {this.state.empleado.descripcion} </td>
                             <td className="text-center">{this.state.empleado.long}</td>
                             <td className="text-center">{this.state.empleado.vmax}</td>
@@ -132,29 +124,21 @@ export default class BarcoDetail extends Component {
                                     <label htmlFor="nombre">Nombre</label>
                                     <input type="text" name="Nombre" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Peso">Peso</label>
-                                    <input type="text" name="Peso" className="form-control" />
-                                </div>
-                                <div className="form-group col-md-3">
-                                    <label htmlFor="Cap_C">Capacidad Carga</label>
-                                    <input type="text" name="Cap_C" className="form-control" />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-3">
+                                <div className="form-group col-md-6">
                                     <label htmlFor="Descripcion">Descripcion</label>
                                     <input type="text" name="Descripcion" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-3">
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
                                     <label htmlFor="Long">Longitud</label>
                                     <input type="text" name="Long" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-3">
+                                <div className="form-group col-md-4">
                                     <label htmlFor="Vmax"> Velocidad Max </label>
                                     <input type="text" name="Vmax" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-3">
+                                <div className="form-group col-md-4">
                                     <label htmlFor="sucursal">Sucursal</label>
                                     <select className="form-control" name="sucursal">
                                         <option >Choose...</option>
