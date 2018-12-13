@@ -19,7 +19,14 @@ import CreateRol from './views/pages/roles/CreateRol.jsx';
 import Account from './views/Account.jsx';
 import Login from './views/Login';
 import Register from "./views/Register";
+import Aviones from './views/pages/avion/Aviones.jsx';
+import AvionDetail from './views/pages/avion/AvionDetail.jsx';
+import Barcos from "./views/pages/barco/Barcos.jsx";
+import BarcoDetail from "./views/pages/barco/BarcoDetail.jsx";
+import Vehiculos from "./views/pages/vehiculo/Vehiculos.jsx";
+import VehiculoDetail from "./views/pages/barco/VehiculoDetail.jsx";
 import SucursalDetail from "./views/pages/sucursal/SucursalDetail.jsx";
+
 
 class BaseRouter extends Component{
     render(){
@@ -42,6 +49,12 @@ class BaseRouter extends Component{
             <Route path="/admin/roles" component={Roles} />
             <Route path="/admin/rol/create" component={CreateRol} />
             <Route path="/admin/rol/:rol" component={RolDetail} />
+            <Route path="/admin/aviones" component={Aviones} />
+            <Route path="/admin/avion/:avion" component={AvionDetail} />
+            <Route path="/admin/barcos" component={Barcos} />
+            <Route path="/admin/barco/:barco" component={BarcoDetail} />
+            <Route path="/admin/vehiculos" component={Vehiculos} />
+            <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
           </div>;
     }
 }

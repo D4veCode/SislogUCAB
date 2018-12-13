@@ -16,9 +16,6 @@ export default class Sidemenu extends Component{
                             <li>
                                 <Link to="admin/sucursales">Info Sucursales</Link>
                             </li>
-                            <li>
-                                <Link to="admin/sucursal/create">Registro Sucursal</Link>
-                            </li>
                         </ul> 
                     </li>
                     <li>
@@ -41,9 +38,6 @@ export default class Sidemenu extends Component{
                             <li>
                                <Link to="admin/empleados">Info Empleados</Link>
                             </li>
-                            <li>
-                                <Link to="admin/empleado/create">Registro Empleado</Link>
-                            </li>
                         </ul> 
                     </li>
                     <li>
@@ -60,8 +54,29 @@ export default class Sidemenu extends Component{
                             <li>
                                 <Link to="admin/roles">Info Roles</Link>
                             </li>
+                        </ul>
+                    </li>
+                    <li className="active">
+                        <a href="#aviones" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Aviones</a>
+                        <ul className="collapse list-unstyled" id="aviones">
                             <li>
-                                <Link to="admin/rol/create">Registro Rol</Link>
+                                <Link to="admin/aviones">Info Aviones</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="active">
+                        <a href="#barcos" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Barcos</a>
+                        <ul className="collapse list-unstyled" id="barcos">
+                            <li>
+                                <Link to="admin/barcos">Info Barcos</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="active">
+                        <a href="#vehiculos" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Vehiculos</a>
+                        <ul className="collapse list-unstyled" id="vehiculos">
+                            <li>
+                                <Link to="admin/vehiculos">Info Barcos</Link>
                             </li>
                         </ul>
                     </li>
