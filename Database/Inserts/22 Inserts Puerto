@@ -3,3 +3,5 @@ insert into Puerto (Fk_Lugar, Fk_Sucursal, Nombre, Cant_P, Areas_T, Areas_A, Can
 insert into Puerto (Fk_Lugar, Fk_Sucursal, Nombre, Cant_P, Areas_T, Areas_A, Cant_M, long, Ancho, Calado, Uso) values (898, 128, 'Bauch-Legros', 167, 21, 38, 2, 189, 82, 474, 22);
 insert into Puerto (Fk_Lugar, Fk_Sucursal, Nombre, Cant_P, Areas_T, Areas_A, Cant_M, long, Ancho, Calado, Uso) values (1200, 216, 'Renner Inc', 122, 26, 72, 3, 70, 68, 475, 83);
 insert into Puerto (Fk_Lugar, Fk_Sucursal, Nombre, Cant_P, Areas_T, Areas_A, Cant_M, long, Ancho, Calado, Uso) values (1277, 244, 'Steuber-Kuhic', 147, 27, 26, 1, 495, 84, 474, 5);
+insert into Puerto (Fk_Lugar, Fk_Sucursal, Nombre, Cant_P, Areas_T, Areas_A, Cant_M, long, Ancho, Calado, Uso) values (537, 21, 'ConFerry', 6, 2, 4, 1, 200, 84, 474, 2);
+
