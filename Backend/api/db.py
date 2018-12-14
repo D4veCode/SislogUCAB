@@ -398,13 +398,13 @@ def getBarcos():
 def agregarBarco(nombre, descripcion, vmax, long, fk_sucursal):
     con = connect()
     con.query("INSERT INTO barco(nombre, descripcion, vmax, long, fk_sucursal) VALUES ($1, $2, $3, $4, $5)",
-              (nombre, descripcion, vmax, long, fk_sucursal)).dictresult()
+              (nombre, descripcion, vmax, long, fk_sucursal))
     con.close()
 
 
 def getBarco(id):
     con = connect()
-    barco = con.query("SELECT b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
+    barco = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
                       "(select nombre from sucursal where b.fk_sucursal=cod) FROM barco as b where id=$1",
                       (id,)).dictresult()
     con.close()
@@ -428,7 +428,7 @@ def deleteBarco(id):
 
 def getVehiculos():
     con = connect()
-    vehs = con.query("SELECT v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
+    vehs = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
                      "(select nombre from modelo where v.fk_mod=id), "
                      "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v").dictresult()
     con.close()
@@ -455,7 +455,7 @@ def updateVehiculo(id, placa, cap_c, peso, descripcion, color, fecha_v, serial_m
 
 def getVehiculo(id):
     con = connect()
-    veh = con.query("SELECT v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
+    veh = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
                     "(select nombre from modelo where v.fk_mod=id), "
                     "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v where id=$1",
                     (id,)).dictresult()
@@ -467,3 +467,11 @@ def deleteVehiculo(id):
     con = connect()
     con.query("DELETE FROM vehiculo WHERE id=$1", (id,))
     con.close()
+
+def getModelos():
+    con = connect()
+
+    modelos = con.query("select m.id, m.nombre from modelo").dictresult()
+
+    con.close()
+    return modelos

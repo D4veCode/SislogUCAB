@@ -30,6 +30,12 @@ veh_fields = {
 }
 
 
+modelos_field ={
+    'id': fields.Integer,
+    'nombre': fields.String
+}
+
+
 class VehiculoList(Resource):
     @jwt_required
     def get(self):
@@ -96,4 +102,13 @@ class Vehiculo(Resource):
 
         except Exception as e:
 
+            return {"status": "fail", "error": str(e)}, 500
+
+
+class ModeloList(Resource):
+    def get(self):
+        try:
+            modelos = database.getModelos()
+            return {"status": "success", "modelos": [marshal(mod, modelos_field) for mod in modelos]}
+        except Exception as e:
             return {"status": "fail", "error": str(e)}, 500

@@ -57,7 +57,7 @@ class Barco(Resource):
 
         except Exception:
 
-            return{"status": "fail", "error": "Boat in office {suc} not found."}, 404
+            return{"status": "fail", "error": "Boat in office not found."}, 404
 
     def put(self, id):
 
