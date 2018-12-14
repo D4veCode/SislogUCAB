@@ -339,7 +339,7 @@ def getMtransp():
 def getAviones():
     con = connect()
 
-    aviones = con.query("SELECT a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
+    aviones = con.query("SELECT a.id, a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
                         "a.peso_maxd, a.carrera_d, a.vmax, a.fuel_c, a.motor, a.area, "
                         "(select nombre as fk_sucursal from sucursal where a.fk_sucursal=cod) "
                         "FROM avion as a").dictresult()
@@ -360,7 +360,7 @@ def agregarAvion(nombre,peso,cap_c, descripcion, long, env, alt, ancho_c, diamet
 
 def getAvion(id):
     con = connect()
-    avion = con.query("SELECT a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
+    avion = con.query("SELECT a.id, a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
                       "a.peso_maxd, a.carrera_d, a.vmax, a.fuel_c, a.motor, a.area, "
                       "(select nombre as fk_sucursal from sucursal where a.fk_sucursal=cod) "
                       "FROM avion as a where a.id=$1", (id,)).dictresult()
@@ -389,7 +389,7 @@ def deleteAvion(id):
 
 def getBarcos():
     con = connect()
-    barcos = con.query("SELECT b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
+    barcos = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
                        "(select nombre from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
     con.close()
     return barcos

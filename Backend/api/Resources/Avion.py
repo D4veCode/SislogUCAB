@@ -70,7 +70,7 @@ class Avion(Resource):
     def get(self, id):
 
         try:
-            avion = database.getAvion(id)
+            avion = database.getAvion(id)[0]
             return {"status": "success", "avion": marshal(avion, avion_fields)}
 
         except Exception as e:
