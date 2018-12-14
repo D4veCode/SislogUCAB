@@ -1,0 +1,2 @@
+Insert into Tipo_Transp(Tipo)Values
+('Terrestre'),('Aereo'),('Maritimo');

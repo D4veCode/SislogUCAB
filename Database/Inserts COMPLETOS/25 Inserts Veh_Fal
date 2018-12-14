@@ -1,0 +1,6 @@
+insert into Veh_Fal (Fecha, Fk_Vehiculo, Fk_Falla) values ('25/4/2018', 6, 1); 
+insert into Veh_Fal (Fecha, Fk_Vehiculo, Fk_Falla) values ('2/9/2018', 2, 2);
+insert into Veh_Fal (Fecha, Fk_Vehiculo, Fk_Falla) values ('20/11/2017', 3, 3);
+insert into Veh_Fal (Fecha, Fk_Vehiculo, Fk_Falla) values ('25/6/2018', 4, 4);
+insert into Veh_Fal (Fecha, Fk_Vehiculo, Fk_Falla) values ('27/11/2017', 5, 5);
+

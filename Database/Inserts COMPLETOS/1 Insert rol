@@ -1,0 +1,7 @@
+ insert into Rol(Nombre,Tipo)values
+	('Admin','adm'),
+	('Cliente','usr'),
+	('Cajero','adm'),
+	('Empaquetador','adm');
+
+

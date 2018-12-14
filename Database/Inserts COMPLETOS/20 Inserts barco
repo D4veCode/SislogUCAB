@@ -1,0 +1,6 @@
+insert into barco (Nombre, Descripcion, Vmax, Long , Fk_Sucursal)values
+('ALBERTA AMORETTI','Buque de carga portacontenedores',16,176,299),
+('MARTINA','Buque de carga portacontenedores',20,150,216),
+('ISOLA ROSSA','Buque de carga portacontenedores',15,200,299),
+('FANTASTIC','Buque de carga portacontenedores',25,150,216),
+('SPLENDID','Buque de carga portacontenedores',22,160,299);
