@@ -32,7 +32,7 @@ veh_fields = {
 
 class VehiculoList(Resource):
     @jwt_required
-    def get(self, suc=None):
+    def get(self):
 
         try:
 

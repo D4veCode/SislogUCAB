@@ -424,3 +424,46 @@ def deleteBarco(id):
     con = connect()
     con.query("DELETE FROM barco WHERE id=$1", (id,))
     con.close()
+
+
+def getVehiculos():
+    con = connect()
+    vehs = con.query("SELECT v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
+                     "(select nombre from modelo where v.fk_mod=id), "
+                     "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v").dictresult()
+    con.close()
+    return vehs
+
+
+def agregarVehiculo(placa, cap_c, peso, descripcion, color, fecha_v, serial_m, serial_c, modelo, fk_sucursal):
+    con = connect()
+
+    con.query("INSERT INTO vehiculo(placa, peso, cap_c, descripcion, color, fecha_v, "
+              "serial_m, serial_c, fk_mod, fk_sucursal) "
+              "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
+              (placa, peso, cap_c, descripcion, color, fecha_v, serial_m, serial_c, modelo, fk_sucursal))
+    con.close()
+
+
+def updateVehiculo(id, placa, cap_c, peso, descripcion, color, fecha_v, serial_m, serial_c, modelo, fk_sucursal):
+    con = connect()
+    con.query("UPDATE vehiculo SET placa=$1, peso=$2, cap_c=$3, descripcion=$4, color=$5, fecha_v=$6, "
+              "serial_m=$7, serial_c=$8, fk_mod=$9, fk_sucursal=$10 WHERE id=$11",
+              (placa, peso, cap_c, descripcion, color, fecha_v, serial_m, serial_c, modelo, fk_sucursal, id))
+    con.close()
+
+
+def getVehiculo(id):
+    con = connect()
+    veh = con.query("SELECT v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
+                    "(select nombre from modelo where v.fk_mod=id), "
+                    "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v where id=$1",
+                    (id,)).dictresult()
+    con.close()
+    return veh
+
+
+def deleteVehiculo(id):
+    con = connect()
+    con.query("DELETE FROM vehiculo WHERE id=$1", (id,))
+    con.close()
