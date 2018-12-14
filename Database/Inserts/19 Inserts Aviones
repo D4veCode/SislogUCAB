@@ -1,0 +1,3 @@
+insert into Avion(Nombre, Fuel_C, Motor, Peso_MaxD, Carrera_D, Peso , Cap_C , Descripcion, Long , Env , Alt , Ancho_C , Diametro, Vmax, Area, Fk_Sucursal)values
+('Boeing 757-200',11276,'PW2037',99790,2360,57840,41950,'Las medidas estan en galones,metros,kg y km/h',47.32,38.05,13.56,15,45,850,226.5,299),
+('Boeing 757-200',11276,'PW2037',99790,2360,57840,41950,'Las medidas estan en galones,metros,kg y km/h',47.32,38.05,13.56,15,45,850,226.5,216);

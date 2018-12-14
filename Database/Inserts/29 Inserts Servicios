@@ -1,0 +1,2 @@
+Insert into Servicio(Tipo)values
+('Luz'),('Agua'),('Gas'),('Reparacion'),('Nomina'),('multa'),('Equipos'),('Consumibles');

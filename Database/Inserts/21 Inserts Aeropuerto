@@ -1,0 +1,8 @@
+insert into aeropuerto(Nombre,Cant_T,Cant_P,Cap, Fk_Lugar, Fk_Sucursal)values
+('Aeropuerto Internacional General José Antonio Anzoátegui',20,40,1000,537,21),
+('Aeropuerto Internacional Arturo Michelena',10,20,1000,772,90),
+('Aeropuerto Internacional Josefa Camejo',10,20,1000,868,116),
+('Aeropuerto Internacional del Caribe Santiago Mariño',30,50,1000,1200,216),
+('Aeropuerto Internacional de Maiquetía Simón Bolívar',30,50,1000,1465,299),
+('Aeropuerto Internacional de La Chinita',30,50,1000,1552,327);
+

@@ -1,0 +1,3 @@
+Insert into Falla(nombre) values
+('Bomba de agua'),('Tren delantero'),('Pintura'),('Latoneria'),('Frenos'),('Radiador'),('Motor'),('transmision'),('Aire'),('Alternador'),
+('Bomba de gasolina'),('Pila de la bomba de gasolina'),('Caja de Velocidades'),('Servicio'),('Cauchos'),('Bujes'),('Amortiguador'),('Bateria');

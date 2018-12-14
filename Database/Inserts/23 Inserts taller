@@ -1,0 +1,6 @@
+insert into Taller (Nombre, pg_Web, Email, Fk_lugar) values ('Greenfelder, Hagenes and Reilly', null, 'sbamlett0@hao123.com', 537);
+insert into Taller (Nombre, pg_Web, Email, Fk_lugar) values ('Powlowski, Hoppe and Kling', null, 'jearpe1@t.co', 772);
+insert into Taller (Nombre, pg_Web, Email, Fk_lugar) values ('Schinner LLC', 'sfgate.com', 'amiko2@time.com', 868);
+insert into Taller (Nombre, pg_Web, Email, Fk_lugar) values ('Fritsch-Schumm', null, 'egullen3@istockphoto.com', 1200);
+insert into Taller (Nombre, pg_Web, Email, Fk_lugar) values ('Schaden-Waters', 'tiny.cc', 'bkinmond4@tinypic.com', 1552);
+

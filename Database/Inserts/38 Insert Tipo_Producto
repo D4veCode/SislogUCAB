@@ -1,0 +1,5 @@
+Insert into Tipo_Producto(Tipo)values
+('Ropa'),('Equipos Electrodomestico'),('Comida'),('Video Juego'),('Equipo Deportivo'),
+('Medicina'),('Juguetes'),('Productos de Bebe'),('Libro'),('Electronico'),
+('Equipo de Belleza'),('Zapato'),('Implemento de Cocina'),('Implemento para el Hogar'),('Repuesto'),
+('Documento'),('Escolar'),('Mascota'),('Artesanal'),('Dinero');

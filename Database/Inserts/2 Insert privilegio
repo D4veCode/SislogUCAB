@@ -1,0 +1,5 @@
+insert into Privilegio(Nombre,Tipo)values
+	('Pedir','Get'),
+	('Agregar','Post'),
+	('Borrar','Delete'),
+	('Alterar','Update');

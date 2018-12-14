@@ -35,7 +35,7 @@ CREATE Table Rol_Priv(
 
 CREATE Table Usuario(
   ID SERIAL UNIQUE,
-  Username varchar(30) UNIQUE,
+  Username varchar(30) NOT NULL UNIQUE,
   Password varchar(150) NOT NULL,
   Fk_Rol int NOT NULL,
   FOREIGN KEY (Fk_Rol) REFERENCES Rol (ID),
@@ -67,10 +67,10 @@ CREATE Table Sucursal(
 Create Table Departamento(
   COD SERIAL UNIQUE,
   Nombre varchar(150) NOT NULL,
-  Descripcin varchar(150),
+  Descripcion varchar(150),
   Area_D int NOT NULL,
   Fk_Sucursal int NOT NULL,
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Departamento PRIMARY KEY (COD)
   );
 
@@ -86,34 +86,33 @@ CREATE Table Empleado(
   Fecha_N Date NOT NULL,
   Nivel_Acd varchar(150) NOT NULL,
   Edo_C char(1) NOT NULL,
-  Profecion varchar(150) NOT NULL,
+  Profesion varchar(150),
   Num_H int NOT NULL,
-  Salario int NOT NULL,
   Fk_Lugar int NOT NULL,
   Fk_Emp int,
   Fk_User int NOT NULL UNIQUE,
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_User) REFERENCES Usuario (ID),
   Constraint Pk_Empleado PRIMARY KEY (ID)
   );
   
 CREATE Table Emp_Suc(
   ID SERIAL UNIQUE,
+  Salario int NOT NULL,
   Fk_Suc int NOT NULL,
   Fk_Emp int NOT NULL,
-  FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD) ON DELETE CASCADE,
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Emp_Suc PRIMARY KEY (ID)
   );
   
 CREATE Table Emp_Dep(
   ID SERIAL UNIQUE,
-  Fecha date NOT NULL,
   Fk_Dep int NOT NULL,
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Dep) REFERENCES Departamento (COD),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Emp_Dep PRIMARY KEY (ID)	
   );
 
@@ -137,15 +136,16 @@ CREATE Table Horario(
   Fk_Emp int NOT NULL,
   FOREIGN KEY (Fk_Dia) REFERENCES Dia (ID),
   FOREIGN KEY (Fk_Hor) REFERENCES Horario (ID),
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
   Constraint Pk_Horario PRIMARY KEY (ID)
-  );
+  ); 
   
 CREATE Table Cliente(
   ID SERIAL UNIQUE,
   Nombre varchar(100) NOT NULL,
   Apellido varchar(100) NOT NULL,
   Fecha_N Date Not NULL,
+  Email varchar(150) NOT NULL UNIQUE,
   Cedula varchar(10) NOT NULL UNIQUE,
   Edo_C char(1) NOT NULL,
   Nombre_E varchar(100),
@@ -174,14 +174,16 @@ CREATE Table Modelo(
 CREATE Table Vehiculo(
   ID SERIAL UNIQUE,
   Placa varchar(10) NOT NULL UNIQUE,
-  Peso int NOT NULL,
-  Cap_C int NOT NULL,
+  Peso real NOT NULL,
+  Cap_C real NOT NULL,
   Descripcion varchar(150),
   Color varchar(10) NOT NULL,
   Fecha_V date NOT NULL,
   Serial_M varchar(30) NOT NULL,
   Serial_C varchar(30) NOT NULL,
   Fk_Mod int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Mod) REFERENCES Modelo (ID),
   Constraint Pk_Vehiculo PRIMARY KEY (ID)
   );  
@@ -189,30 +191,33 @@ CREATE Table Vehiculo(
 CREATE Table Avion(
   ID SERIAL UNIQUE,
   Nombre varchar(50) NOT NULL,
-  Peso int NOT NULL,
-  Cap_C int NOT NULL,
+  Peso real NOT NULL,
+  Cap_C real NOT NULL,
   Descripcion varchar(150),
-  Long int NOT NULL,
-  Env int NOT NULL,
-  Alt int NOT NULL,
-  Ancho_C int NOT NULL,
-  Diametro int NOT NULL,
-  Peso_MaxD int NOT NULL,
+  Long real NOT NULL,
+  Env real NOT NULL,
+  Alt real NOT NULL,
+  Ancho_C real NOT NULL,
+  Diametro real NOT NULL,
+  Peso_MaxD real NOT NULL,
   Carrera_D int NOT NULL,
   Vmax int NOT NULL,
   Fuel_C int NOT NULL,
   Motor varchar(150) NOT NULL,
-  Area int NOT NULL
+  Area int NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
+  Constraint Pk_Avion PRIMARY KEY (ID)
   );
   
 CREATE Table Barco(
   ID SERIAL UNIQUE,
   Nombre varchar(30) NOT NULL,
   Descripcion varchar(150),
-  Peso int NOT NULL,
-  Cap_C int NOT NULL,
   Vmax int NOT NULL,
-  Long int NOT NULL,
+  Long real NOT NULL,
+  Fk_Sucursal int NOT NULL,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Barco PRIMARY KEY (ID)
   );
   
@@ -225,7 +230,7 @@ CREATE Table Aeropuerto(
   Fk_Lugar int NOT NULL,
   Fk_Sucursal int NOT NULL,
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Aeropuerto PRIMARY KEY (ID)
   );
   
@@ -243,7 +248,7 @@ CREATE Table Puerto(
   Fk_Lugar int NOT NULL,
   Fk_Sucursal int NOT NULL,
   FOREIGN KEY (Fk_Lugar) REFERENCES Lugar (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_puerto PRIMARY KEY (ID)
   );
   
@@ -304,23 +309,10 @@ CREATE Table Telefono(
   Fk_Emp int,
   Fk_Sucursal int,
   Fk_Contacto int,
-  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID),
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Emp) REFERENCES Empleado (ID) ON DELETE CASCADE,
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Contacto) REFERENCES Contacto (ID),
   Constraint Pk_Telefono PRIMARY KEY (ID)
-  );
-  
-CREATE Table Suc_Met(
-  ID SERIAL UNIQUE,
-  Fk_Sucursal int NOT NULL,
-  Fk_Vehiculo int,
-  Fk_Avion int,
-  Fk_Barco int,
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Vehiculo) REFERENCES Vehiculo (ID),
-  FOREIGN KEY (Fk_Avion) REFERENCES Avion (ID),
-  FOREIGN KEY (Fk_Barco) REFERENCES Barco (ID),
-  Constraint Pk_Suc_Met PRIMARY KEY (ID)
   );
   
 CREATE Table Servicio(
@@ -329,15 +321,15 @@ CREATE Table Servicio(
   Constraint Pk_Servicio PRIMARY KEY (ID)
   );
   
-CREATE Table Ser_Suc(
+CREATE Table Gasto(
   ID SERIAL UNIQUE,
   Fk_Servicio int NOT NULL,
   Fk_Sucursal int NOT NULL,
   Monto int NOT NULL,
   Fecha date NOT NULL,
-  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Sucursal) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Servicio) REFERENCES Servicio (ID),
-  Constraint Pk_Gas_Suc PRIMARY KEY (ID)
+  Constraint Pk_Gasto PRIMARY KEY (ID)
   );
   
 Create Table Debito(
@@ -345,7 +337,6 @@ Create Table Debito(
   Nombre_T varchar(50) NOT NULL,
   Numero varchar(30) NOT NULL,
   Cod_S varchar(10) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Debito PRIMARY KEY(ID)
   );
 
@@ -356,7 +347,6 @@ CREATE Table Credito(
   Numero varchar(30) NOT NULL,
   Fecha_V date NOT NULL,
   Cod_S varchar(10) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Credito PRIMARY KEY(ID)
   );
   
@@ -364,7 +354,6 @@ CREATE Table Cheque(
   ID SERIAL UNIQUE,
   Numero_C varchar(50) NOT NULL,
   Fecha_D timestamp NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Cheque PRIMARY KEY(ID)
   );
   
@@ -373,7 +362,6 @@ CREATE Table Transferencia(
   Nombre_T varchar(50) NOT NULL,
   Num_R varchar(20) NOT NULL,
   Rif varchar(30) NOT NULL,
-  Banco varchar(50) NOT NULL,
   Constraint Pk_Transferencia PRIMARY KEY(ID)
   );
   
@@ -387,8 +375,8 @@ CREATE Table Ruta(
   ID SERIAL UNIQUE,
   Fk_Origen int NOT NULL,
   Fk_Destino int NOT NULL,
-  FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD),
-  FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Origen) REFERENCES Sucursal (COD) ON DELETE CASCADE,
+  FOREIGN KEY (Fk_Destino) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Ruta PRIMARY KEY(ID)
   );
  
@@ -397,6 +385,7 @@ CREATE Table Ruta_Trans(
   Fk_TT int NOT NULL,
   Fk_Ruta int NOT NULL,
   Tiempo int NOT NULL,
+  Precio int NOT NULL,
   FOREIGN KEY (Fk_TT) REFERENCES Tipo_Transp (ID),
   FOREIGN KEY (Fk_Ruta) REFERENCES Ruta (ID),  
   Constraint Pk_Ruta_Trans PRIMARY KEY(ID)
@@ -407,18 +396,25 @@ CREATE Table Tipo_Producto(
   Tipo varchar(30) NOT NULL,
   Constraint Pk_Tipo_Producto PRIMARY KEY(ID)
   );
+  
+ CREATE Table Dimension(
+  ID Serial UNIQUE,
+  Ancho real NOT NULL,
+  Alto real NOT NULL,
+  Largo real NOT NULL,
+  Constraint Pk_Dimension PRIMARY KEY(ID)
+);
 
 CREATE Table Paquete(
   ID SERIAL UNIQUE,
   Num_G int NOT NULL UNIQUE,
-  Peso int NOT NULL,
-  Monto int NOT NULL,
-  Ancho int NOT NULL,
-  Largo int NOT NULL,
-  Alto int NOT NULL,
+  Peso real NOT NULL,
+  Monto real NOT NULL,
   Fk_Trans int NOT NULL,
   Fk_Cliente int NOT NULL,
-  FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID),
+  Fk_Dim int NOT NULL,
+  FOREIGN KEY (Fk_Cliente) REFERENCES Cliente (ID) ON DELETE CASCADE,
+  FOREIGN KEY (Fk_Dim) REFERENCES Dimension (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Tipo_Transp (ID),
   Constraint Pk_Paquete PRIMARY KEY(ID)
   );
@@ -441,7 +437,7 @@ CREATE Table Destinatario(
   FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
   Constraint Pk_Destinatario PRIMARY KEY(ID)
   );
-  
+
 CREATE Table Tracking(
   ID SERIAL UNIQUE,
   Fecha_L date NOT NULL,
@@ -451,15 +447,15 @@ CREATE Table Tracking(
   Fk_Suc int NOT NULL,
   FOREIGN KEY (Fk_RT) REFERENCES Ruta_Trans (ID),
   FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
-  FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD),
+  FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Tracking PRIMARY KEY(ID)
   );
   
 CREATE Table Facturacion(
   ID SERIAL UNIQUE,
   Fecha date NOT NULL,
-  Fk_Tacking int NOT NULL,
-  Monto int NOT NULL,
+  Fk_Tracking int NOT NULL,
+  Monto real NOT NULL,
   Fk_Deb int,
   Fk_Cre int,
   Fk_Che int,
@@ -468,7 +464,7 @@ CREATE Table Facturacion(
   FOREIGN KEY (Fk_Cre) REFERENCES Credito (ID),
   FOREIGN KEY (Fk_Che) REFERENCES Cheque (ID),
   FOREIGN KEY (Fk_Trans) REFERENCES Transferencia (ID),
-  FOREIGN KEY (Fk_Tacking) REFERENCES Tracking (ID),
+  FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
   Constraint Pk_Facturacion PRIMARY KEY(ID)
   );
 
@@ -488,3 +484,13 @@ CREATE Table Sta_Tra(
   FOREIGN KEY (Fk_Tracking) REFERENCES Tracking (ID),
   Constraint Pk_Sta_Tra PRIMARY KEY(ID)
   );
+  
+CREATE Table Asistencia(
+  ID SERIAL,
+  Dia Date NOT NULL default (now() at time zone 'utc'),
+  Hora_E time NOT NULL,
+  Hora_S time,
+  Fk_Empleado int NOT NULL,
+  FOREIGN KEY (Fk_Empleado) REFERENCES Empleado(ID) ON DELETE CASCADE,
+  Constraint Pk_Asistencia PRIMARY KEY(ID)
+);

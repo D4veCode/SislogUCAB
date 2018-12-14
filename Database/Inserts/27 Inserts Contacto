@@ -1,0 +1,5 @@
+insert into Contacto (Fk_Taller, Nombre, Apellido, Cedula) values (1, 'Dulcie', 'Goozee', 16700275);
+insert into Contacto (Fk_Taller, Nombre, Apellido, Cedula) values (2, 'Audrie', 'Hannaford', 7049755);
+insert into Contacto (Fk_Taller, Nombre, Apellido, Cedula) values (3, 'Merrielle', 'Ianniello', 18922783);
+insert into Contacto (Fk_Taller, Nombre, Apellido, Cedula) values (4, 'Artemis', 'Houselee', 6238009);
+insert into Contacto (Fk_Taller, Nombre, Apellido, Cedula) values (5, 'Antonino', 'Lamputt', 4323309);

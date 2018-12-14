@@ -1,0 +1,2 @@
+Insert into Status(tipo, descripcion)values
+('En Almacen','Esperando a ser transportado'),('Transportandose','El paquete esta movimiento'),('Esperando Retiro','Ya el paquete en destino esperando a ser reclamado'),('Entregado','Paquete ya entregado');
