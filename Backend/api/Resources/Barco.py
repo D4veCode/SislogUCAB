@@ -6,38 +6,29 @@ barco_parse = reqparse.RequestParser()
 
 barco_parse.add_argument('nombre', required=True)
 barco_parse.add_argument('descripcion', required=True)
-barco_parse.add_argument('peso', required=True)
-barco_parse.add_argument('cap_c', required=True)
 barco_parse.add_argument('vmax', required=True)
 barco_parse.add_argument('long', required=True)
-barco_parse.add_argument('sucursal', required=True)
+barco_parse.add_argument('fk_sucursal', required=True)
 
 
 bar_fields = {
     'id': fields.Integer,
     'nombre': fields.String,
     'descripcion': fields.String,
-    'peso': fields.Integer,
-    'cap_c': fields.Integer,
     'vmax':  fields.Integer,
-    'long': fields.Integer
+    'long': fields.Integer,
+    'fk_sucursal': fields.String
 }
 
 
 class BarcoList(Resource):
     @jwt_required
-    def get(self, suc=None):
+    def get(self):
 
         try:
-            if suc:
-                barcos = database.getBarcos(suc)
 
-                return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
-            else:
-
-                barcos = database.getBarcos()
-
-                return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
+            barcos = database.getBarcos()
+            return {"status": "success", "barcos": [marshal(bar, bar_fields) for bar in barcos]}
 
         except Exception as e:
 
@@ -47,12 +38,7 @@ class BarcoList(Resource):
 
         try:
             args = barco_parse.parse_args()
-
-            idBarco = database.crearBarco(args['nombre'], args['descripcion'], args['peso'], args['cap_c'],
-                                  args['vmax'], args['long'])
-
-            database.agregarBarco(idBarco, args['sucursal'])
-
+            database.agregarBarco(args['nombre'], args['descripcion'], args['vmax'], args['long'], args['fk_sucursal'])
             return {"status": "success", "message": "Boat created."}, 200
 
         except Exception as e:
@@ -62,26 +48,24 @@ class BarcoList(Resource):
 
 class Barco(Resource):
     @jwt_required
-    def get(self, suc, id):
+    def get(self, id):
 
         try:
 
-            barco = database.getBarco(suc, id)[0]
-
+            barco = database.getBarco(id)[0]
             return {"status": "success", "barco": marshal(barco, bar_fields)}
 
         except Exception:
 
             return{"status": "fail", "error": "Boat in office {suc} not found."}, 404
 
-    def put(self, suc, id):
+    def put(self, id):
 
         try:
 
             args= barco_parse.parse_args()
 
-            database.updateBarco(suc, id, args['nombre'], args['descripcion'], args['peso'], args['cap_c'],
-                                args['vmax'], args['long'])
+            database.updateBarco(id, args['nombre'], args['descripcion'], args['vmax'], args['long'], args['fk_sucursal'])
 
             return {"status": "success", "message": "Boat updated."}
 
@@ -89,11 +73,11 @@ class Barco(Resource):
 
             return {"status": "fail", "error": str(e)}, 500
 
-    def delete(self, suc, id):
+    def delete(self, id):
 
         try:
 
-            database.deleteBarco(suc, id)
+            database.deleteBarco(id)
 
             return {"status": "success", "message":  "The boat has been deleted."}
 

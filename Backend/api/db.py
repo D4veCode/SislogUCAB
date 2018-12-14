@@ -334,3 +334,93 @@ def getMtransp():
 
     con.close()
     return m_trans
+
+
+def getAviones():
+    con = connect()
+
+    aviones = con.query("SELECT a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
+                        "a.peso_maxd, a.carrera_d, a.vmax, a.fuel_c, a.motor, a.area, "
+                        "(select nombre as fk_sucursal from sucursal where a.fk_sucursal=cod) "
+                        "FROM avion as a").dictresult()
+    con.close()
+    return aviones
+
+
+def agregarAvion(nombre,peso,cap_c, descripcion, long, env, alt, ancho_c, diametro, peso_maxd, carrera_d, vmax,
+                 fuel_c, motor, area, fk_sucursal):
+    con = connect()
+    con.query("INSERT INTO avion(nombre, peso, cap_c, descripcion, long, env, alt, ancho_c, diametro, peso_maxd, "
+              "carrera_d, vmax, fuel_c, motor, area, fk_sucursal)"
+              "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+              (nombre, peso, cap_c, descripcion, long, env, alt, ancho_c, diametro, peso_maxd, carrera_d, vmax,
+               fuel_c, motor, area, fk_sucursal))
+    con.close()
+
+
+def getAvion(id):
+    con = connect()
+    avion = con.query("SELECT a.nombre, a.peso, a.cap_c, a.descripcion, a.long, a.env, a.alt, a.ancho_c, a.diametro, "
+                      "a.peso_maxd, a.carrera_d, a.vmax, a.fuel_c, a.motor, a.area, "
+                      "(select nombre as fk_sucursal from sucursal where a.fk_sucursal=cod) "
+                      "FROM avion as a where a.id=$1", (id,)).dictresult()
+    con.close()
+    return avion
+
+
+def updateAvion(id, nombre,peso,cap_c, descripcion, long, env, alt, ancho_c, diametro, peso_maxd, carrera_d, vmax,
+                 fuel_c, motor, area, fk_sucursal):
+    con = connect()
+
+    con.query("UPDATE avion SET nombre=$1, peso=$2, cap_c=$3, descripcion=$4, long=$5, env=$6, alt=$7, ancho_c=$8, "
+              "diametro=$9, peso_maxd=$10, carrera_d=$11, vmax=$12, fuel_c=$13, motor=$14, area=$15, fk_sucursal=$16 "
+              "WHERE id=$17", (nombre,peso,cap_c, descripcion, long, env, alt, ancho_c, diametro, peso_maxd, carrera_d, vmax,
+              fuel_c, motor, area, fk_sucursal, id))
+    con.close()
+
+
+def deleteAvion(id):
+    con =connect()
+
+    con.query("DELETE FROM avion WHERE id=$1", (id,))
+
+    con.close()
+
+
+def getBarcos():
+    con = connect()
+    barcos = con.query("SELECT b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
+                       "(select nombre from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
+    con.close()
+    return barcos
+
+
+def agregarBarco(nombre, descripcion, vmax, long, fk_sucursal):
+    con = connect()
+    con.query("INSERT INTO barco(nombre, descripcion, vmax, long, fk_sucursal) VALUES ($1, $2, $3, $4, $5)",
+              (nombre, descripcion, vmax, long, fk_sucursal)).dictresult()
+    con.close()
+
+
+def getBarco(id):
+    con = connect()
+    barco = con.query("SELECT b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
+                      "(select nombre from sucursal where b.fk_sucursal=cod) FROM barco as b where id=$1",
+                      (id,)).dictresult()
+    con.close()
+    return barco
+
+
+def updateBarco(id, nombre, descripcion, vmax, long, fk_sucursal):
+    con = connect()
+
+    con.query("UPDATE barco SET nombre=$1, descripcion=$2, vmax=$3, long=$4, fk_sucursal=$5 WHERE id=$6",
+              (nombre, descripcion, vmax, long, fk_sucursal, id))
+    con.close()
+
+
+def deleteBarco(id):
+
+    con = connect()
+    con.query("DELETE FROM barco WHERE id=$1", (id,))
+    con.close()

@@ -73,7 +73,7 @@ class Ruta(Resource):
 
         try:
             database.deleteRuta(id)
-            return {"status": "fail", "message": "Route has been deleted"}
+            return {"status": "success", "message": "Route has been deleted"}
 
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 500

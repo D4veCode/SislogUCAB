@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse, fields, marshal
+from flask_restful import Resource, fields, marshal
 import api.db as database
 from flask_jwt_extended import jwt_required
 

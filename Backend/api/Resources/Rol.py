@@ -44,7 +44,7 @@ class Rol(Resource):
     def get(self, id):
 
         try:
-            rol = database.getRol(id)
+            rol = database.getRol(id)[0]
 
             return {"status": "success", "rol": marshal(rol, rol_fields)}
 

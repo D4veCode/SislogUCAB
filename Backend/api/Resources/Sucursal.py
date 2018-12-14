@@ -11,7 +11,8 @@ sucu_parse.add_argument('cap_alm', required=True)
 sucu_parse.add_argument('tamano_d', required=True)
 sucu_parse.add_argument('fk_lugar', required=True)
 
-suc_fields ={
+
+suc_fields = {
     'cod': fields.Integer,
     'nombre': fields.String,
     'cap_m2': fields.Integer,
@@ -20,6 +21,7 @@ suc_fields ={
     'tamaño_d': fields.Integer,
     'fk_lugar': fields.String
 }
+
 
 class SucursalList(Resource):
     @jwt_required
@@ -40,11 +42,13 @@ class SucursalList(Resource):
         try:
             data = sucu_parse.parse_args()
 
-            database.agregarSucursal(data['nombre'], data['cap_m2'], data['cap_alm'], data['email'], data['tamano_d'], data['fk_lugar'])
+            database.agregarSucursal(data['nombre'], data['cap_m2'], data['cap_alm'], data['email'], data['tamano_d'],
+                                     data['fk_lugar'])
             return {"status": "success", "message": "Office Created. "}, 201
         except Exception as e:
 
             return {"status": "fail", "error": str(e)}, 500
+
 
 class Sucursal(Resource):
     @jwt_required
@@ -56,9 +60,9 @@ class Sucursal(Resource):
 
             return {"status": "success", "sucursal": marshal(sucursal, suc_fields)}
 
-        except Exception:
+        except Exception as e:
 
-            return {"status": "fail", "error": "Office not found"}, 404
+            return {"status": "fail", "error": "Office not found", "msg": str(e)}, 404
 
     def put(self, id):
 
