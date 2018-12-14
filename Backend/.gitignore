@@ -110,5 +110,3 @@ fabric.properties
 
 # PyBuilder
 target/
-
-idea/**
