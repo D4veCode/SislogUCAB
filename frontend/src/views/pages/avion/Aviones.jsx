@@ -85,7 +85,7 @@ export default class Aviones extends Component {
             fk_sucursal: Fk_Sucursal
         });
 
-        //console.log(datas);
+        console.log(datas);
 
         axios.post('http://localhost:3001/api/v1/aviones', datas, {
             headers: {
@@ -392,7 +392,7 @@ export default class Aviones extends Component {
         }]
 
         var sucursales = this.state.sucursales.map(function (av) {
-                return <option value={av.id} key={av.id}> {av.nombre} </option>
+                return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         return (
 

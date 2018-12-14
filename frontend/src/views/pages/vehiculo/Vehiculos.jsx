@@ -156,7 +156,7 @@ export default class Vehiculos extends Component {
         },
         {
             Header: 'Cap. Crg',
-            accessor: 'Cap_C',
+            accessor: 'cap_c',
             sortable: false,
             style: {
                 textAlign: "center"
@@ -246,7 +246,7 @@ export default class Vehiculos extends Component {
         },
         {
             Header: 'Modelo',
-            accessor: 'fk_mod',
+            accessor: 'modelo',
             sortable: false,
             style: {
                 textAlign: "center"
@@ -307,7 +307,7 @@ export default class Vehiculos extends Component {
         }]
 
         var sucursales = this.state.sucursales.map(function (av) {
-            return <option value={av.id} key={av.id}> {av.nombre} </option>
+            return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         var modelos = this.state.modelos.map(function (md) {
             return <option value={md.id} key={md.id}> {md.nombre} </option>
@@ -333,15 +333,19 @@ export default class Vehiculos extends Component {
                     <div>
                         <form onSubmit={event => this.handleFormSubmit(event)}>
                             <div className="form-row">
-                                <div className="form-group col-md-4">
+                                <div className="form-group col-md-3">
                                     <label htmlFor="nombre">Nombre</label>
                                     <input type="text" name="Nombre" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-4">
+                                <div className="form-group col-md-3">
                                     <label htmlFor="Peso">Peso</label>
                                     <input type="text" name="Peso" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-4">
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Placa">Placa</label>
+                                    <input type="text" name="Placa" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
                                     <label htmlFor="Cap_C">Capacidad Carga</label>
                                     <input type="text" name="Cap_C" className="form-control" />
                                 </div>
@@ -355,7 +359,7 @@ export default class Vehiculos extends Component {
                                     <label htmlFor="Color">Color</label>
                                     <input type="text" name="Color" className="form-control" />
                                 </div>
-                                <div className="form-group col-md-4">
+                                <div className="form-group col-md-3">
                                     <label htmlFor="Fecha_V">Fecha Vehiculo</label>
                                     <input type="date" name="Fecha_V" className="form-control" />
                                 </div>

@@ -22,6 +22,7 @@ export default class BarcoDetail extends Component {
         })
             .then(response => {
                 this.setState({ barco: response.data.barco })
+                console.log(this.state.barco);
             })
 
         axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
@@ -89,7 +90,7 @@ export default class BarcoDetail extends Component {
 
     render() {
         var sucursales = this.state.sucursales.map(function (av) {
-                return <option value={av.id} key={av.id}> {av.nombre} </option>
+                return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         return (
             <div className = "wrapper" keywords = "clientes" >

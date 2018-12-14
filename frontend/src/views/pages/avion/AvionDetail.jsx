@@ -22,7 +22,10 @@ export default class BarcoDetail extends Component {
         })
             .then(response => {
                 this.setState({ avion: response.data.avion })
-            })
+                console.log(this.state.avion);
+            }).catch(function (error) {
+                console.log(error.response);
+            });
 
         axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
             headers: {
@@ -111,7 +114,7 @@ export default class BarcoDetail extends Component {
 
     render() {
         var sucursales = this.state.sucursales.map(function (av) {
-                return <option value={av.id} key={av.id}> {av.nombre} </option>
+                return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         return (
             <div className="m-3 w-100">
@@ -140,22 +143,22 @@ export default class BarcoDetail extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="text-center">{this.state.empleado.nombre}</td>
-                            <td className="text-center">{this.state.empleado.peso}</td>
-                            <td className="text-center"> {this.state.empleado.cap_c}</td>
-                            <td className="text-center"> {this.state.empleado.descripcion} </td>
-                            <td className="text-center">{this.state.empleado.long}</td>
-                            <td className="text-center">{this.state.empleado.env}</td>
-                            <td className="text-center">{this.state.empleado.alt}</td>
-                            <td className="text-center">{this.state.empleado.ancho_c}</td>
-                            <td className="text-center">{this.state.empleado.diametro}</td>
-                            <td className="text-center">{this.state.empleado.peso_maxd}</td>
-                            <td className="text-center">{this.state.empleado.carrera_d}</td>
-                            <td className="text-center">{this.state.empleado.vmax}</td>
-                            <td className="text-center">{this.state.empleado.fuel_c}</td>
-                            <td className="text-center">{this.state.empleado.motor}</td>
-                            <td className="text-center">{this.state.empleado.area}</td>
-                            <td className="text-center">{this.state.empleado.fk_sucursal}</td>
+                            <td className="text-center">{this.state.avion.nombre}</td>
+                            <td className="text-center">{this.state.avion.peso}</td>
+                            <td className="text-center"> {this.state.avion.cap_c}</td>
+                            <td className="text-center"> {this.state.avion.descripcion} </td>
+                            <td className="text-center">{this.state.avion.long}</td>
+                            <td className="text-center">{this.state.avion.env}</td>
+                            <td className="text-center">{this.state.avion.alt}</td>
+                            <td className="text-center">{this.state.avion.ancho_c}</td>
+                            <td className="text-center">{this.state.avion.diametro}</td>
+                            <td className="text-center">{this.state.avion.peso_maxd}</td>
+                            <td className="text-center">{this.state.avion.carrera_d}</td>
+                            <td className="text-center">{this.state.avion.vmax}</td>
+                            <td className="text-center">{this.state.avion.fuel_c}</td>
+                            <td className="text-center">{this.state.avion.motor}</td>
+                            <td className="text-center">{this.state.avion.area}</td>
+                            <td className="text-center">{this.state.avion.fk_sucursal}</td>
                         </tr>
                     </tbody>
                 </table>

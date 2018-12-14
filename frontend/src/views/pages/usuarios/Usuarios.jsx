@@ -17,7 +17,7 @@ export default class Usuarios extends Component{
         axios.get("http://127.0.0.1:3001/api/v1/users", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ1NDg3MDUsIm5iZiI6MTU0NDU0ODcwNSwianRpIjoiNzM3ZTdlZjEtZDAyOS00NzliLWJhNmQtY2YxMGQwYjQwMTY0IiwiZXhwIjoxNTQ0NTkzNzA1LCJpZGVudGl0eSI6ImlzYWFjIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.kWtFuLIo0XHBdbrQffgXesHm7XLaheWJLcgHPYN3BlY",
+                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
                 "Content-Type": "application/json"
             }
         }).then(response => {
@@ -54,9 +54,9 @@ export default class Usuarios extends Component{
                 background: "black",
                 color: 'white',
             },
-            width: 150,
-            maxWidth: 150,
-            minWidth: 150,
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
         },
         {
             Header: 'Rol',
@@ -69,9 +69,9 @@ export default class Usuarios extends Component{
                 background: "black",
                 color: 'white',
             },
-            width: 150,
-            maxWidth: 150,
-            minWidth: 150,
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
         },
         ]
         return(
@@ -81,10 +81,10 @@ export default class Usuarios extends Component{
                 <div className="container-fluid m-0 p-0">
                     {/* <MenuAdmin/> */}
 
-                    <div className="m-2 w-100">
+                    <div className="m-2">
                         <h2 className="text-center"> SisLogUCAB Usuarios DataTable</h2>
 
-                        <ReactTable className="mr-4"
+                        <ReactTable className="mr-4 "
                             columns={columns}
                             data={this.state.users}
                             defaultPageSize={10}

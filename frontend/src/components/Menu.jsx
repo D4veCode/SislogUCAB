@@ -9,16 +9,14 @@ export default class Menu extends Component{
 				<div className="container">
 					<div className="row align-items-center justify-content-between d-flex">
 						<div id="logo">
-							<a href="#home">SisLogUCAB</a>
+							<a href="/">SisLogUCAB</a>
 						</div>
 						<nav id="nav-menu-container">
 							<ul className="nav-menu">
 								<li><Link to="/">Home</Link></li>
-								<li><a href="#offer">We Offer</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#project">Project</a></li>
-								<li><a href="#price">Price</a></li>
-								<li><a href="#blog">Blog</a></li>
+								<li><a href="#offer">Mision</a></li>
+								<li><a href="#about">Vision</a></li>
+								<li><a href="#price">Historia</a></li>
 								<li><Link to='/cliente/login'>Login</Link></li>
 							</ul>
 						</nav>	    		

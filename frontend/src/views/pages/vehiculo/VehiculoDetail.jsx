@@ -120,7 +120,7 @@ export default class VehiculoDetail extends Component {
 
     render() {
         var sucursales = this.state.sucursales.map(function (av) {
-            return <option value={av.id} key={av.id}> {av.nombre} </option>
+            return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         var modelos = this.state.modelos.map(function (md) {
             return <option value={md.id} key={md.id}> {md.nombre} </option>
@@ -151,16 +151,16 @@ export default class VehiculoDetail extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td className="text-center">{this.state.empleado.placa}</td>
-                                <td className="text-center">{this.state.empleado.peso}</td>
-                                <td className="text-center"> {this.state.empleado.cap_c}</td>
-                                <td className="text-center"> {this.state.empleado.descripcion} </td>
-                                <td className="text-center">{this.state.empleado.color}</td>
-                                <td className="text-center">{this.state.empleado.fecha_v}</td>
-                                <td className="text-center">{this.state.empleado.serial_m}</td>
-                                <td className="text-center">{this.state.empleado.serial_c}</td>
-                                <td className="text-center">{this.state.empleado.fk_mod}</td>
-                                <td className="text-center">{this.state.empleado.fk_sucursal}</td>
+                                <td className="text-center">{this.state.vehiculo.placa}</td>
+                                <td className="text-center">{this.state.vehiculo.peso}</td>
+                                <td className="text-center"> {this.state.vehiculo.cap_c}</td>
+                                <td className="text-center"> {this.state.vehiculo.descripcion} </td>
+                                <td className="text-center">{this.state.vehiculo.color}</td>
+                                <td className="text-center">{this.state.vehiculo.fecha_v}</td>
+                                <td className="text-center">{this.state.vehiculo.serial_m}</td>
+                                <td className="text-center">{this.state.vehiculo.serial_c}</td>
+                                <td className="text-center">{this.state.vehiculo.modelo}</td>
+                                <td className="text-center">{this.state.vehiculo.fk_sucursal}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -170,15 +170,19 @@ export default class VehiculoDetail extends Component {
                         <div>
                             <form onSubmit={event => this.handleFormSubmit(event, "put", this.state.vehiculoID)}>
                                 <div className="form-row">
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="nombre">Nombre</label>
                                         <input type="text" name="Nombre" className="form-control" />
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Peso">Peso</label>
                                         <input type="text" name="Peso" className="form-control" />
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="Placa">Placa</label>
+                                        <input type="text" name="Placa" className="form-control" />
+                                    </div>
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Cap_C">Capacidad Carga</label>
                                         <input type="text" name="Cap_C" className="form-control" />
                                     </div>
@@ -192,7 +196,7 @@ export default class VehiculoDetail extends Component {
                                         <label htmlFor="Color">Color</label>
                                         <input type="text" name="Color" className="form-control" />
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Fecha_V">Fecha Vehiculo</label>
                                         <input type="date" name="Fecha_V" className="form-control" />
                                     </div>

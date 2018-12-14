@@ -205,7 +205,7 @@ export default class Barcos extends Component {
         }]
 
         var sucursales = this.state.sucursales.map(function (av) {
-                return <option value={av.id} key={av.id}> {av.nombre} </option>
+                return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         return (
             <div className="wrapper" keywords="clientes">
@@ -227,7 +227,7 @@ export default class Barcos extends Component {
                     ></ReactTable>
 
                     <br />
-                    <div classNmae="mx-3 p-3">
+                    <div className="mx-3 p-3">
                         <form onSubmit={event => this.handleFormSubmit(event)}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">

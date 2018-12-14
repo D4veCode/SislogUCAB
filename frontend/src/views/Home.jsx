@@ -12,96 +12,33 @@ export default class Home extends Component {
                         <div className="row fullscreen d-flex align-items-center justify-content-center">
                             <div className="banner-content col-lg-7">
                                 <h1>
-                                    All you want is here
+                                    Bienvenido SisLogUCAB
 							</h1>
                                 <p className="pt-20 pb-20">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.
+                                    Puerta a Puerta
 							</p>
                             </div>
                         </div>
                     </div>
                 </section>
-
-                <section className="we-offer-area section-gap" id="offer">
-                    <div className="container">
-                        <div className="row d-flex justify-content-center">
-                            <div className="menu-content pb-60 col-lg-10">
-                                <div className="title text-center">
-                                    <h1 className="mb-10">Our Offered Services</h1>
-                                    <p>Who are in extremely love with eco friendly system.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <div className="single-offer d-flex flex-row pb-30">
-                                    <div className="icon">
-                                        <img src="/image/s1.png" alt="" />
-                                    </div>
-                                    <div className="desc">
-                                        <a href=""><h4>Unlimited Colors</h4></a>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
-									</p>
-                                    </div>
-                                </div>
-                                <div className="single-offer d-flex flex-row pb-30">
-                                    <div className="icon">
-                                        <img src="/image/s3.png" alt="" />
-                                    </div>
-                                    <div className="desc">
-                                        <a href=""><h4>Endless Support</h4></a>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
-									</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="single-offer d-flex flex-row pb-30">
-                                    <div className="icon">
-                                        <img src="/image/s2.png" alt="" />
-                                    </div>
-                                    <div className="desc">
-                                        <a href=""><h4>Smart Security</h4></a>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
-									</p>
-                                    </div>
-                                </div>
-                                <div className="single-offer d-flex flex-row pb-30">
-                                    <div className="icon">
-                                        <img src="/image/s4.png" alt="" />
-                                    </div>
-                                    <div className="desc">
-                                        <a href=""><h4>Smart Security</h4></a>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.
-									</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="home-video-area" id="about">
+           
+                <section className="home-video-area" id="mision">
                     <div className="container-fluid">
                         <div className="row justify-content-end align-items-center">
-                            <div className="col-lg-4 no-padding video-right">
-                                <p className="top-title">Tutorial for beginner</p>
-                                <h1>Watch tutorial <br />
-                                    Video of SaaS to start</h1>
-                                <p><span>We are here to listen from you deliver exellence</span></p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. magna aliqua. Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. magna aliqua. Ut enim ad minim.
+                            <div className="col-lg-4 no-padding video-right mr-5">
+                                <h1 className="mr-5">Nuestra Mision<br />
+                                </h1>
+                                <p className="mr-5"><span>La finalidad o razón de ser de LogUCAB</span></p>
+                                <p className="text-justify">
+                                   se orienta en aportar soluciones para hacer ganar tiempo uniendo personas y distancias, comprometidos con un mundo
+                                   más sostenible.
 							</p>
                             </div>
                             <section className="video-area col-lg-6">
                                 <div className="overlay overlay-bg"></div>
                                 <div className="container">
                                     <div className="video-content">
-                                        <a href="http://www.youtube.com/watch?v=0O2aH4XLbto" className="play-btn"><img src="/image/play-btn.png" alt="" /></a>
+                                        
                                     </div>
                                 </div>
                             </section>
@@ -112,17 +49,15 @@ export default class Home extends Component {
 
                 <section className="home-aboutus-area">
                     <div className="container-fluid">
-                        <div className="row justify-content-center align-items-center">
+                        <div className="row justify-content-center align-items-center ml-5">
                             <div className="col-lg-8 no-padding about-left">
                                 <img className="img-fluid" src="/image/about-bg.jpg" alt="" />
                             </div>
                             <div className="col-lg-4 no-padding about-right">
-                                <p className="top-title">24/7 Support system</p>
-                                <h1 className="text-white">A Handy support <br />
-                                    System for the Software</h1>
-                                <p><span>We are here to listen from you deliver exellence</span></p>
+                                
+                                <h1 className="text-white ml-5">Nuestra Vision<br /> </h1>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. magna aliqua. Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. magna aliqua. Ut enim ad minim.
+                                desea ser percibida como la marca líder preferida por ofrecer las soluciones más innovadoras y de valor añadido en el transporte y la logística.
 							</p>
                             </div>
                         </div>
