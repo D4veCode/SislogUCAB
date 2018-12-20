@@ -28,6 +28,8 @@ import RutaDetail from "./views/pages/rutas/RutaDetail.jsx";
 import Vehiculos from "./views/pages/vehiculo/Vehiculos.jsx";
 import VehiculoDetail from "./views/pages/vehiculo/VehiculoDetail.jsx";
 import SucursalDetail from "./views/pages/sucursal/SucursalDetail.jsx";
+import Paquetes from "./views/pages/paquete/Paquetes.jsx";
+
 
 
 class BaseRouter extends Component{
@@ -59,6 +61,7 @@ class BaseRouter extends Component{
             <Route path="/admin/ruta/:ruta" component={RutaDetail} />
             <Route path="/admin/vehiculos" component={Vehiculos} />
             <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
+            <Route path="/admin/paquetes" component={Paquetes} />
           </div>;
     }
 }
