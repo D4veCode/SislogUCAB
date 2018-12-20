@@ -144,3 +144,31 @@ a.article:hover {
         display: none;
     }
 }
+
+.hola{
+    width: 83%;
+    margin-left: 250px;
+}
+
+ul.list-unstyled li a{
+    text-decoration: none;
+    color: white;
+}
+
+ul.list-unstyled li a:hover{
+    color:grey;
+}
+
+
+
+.titulo-admin div{
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.titulo-admin div h2{
+    font-size: 60px;
+
+}

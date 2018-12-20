@@ -107,7 +107,7 @@ export default class Sucursal extends Component{
             console.log(error.response);
         });
     }
-
+    
     render(){
         const columns = [{
             Header: '#',
@@ -140,9 +140,9 @@ export default class Sucursal extends Component{
                 background: "black",
                 color: 'white',
             },
-            width: 100,
-            maxWidth: 100,
-            minWidth: 100,
+            width: 200,
+            maxWidth: 200,
+            minWidth: 200,
         },
         {
             Header: 'Capacidad M2',
@@ -215,9 +215,9 @@ export default class Sucursal extends Component{
             style: {
                 textAlign: "center"
             },
-            width: 110,
-            maxWidth: 110,
-            minWidth: 110,
+            width: 200,
+            maxWidth: 200,
+            minWidth: 200,
         },
         {
             Header: 'Action',
@@ -281,7 +281,7 @@ export default class Sucursal extends Component{
 
             </div>
 
-                <div>
+                <div className="mx-5">
                     <form onSubmit={(event) => this.handleFormSubmit(event)}>
                             <div className="form-row">
                                 <div className="form-group col-md-6">

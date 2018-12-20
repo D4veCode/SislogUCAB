@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidemenu from '../../containers/Sidemenu.jsx';
 import { Link } from 'react-router-dom';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -395,106 +396,112 @@ export default class Aviones extends Component {
                 return <option value={av.cod} key={av.cod}> {av.nombre} </option>
         })
         return (
+            <div className="wrapper" keywords="clientes">
+                <Sidemenu />
 
-            <div className="m-3 w-100">
-                <h2 className="text-center m-3"> SisLogUCAB Aviones DataTable </h2>
+                <div className="container-fluid m-0 p-0 hola" >
+                    {/* <MenuAdmin/> */}
+                <div className="m-3 w-100">
+                    <h2 className="text-center m-3"> SisLogUCAB Aviones DataTable </h2>
 
-                <ReactTable className="mr-4"
+                    <ReactTable className="mr-4"
                     columns={columns}
                     data={this.state.aviones}
                     defaultPageSize={5}
                     filterable={false}
                     noDataText="No Posee Registro Alguno!"
                     showPageSizeOptions={false}
-                ></ReactTable>
-                <br />
-                <div>
-                    <form onSubmit={event => this.handleFormSubmit(event)}>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <label htmlFor="nombre">Nombre</label>
-                                <input type="text" name="Nombre" className="form-control" />
+                    ></ReactTable>
+                    <br />
+                    <div>
+                        <form onSubmit={event => this.handleFormSubmit(event)}>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="nombre">Nombre</label>
+                                    <input type="text" name="Nombre" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Peso">Peso</label>
+                                    <input type="text" name="Peso" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Cap_C">Capacidad Carga</label>
+                                    <input type="text" name="Cap_C" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Peso">Peso</label>
-                                <input type="text" name="Peso" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Descripcion">Descripcion</label>
+                                    <input type="text" name="Descripcion" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Long">Longitud</label>
+                                    <input type="text" name="Long" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Env">Envergadura</label>
+                                    <input type="text" name="Env" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Cap_C">Capacidad Carga</label>
-                                <input type="text" name="Cap_C" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Alt">Altura</label>
+                                    <input type="text" name="Alt" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Ancho_C">Ancho Capacidad</label>
+                                    <input type="text" name="Ancho_C" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Diametro">Diametro</label>
+                                    <input type="text" name="Diametro" className="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Descripcion">Descripcion</label>
-                                <input type="text" name="Descripcion" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Peso_MaxD">Peso Max Despegue
+                                        </label>
+                                    <input type="text" name="Peso_MaxD" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Carrera_D"> Carrera Max Despegue </label>
+                                    <input type="text" name="Carrera_D" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlFor="Vmax"> Velocidad Max </label>
+                                    <input type="text" name="Vmax" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Long">Longitud</label>
-                                <input type="text" name="Long" className="form-control" />
+                            <div className="form-row">
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Fuel_C">Capacidad Combustible</label>
+                                    <input type="text" name="Fuel_C" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Motor"> Motor </label>
+                                    <input type="text" name="Motor" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="sucursal">Sucursal</label>
+                                    <select className="form-control" name="sucursal">
+                                        <option >Choose...</option>
+                                        {sucursales}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-3">
+                                    <label htmlFor="Area"> Area </label>
+                                    <input type="text" name="Area" className="form-control" />
+                                </div>
                             </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Env">Envergadura</label>
-                                <input type="text" name="Env" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Alt">Altura</label>
-                                <input type="text" name="Alt" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Ancho_C">Ancho Capacidad</label>
-                                <input type="text" name="Ancho_C" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Diametro">Diametro</label>
-                                <input type="text" name="Diametro" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Peso_MaxD">Peso Max Despegue
-                                    </label>
-                                <input type="text" name="Peso_MaxD" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Carrera_D"> Carrera Max Despegue </label>
-                                <input type="text" name="Carrera_D" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label htmlFor="Vmax"> Velocidad Max </label>
-                                <input type="text" name="Vmax" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Fuel_C">Capacidad Combustible</label>
-                                <input type="text" name="Fuel_C" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Motor"> Motor </label>
-                                <input type="text" name="Motor" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="sucursal">Sucursal</label>
-                                <select className="form-control" name="sucursal">
-                                    <option >Choose...</option>
-                                    {sucursales}
-                                </select>
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label htmlFor="Area"> Area </label>
-                                <input type="text" name="Area" className="form-control" />
-                            </div>
-                        </div>
 
-                        <button type="submit" className="btn btn-primary">
-                            Registro
-                            </button>
-                    </form>
+                            <button type="submit" className="btn btn-primary">
+                                Registro
+                                </button>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </div>
         );
     }
 }

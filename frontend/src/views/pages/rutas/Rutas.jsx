@@ -64,12 +64,15 @@ export default class Rutas extends Component {
         const Suc_Dest = parseInt(event.target.elements.Destino.value);
         const M_Trans = parseInt(event.target.elements.M_Trans.value);
         const Tiempo = parseInt(event.target.elements.Tiempo.value);
+        const Precio = parseInt(event.target.elements.Precio.value);
+
 
         let datas = JSON.stringify({
             origen: Suc_Origen,
             destino: Suc_Dest,
             m_trans: M_Trans,
-            tiempo:Tiempo
+            tiempo:Tiempo, 
+            precio: Precio
         })
 
         console.log(datas);
@@ -195,6 +198,21 @@ export default class Rutas extends Component {
             minWidth: 250,
         },
         {
+            Header: 'Precio',
+            accessor: 'precio',
+            sortable: false,
+            style: {
+                textAlign: "center"
+            },
+            headerStyle: {
+                background: "black",
+                color: 'white',
+            },
+            width: 250,
+            maxWidth: 250,
+            minWidth: 250,
+        },
+        {
             Header: 'Action',
             Cell: props => {
                 return (
@@ -249,12 +267,13 @@ export default class Rutas extends Component {
                     className="mr-4" 
                     columns={columns} 
                     data={this.state.rutas} 
-                    defaultPageSize={10} 
+                    defaultPageSize={5} 
                     filterable={false} 
                     noDataText="No Posee Registro Alguno!" 
                     showPageSizeOptions={false} />
-              </div>
 
+              </div>
+              <br/>
               <div className="m-3">
                 <form onSubmit={event => this.handleFormSubmit(event)}>
                   <div className="form-row">
@@ -284,6 +303,13 @@ export default class Rutas extends Component {
                         <input type="number" name="Tiempo" className="form-control"/>
                     </div>
                   </div>
+                  <div className="form-row">
+                    <div className="form-group col-md-3">
+                        <label htmlFor="Precio"> Precio Envio</label>
+                        <input type="number" name="Precio" className="form-control"/>
+                    </div>
+                  </div>
+
 
                   <button type="submit" className="btn btn-primary">
                     Create
