@@ -110,3 +110,5 @@ fabric.properties
 
 # PyBuilder
 target/
+
+.vscode/*
