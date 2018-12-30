@@ -1,5 +1,5 @@
+import React from 'react';
 import { Route } from 'react-router-dom';
-import React, { Component } from 'react';
 
 //importando las rutas de la pagina
 import Home from './views/Home.jsx';
@@ -31,39 +31,36 @@ import SucursalDetail from "./views/pages/sucursal/SucursalDetail.jsx";
 import Paquetes from "./views/pages/paquete/Paquetes.jsx";
 
 
-
-class BaseRouter extends Component{
-    render(){
-        return <div>
-            <Route exact path="/" component={Home} />
-            <Route path="/cliente/login" component={Login} />
-            <Route path="/cliente/register" name="Register Page" component={Register} />
-            <Route path="/account" component={Account} />
-            <Route path="/admin/sucursales" component={Sucursal} />
-            <Route path="/admin/sucursal/create" component={RegistroSucursal} />
-            <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />
-            <Route path="/admin/clientes" component={Clientes} />
-            <Route path="/admin/clientes/registro/natural" component={CreateClienteN} />
-            <Route path="/admin/clientes/registro/juridico" component={CreateClienteJ} />
-            <Route path="/admin/cliente/:cliente" component={ClienteDetail} />
-            <Route path="/admin/empleados" component={Empleados} />
-            <Route path="/admin/empleado/create" component={CreateEmpleado} />
-            <Route path="/admin/empleado/:empleado" component={EmpleadoDetail} />
-            <Route path="/admin/usuarios" component={Usuarios} />
-            <Route path="/admin/roles" component={Roles} />
-            <Route path="/admin/rol/create" component={CreateRol} />
-            <Route path="/admin/rol/:rol" component={RolDetail} />
-            <Route path="/admin/aviones" component={Aviones} />
-            <Route path="/admin/avion/:avion" component={AvionDetail} />
-            <Route path="/admin/barcos" component={Barcos} />
-            <Route path="/admin/barco/:barco" component={BarcoDetail} />
-            <Route path="/admin/rutas" component={Rutas} />
-            <Route path="/admin/ruta/:ruta" component={RutaDetail} />
-            <Route path="/admin/vehiculos" component={Vehiculos} />
-            <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
-            <Route path="/admin/paquetes" component={Paquetes} />
-          </div>;
-    }
-}
+const BaseRouter = () =>(
+    <div>
+        <Route exact path="/" component={Home} />
+        <Route path="/cliente/login" component={Login} />
+        <Route path="/cliente/register" name="Register Page" component={Register} />
+        <Route path="/account" component={Account} />
+        <Route path="/admin/sucursales" component={Sucursal} />
+        <Route path="/admin/sucursal/create" component={RegistroSucursal} />
+        <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />
+        <Route path="/admin/clientes" component={Clientes} />
+        <Route path="/admin/clientes/registro/natural" component={CreateClienteN} />
+        <Route path="/admin/clientes/registro/juridico" component={CreateClienteJ} />
+        <Route path="/admin/cliente/:cliente" component={ClienteDetail} />
+        <Route path="/admin/empleados" component={Empleados} />
+        <Route path="/admin/empleado/create" component={CreateEmpleado} />
+        <Route path="/admin/empleado/:empleado" component={EmpleadoDetail} />
+        <Route path="/admin/usuarios" component={Usuarios} />
+        <Route path="/admin/roles" component={Roles} />
+        <Route path="/admin/rol/create" component={CreateRol} />
+        <Route path="/admin/rol/:rol" component={RolDetail} />
+        <Route path="/admin/aviones" component={Aviones} />
+        <Route path="/admin/avion/:avion" component={AvionDetail} />
+        <Route path="/admin/barcos" component={Barcos} />
+        <Route path="/admin/barco/:barco" component={BarcoDetail} />
+        <Route path="/admin/rutas" component={Rutas} />
+        <Route path="/admin/ruta/:ruta" component={RutaDetail} />
+        <Route path="/admin/vehiculos" component={Vehiculos} />
+        <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
+        <Route path="/admin/paquetes" component={Paquetes} />
+    </div>
+);
 
 export default BaseRouter;
