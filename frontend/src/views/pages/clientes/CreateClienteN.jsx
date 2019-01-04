@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Sidemenu from "../../containers/Sidemenu.jsx";
 
 export default class CreateClienteN extends Component{
     constructor(props){
@@ -106,6 +107,110 @@ export default class CreateClienteN extends Component{
             return <option value={parro.id} key={`option_${parro.id}`}> {parro.nombre}</option>
         });
         return (
+            <div className="wrapper" keywords="clientes">
+                <Sidemenu />
+
+                <div className="container-fluid m-0 p-0">
+                    {/* <MenuAdmin/> */}
+
+                    <div className="m-2 w-100">
+                        <h2 className="text-center"> SisLogUCAB Clientes DataTable</h2>
+
+                        <form onSubmit={event => this.handleFormSubmit(event)}>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Username">Username</label>
+                                    <input type="text" name="Username" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Password">Password</label>
+                                    <input type="password" name="Password" className="form-control" id="inputPassword4" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Email">Email</label>
+                                    <input type="email" name="Email" className="form-control" id="inputEmail4" />
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Nombre">Nombre</label>
+                                    <input type="text" name="Nombre" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Apellido">Apellido</label>
+                                    <input type="text" name="Apellido" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Cedula">Cedula</label>
+                                    <input type="text" name="Cedula" className="form-control" />
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlform="estados">Estados</label>
+                                    <select ref="Estados" className="form-control" name="Estados" onChange={(e) => { this.onGetMunicipios(); }}>
+                                        <option readOnly>Seleccione...</option>
+                                        {Est}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="municipios">Municipios</label>
+                                    <select ref="Municipios" className="form-control" name="Municipios" onChange={(e) => { this.onGetParroquias(); }}>
+                                        <option readOnly>Seleccione...</option>
+                                        {Municipios}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="parroquias">Parroquias</label>
+                                    <select className="form-control" name="Parroquias">
+                                        <option readOnly>Seleccione...</option>
+                                        {Parroquias}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Fecha_N">Nacimiento</label>
+                                    <input type="date" name="Fecha_N" className="form-control" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="L_VIP">L_VIP</label>
+                                    <select id="inputState" className="form-control" name="L_VIP" required>
+                                        <option readOnly defaultValue="0">
+                                            Choose...
+                                        </option>
+                                        <option value="1">Si</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label htmlform="Edo_C">Estado Civil</label>
+                                    <select className="form-control" name="Edo_C">
+                                        <option readOnly>Choose...</option>
+                                        <option value="c">Casado</option>
+                                        <option value="s">Soltero</option>
+                                        <option value="v">Viudo</option>
+                                        <option value="d">Divorciado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary">
+                                Registro
+                  </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        
+        );
+    }
+}
+
+  /* 
         <div className="wrapper" keywords="registro clientes">
             <div className="m-2 w-100">
               <h2 className="text-center">
@@ -202,6 +307,4 @@ export default class CreateClienteN extends Component{
               </div>
             </div>
           </div>
-        );
-    }
-}
+        */

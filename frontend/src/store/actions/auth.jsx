@@ -43,15 +43,19 @@ export const authLogin = (data) => {
         axios.post("http://127.0.0.1:3001/api/v1/cliente/login",{
             data
         }).then(response => {
-            const token = response.data.key;
+            const token = response.data.token;
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
             dispatch(authSuccess(token));
             dispatch(checkAuthTimeout(3600));
+            this.props.history.push("/");
         }).catch(error => {
             dispatch(authFail(error))
+            console.log(error.response)
         })
+
+
     }
 }
 

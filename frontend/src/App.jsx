@@ -21,7 +21,7 @@ class App extends Component {
   }
 }
 
-const mapStateProps = state => {
+const mapStateToProps = state => {
   return {
     isAuthenticated: state.token !== null
   }
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -19,8 +19,6 @@ class Login extends Component {
 
     this.props.onAuth(data);
 
-    this.props.history.push('/');
-
   }
 
   render() {

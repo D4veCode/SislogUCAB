@@ -10,14 +10,16 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './store/reducers/auth';
 
-const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose
+//const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose
 
-const store = createStore(reducer, composeEnhances(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
 const app = (
-    <Provider store={store}>
+    <Provider store = {store} >
         <App/>
     </Provider>
 )
