@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../store/actions/auth.jsx";
 
 class Menu extends Component{
-	componentDidMount() {
-		this.props.onTryAutoSignup();
-	}
-    render(){
+	render(){
         return(
           <div>
             <header id="home" className="mt-3">
@@ -22,7 +19,23 @@ class Menu extends Component{
 								<li><a href="#offer">Mision</a></li>
 								<li><a href="#about">Vision</a></li>
 								<li><a href="#price">Historia</a></li>
-								<li><Link to='/cliente/login' {...this.props} >Login</Link></li>
+								{
+									this.props.isAuthenticated ? 
+											<li className="nav-item dropdown">
+												<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Acciones
+        										</a>
+												<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+													<Link className="dropdown-item" to="/perfil">Perfil</Link>
+													<br/>
+													<Link className="dropdown-item" to="/tracking">Tracking</Link>
+													<div className="dropdown-divider"></div>
+													<button className="dropdown-item" href="#" onClick={this.props.logout}> Cerrar Sesion </button>
+												</div>
+											</li>
+									:
+									<li><Link to='/cliente/login'>Login</Link></li>
+								}
 							</ul>
 						</nav>	    		
 					</div>
@@ -32,17 +45,10 @@ class Menu extends Component{
         );
     }
 }
-
-const mapStateProps = state => {
-	return {
-		isAuthenticated: state.token !== null
-	}
-}
-
 const mapDispatchToProps = dispatch => {
 	return {
-		onTryAutoSignup: () => dispatch(actions.authCheckState())
+		logout: () => dispatch(actions.logout())
 	}
 }
 
-export default connect(mapStateProps, mapDispatchToProps)(Menu);
+export default connect(null, mapDispatchToProps)(Menu);

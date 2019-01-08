@@ -15,9 +15,13 @@ class Login extends Component {
       password: Password,
     })
 
-    console.log(data);
+    //console.log(data);
 
-    this.props.onAuth(data);
+   
+      if (!event.error) {
+        this.props.onAuth(data);
+      }
+  
 
   }
 

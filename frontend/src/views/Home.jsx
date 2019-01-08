@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import Menu from '../components/Menu.jsx';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/auth.jsx';
 
 class Home extends Component {
-    componentDidMount() {
-        this.props.onTryAutoSignup();
-    }
     render() {
         return (
             <div>
@@ -30,16 +26,10 @@ class Home extends Component {
     }
 }
 
-const mapStateProps = state => {
+const mapStateToProps = state => {
     return {
         isAuthenticated: state.token !== null
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onTryAutoSignup: () => dispatch(actions.authCheckState())
-    }
-}
-
-export default connect(mapStateProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

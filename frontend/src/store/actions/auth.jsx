@@ -40,21 +40,26 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (data) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post("http://127.0.0.1:3001/api/v1/cliente/login",{
-            data
+        console.log(data);
+        axios.post("http://127.0.0.1:3001/api/v1/cliente/login", data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }).then(response => {
+            console.log(response.data);
             const token = response.data.token;
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
+            this.props.history.push("/");
+
             dispatch(authSuccess(token));
             dispatch(checkAuthTimeout(3600));
-            this.props.history.push("/");
+
         }).catch(error => {
             dispatch(authFail(error))
             console.log(error.response)
         })
-
 
     }
 }
