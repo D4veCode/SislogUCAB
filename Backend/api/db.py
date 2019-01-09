@@ -202,6 +202,15 @@ def getRol(id):
     return rol
 
 
+def getRolUser(username):
+    con = connect()
+
+    rol = con.query("select nombre from rol where id = (select fk_rol from usuario where username=$1)", (username,)).dictresult()
+    con.close()
+
+    return rol
+
+
 def updateRol(id, nombre, tipo):
     con = connect()
 
@@ -277,19 +286,19 @@ def getRutas():
                       "where rt.fk_ruta=r.id and r.fk_origen=s.cod), "
                       "(select s.nombre as suc_dest from sucursal as s, ruta as r "
                       "where rt.fk_ruta=r.id and r.fk_destino=s.cod), "
-                      "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo "
+                      "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo, rt.precio "
                       "from ruta_trans as rt ").dictresult()
     con.close()
     return rutas
 
 
-def agregarRuta(origen, destino, m_trans, tiempo):
+def agregarRuta(origen, destino, m_trans, tiempo, precio):
     con = connect()
 
     ruta = con.query("INSERT INTO ruta(fk_origen, fk_destino) VALUES ($1, $2) returning id",
                      (origen, destino)).dictresult()[0].get("id")
 
-    con.query("INSERT INTO ruta_trans(fk_tt, fk_ruta, tiempo) VALUES ($1, $2, $3)", (m_trans, ruta, tiempo))
+    con.query("INSERT INTO ruta_trans(fk_tt, fk_ruta, tiempo, precio) VALUES ($1, $2, $3, $4)", (m_trans, ruta, tiempo, precio))
 
     con.close()
 
@@ -302,19 +311,19 @@ def getRuta(id):
                      "where rt.fk_ruta=r.id and r.fk_origen=s.cod), "
                      "(select s.nombre as suc_dest from sucursal as s, ruta as r "
                      "where rt.fk_ruta=r.id and r.fk_destino=s.cod), "
-                     "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo "
+                     "(select t.tipo as tipo_trans from tipo_transp as t where rt.fk_tt=t.id), rt.tiempo, rt.precio "
                      "from ruta_trans as rt where rt.id=$1", (id,)).dictresult()
     con.close()
     return ruta
 
 
-def updateRuta(id, origen, destino, tiempo, m_trans):
+def updateRuta(id, origen, destino, tiempo, m_trans, precio):
     con = connect()
 
     rut = con.query("update ruta set fk_origen = $1, fk_destino = $2 "
                     "where id = (select fk_ruta from ruta_trans where id=$3) returning id",
                     (origen, destino, id)).dictresult()[0].get("id")
-    con.query("update ruta_trans set fk_tt=$1, fk_ruta=$2, tiempo=$3 where id=$4", (m_trans, rut, tiempo, id))
+    con.query("update ruta_trans set fk_tt=$1, fk_ruta=$2, tiempo=$3, precio=$4 where id=$5", (m_trans, rut, tiempo, precio, id))
 
     con.close()
 
@@ -389,8 +398,8 @@ def deleteAvion(id):
 
 def getBarcos():
     con = connect()
-    barcos = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
-                       "(select nombre from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
+    barcos = con.query("SELECT b.id, b.nombre, b.descripcion, b.vmax, b.long, "
+                       "(select nombre as fk_sucursal from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
     con.close()
     return barcos
 
@@ -404,8 +413,8 @@ def agregarBarco(nombre, descripcion, vmax, long, fk_sucursal):
 
 def getBarco(id):
     con = connect()
-    barco = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
-                      "(select nombre from sucursal where b.fk_sucursal=cod) FROM barco as b where id=$1",
+    barco = con.query("SELECT b.id, b.nombre, b.descripcion, b.vmax, b.long, "
+                      "(select nombre as fk_sucursal from sucursal where b.fk_sucursal=cod) FROM barco as b where id=$1",
                       (id,)).dictresult()
     con.close()
     return barco
@@ -429,8 +438,8 @@ def deleteBarco(id):
 def getVehiculos():
     con = connect()
     vehs = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
-                     "(select nombre from modelo where v.fk_mod=id), "
-                     "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v").dictresult()
+                     "(select nombre as modelo from modelo where v.fk_mod=id), "
+                     "(select nombre as fk_sucursal from sucursal where v.fk_sucursal=cod) FROM vehiculo as v").dictresult()
     con.close()
     return vehs
 
@@ -456,8 +465,8 @@ def updateVehiculo(id, placa, cap_c, peso, descripcion, color, fecha_v, serial_m
 def getVehiculo(id):
     con = connect()
     veh = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
-                    "(select nombre from modelo where v.fk_mod=id), "
-                    "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v where id=$1",
+                    "(select nombre as modelo from modelo where v.fk_mod=id), "
+                    "(select nombre as fk_sucursal from sucursal where v.fk_sucursal=cod) FROM vehiculo as v where id=$1",
                     (id,)).dictresult()
     con.close()
     return veh
@@ -471,7 +480,28 @@ def deleteVehiculo(id):
 def getModelos():
     con = connect()
 
-    modelos = con.query("select m.id, m.nombre from modelo").dictresult()
+    modelos = con.query("select m.id, m.nombre from modelo as m").dictresult()
 
     con.close()
     return modelos
+
+
+def getPaquetes():
+    con = connect()
+    paquetes = con.query("SELECT p.id, p.num_g, p.peso, p.monto, "
+                         "(select tipo as fk_trans from tipo_transp where p.fk_trans=id), "
+                         "(select nombre as fk_cliente from cliente where p.fk_cliente=id), (select largo from dimension where p.fk_dim=id), "
+                         "(select alto from dimension where p.fk_dim=id), (select ancho from dimension where p.fk_dim=id)"
+                         "FROM paquete as p").dictresult()
+    con.close()
+    return paquetes
+
+
+def agregarPaquete(num_g, peso, monto, fk_cliente, fk_trans, alto, largo, ancho):
+    con = connect()
+    dim = con.query("INSERT INTO dimension(ancho, alto, largo) VALUES ($1, $2, $3)returning id",
+              (ancho, alto, largo)).dictresult()[0].get("id")
+    con.query("INSERT INTO paquete(num_g, peso, monto, fk_trans, fk_cliente, fk_dim) "
+              "VALUES ($1, $2, $3, $4, $5, $6)", (num_g, peso, monto, fk_trans, fk_cliente, dim))
+
+    con.close()

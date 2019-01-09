@@ -1,6 +1,7 @@
 import functools
 from flask import request, url_for
 import bcrypt
+import api.db as database
 
 def paginate(max_per_page=100):
     def decorator(func):
@@ -54,3 +55,6 @@ def encrypt_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
+def getRol(username):
+    print(username)
+    return database.getRolUser(username)[0]['nombre']
