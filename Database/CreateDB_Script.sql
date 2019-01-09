@@ -423,7 +423,7 @@ CREATE Table Paquete(
   ID SERIAL UNIQUE,
   Fk_Paq int NOT NULL,
   Fk_TP int NOT NULL,
-  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_TP) REFERENCES Tipo_Producto (ID),
   Constraint Pk_Paq_Prod PRIMARY KEY(ID)
   );
@@ -446,7 +446,7 @@ CREATE Table Tracking(
   Fk_Paq int NOT NULL,
   Fk_Suc int NOT NULL,
   FOREIGN KEY (Fk_RT) REFERENCES Ruta_Trans (ID),
-  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID),
+  FOREIGN KEY (Fk_Paq) REFERENCES Paquete (ID) ON DELETE CASCADE,
   FOREIGN KEY (Fk_Suc) REFERENCES Sucursal (COD) ON DELETE CASCADE,
   Constraint Pk_Tracking PRIMARY KEY(ID)
   );
