@@ -19,9 +19,9 @@ class Login extends Component {
 
    
       if (!event.error) {
-        this.props.onAuth(data);
+        this.props.onAuth(data, this.props.history);
       }
-  
+     
 
   }
 
@@ -85,7 +85,7 @@ const mapStateProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (data) => dispatch(actions.authLogin(data))
+    onAuth: (data, history) => dispatch(actions.authLogin(data, history))
   }
 }
 

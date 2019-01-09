@@ -37,7 +37,7 @@ export const checkAuthTimeout = expirationTime => {
      }
 }
 
-export const authLogin = (data) => {
+export const authLogin = (data, history) => {
     return dispatch => {
         dispatch(authStart());
         console.log(data);
@@ -51,8 +51,7 @@ export const authLogin = (data) => {
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
-            this.props.history.push("/");
-
+            history.push('/');
             dispatch(authSuccess(token));
             dispatch(checkAuthTimeout(3600));
 
@@ -60,6 +59,7 @@ export const authLogin = (data) => {
             dispatch(authFail(error))
             console.log(error.response)
         })
+
 
     }
 }
