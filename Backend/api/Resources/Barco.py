@@ -84,3 +84,5 @@ class Barco(Resource):
         except Exception as e:
 
             return {"status": "fail", "error": str(e)}, 500
+
+

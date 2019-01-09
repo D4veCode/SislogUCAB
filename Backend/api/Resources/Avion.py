@@ -22,6 +22,7 @@ avion_parse.add_argument('area', required=True)
 avion_parse.add_argument('fk_sucursal', required=True)
 
 avion_fields = {
+    'id': fields.Integer,
     'nombre': fields.String,
     'peso': fields.Float,
     'cap_c': fields.Float,

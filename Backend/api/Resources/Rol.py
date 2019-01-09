@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 
 rol_parse = reqparse.RequestParser()
 
@@ -76,3 +76,10 @@ class Rol(Resource):
         except Exception as e:
 
             return {"status": "fail", "error": str(e)}, 500
+
+
+class RolLogin(Resource):
+    @jwt_required
+    def get(self):
+        data = get_jwt_claims()
+        return data

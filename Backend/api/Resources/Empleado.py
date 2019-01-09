@@ -81,10 +81,19 @@ class Empleado(Resource):
 
         try:
             args = emp_parse.parse_args()
+
             database.updateEmpleado(id, args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'],
                                     args['cedula'], args['email_e'], args['fecha_n'], args['nivel_acd'],
                                     args['edo_c'], args['profesion'], args['num_h'], args['fk_lugar'],
                                     args['fk_emp'], args['email_p'])
+            user = database.getCliente(id)[0].get("username")
+
+            pw = database.getUser(user)[0].get("password")
+            if pw == args['password']:
+                database.updateUser(user, args['username'], args['password'])
+            else:
+                passw = encrypt_password(args['password'])
+                database.updateUser(user, args['username'], passw)
             return {"status": "success", "message": "The Employee has been updated."}
 
         except Exception as e:

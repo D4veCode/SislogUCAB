@@ -70,7 +70,7 @@ class Vehiculo(Resource):
 
         try:
 
-            veh = database.getVehiculo(id)
+            veh = database.getVehiculo(id)[0]
             return {"status": "success", "vehiculo": marshal(veh, veh_fields)}
 
         except Exception:

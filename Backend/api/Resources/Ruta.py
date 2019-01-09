@@ -8,13 +8,15 @@ ruta_parse.add_argument('origen', required=True)
 ruta_parse.add_argument('destino', required=True)
 ruta_parse.add_argument('m_trans', required=True)
 ruta_parse.add_argument('tiempo', required=True)
+ruta_parse.add_argument('precio', required=True)
 
 ruta_field = {
     'id': fields.Integer,
     'suc_origen': fields.String,
     'suc_dest': fields.String,
     'tipo_trans': fields.String,
-    'tiempo': fields.Integer
+    'tiempo': fields.Integer,
+    'precio': fields.Integer
 }
 
 met_trans_field = {
@@ -39,7 +41,7 @@ class RutaList(Resource):
         try:
             data = ruta_parse.parse_args()
 
-            database.agregarRuta(data['origen'], data['destino'], data['m_trans'], data['tiempo'])
+            database.agregarRuta(data['origen'], data['destino'], data['m_trans'], data['tiempo'], data['precio'])
 
             return {"status": "success", "message": "Route registered. "}, 201
 
@@ -63,7 +65,7 @@ class Ruta(Resource):
 
         try:
             data = ruta_parse.parse_args()
-            database.updateRuta(id, data['origen'], data['destino'], data['tiempo'], data['m_trans'])
+            database.updateRuta(id, data['origen'], data['destino'], data['tiempo'], data['m_trans'], data['precio'])
             return {"status": "success", "message": "Route has been updated. "}
 
         except Exception as e:
