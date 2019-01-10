@@ -23,8 +23,10 @@ def expiredtoken_custom():
 def add_claims_to_access_token(identity):
      return {
          'username': identity,
-         'rol': getRol(identity)
+         'rol': getRol(identity),
+         'id_cliente': getIdCliente(identity),
+         'privilegios': getPrivilegios(identity)
     }
 
 from api import db, routes
-from api.helpers import getRol
+from api.helpers import getRol, getIdCliente, getPrivilegios

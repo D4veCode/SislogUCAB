@@ -42,6 +42,26 @@ def getCliente(id):
     return cliente
 
 
+def getIdCliente(username):
+    con = connect()
+
+    cliente = con.query("select c.id from cliente as c where c.fk_user = (select id from usuario where username = $1)", (username, )).dictresult()
+    con.close()
+
+    return cliente 
+
+
+def getPrivilegios(username):
+    con = connect()
+
+    privs = con.query("select p.tipo from privilegio as p, rol_priv as rp, rol as r where " 
+                      "rp.fk_privilegio = p.id and rp.fk_rol = r.id and r.id = (select fk_rol from usuario where username = $1)", 
+                     (username)).dictresult()
+    con.close()
+
+    return privs
+
+
 def agregarUser(username, password, rol):
     con = connect()
 

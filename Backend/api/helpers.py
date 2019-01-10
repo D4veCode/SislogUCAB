@@ -58,3 +58,11 @@ def encrypt_password(password):
 def getRol(username):
     print(username)
     return database.getRolUser(username)[0]['nombre']
+
+
+def getIdCliente(username):
+    return database.getIdCliente(username)[0]['id']
+
+
+def getPrivilegios(username):
+    return database.getPrivilegios(username)
