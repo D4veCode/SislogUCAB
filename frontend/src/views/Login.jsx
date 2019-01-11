@@ -14,10 +14,9 @@ class Login extends Component {
       username: Username,
       password: Password,
     })
-
     //console.log(data);
+    console.log(this.props);
 
-   
       if (!event.error) {
         this.props.onAuth(data, this.props.history);
       }
@@ -37,8 +36,7 @@ class Login extends Component {
                       <h1>Dashboard</h1>
                     </div>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing
-                      elit.
+                      Bienvenidos a SisLogUCAB
                     </p>
                   </div>
                 </div>
@@ -63,9 +61,7 @@ class Login extends Component {
                     </Link>
                     <br />
                     <small>Do not have an account? </small>
-                    <Link to="/" className="signup">
-                      <Link to="/register">Signup</Link>
-                    </Link>
+                    <Link to="/" className="signup">Signup </Link>
                   </div>
                 </div>
               </div>
@@ -76,7 +72,7 @@ class Login extends Component {
   }
 }
 
-const mapStateProps = state => {
+const mapStateToProps = state => {
   return {
     loading: state.loading,
     error:state.error
@@ -89,4 +85,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

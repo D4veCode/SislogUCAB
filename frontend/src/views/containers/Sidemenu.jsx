@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/auth.jsx";
 
-export default class Sidemenu extends Component{
-    onRefrescar(e){
-      window.location.reload();
+class Sidemenu extends Component{
+    onLogout(){
+      this.props.logout();
+
+      console.log('regrese aqui');
+      console.log(localStorage.getItem("token"));
+      if (localStorage.getItem('token')=== null){
+        console.log('entre al if');
+        this.props.history.push('/');
+      }
     }
     render(){
         return <nav id="sidebar">
@@ -124,13 +133,25 @@ export default class Sidemenu extends Component{
                 
               </li>
               <li className="active">
+                <button onClick={e => this.onLogout(e)}>
+                    Cerrar Sesion
+                </button>
+              </li>
+              {/*<li className="active">
                 <a href="#regresar">
-                
                   <Link to="/account" onClick={e => this.onRefrescar(e)}>Regresar</Link>
                 </a>
-                
-              </li>
+
+    </li>  */}
             </ul>
           </nav>;
     }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actions.logout())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Sidemenu);

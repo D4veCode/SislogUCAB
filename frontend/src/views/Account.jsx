@@ -7,7 +7,7 @@ export default class Account extends Component{
     render(){
         return(
         <div className="wrapper">
-            <Sidemenu/>
+            <Sidemenu {...this.props }/>
             
             <div className="content">
               {/* <MenuAdmin/> */}

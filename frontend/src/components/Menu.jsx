@@ -5,6 +5,7 @@ import * as actions from "../store/actions/auth.jsx";
 
 class Menu extends Component{
 	render(){
+		console.log(this.props)
         return(
           <div>
             <header id="home" className="mt-3">
@@ -22,15 +23,15 @@ class Menu extends Component{
 								{
 									this.props.isAuthenticated ? 
 											<li className="nav-item dropdown">
-												<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<a className="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 													Acciones
         										</a>
 												<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-													<Link className="dropdown-item" to="/perfil">Perfil</Link>
+													<Link className="dropdown-item" to="/perfil" {...this.props}>Perfil</Link>
 													<br/>
-													<Link className="dropdown-item" to="/tracking">Tracking</Link>
+													<Link className="dropdown-item" to="/tracking" {...this.props}>Tracking</Link>
 													<div className="dropdown-divider"></div>
-													<button className="dropdown-item" href="#" onClick={this.props.logout}> Cerrar Sesion </button>
+													<button className="dropdown-item"> Cerrar Sesion </button>
 												</div>
 											</li>
 									:

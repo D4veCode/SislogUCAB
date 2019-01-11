@@ -45,7 +45,6 @@ const reducer = (state=initialState, action) => {
             return authFail(state, action);
         case actionTypes.AUTH_LOGOUT:
             return authLogout(state, action);
-    
         default:
             return state
     }

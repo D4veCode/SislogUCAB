@@ -74,9 +74,28 @@ p {
     display: block;
 }
 
+#sidebar ul li button {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    border: 0px;
+    width: 100%;
+}
+
 #sidebar ul li a:hover {
     color: #7386D5;
     background: #fff;
+}
+
+#sidebar ul li button:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.active>button,
+button[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
 }
 
 #sidebar ul li.active>a,
@@ -86,6 +105,10 @@ a[aria-expanded="true"] {
 }
 
 a[data-toggle="collapse"] {
+    position: relative;
+}
+
+button[data-toggle="collapse"] {
     position: relative;
 }
 
@@ -145,30 +168,27 @@ a.article:hover {
     }
 }
 
-.hola{
+.hola {
     width: 83%;
     margin-left: 250px;
 }
 
-ul.list-unstyled li a{
+ul.list-unstyled li a {
     text-decoration: none;
     color: white;
 }
 
-ul.list-unstyled li a:hover{
-    color:grey;
+ul.list-unstyled li a:hover {
+    color: grey;
 }
 
-
-
-.titulo-admin div{
+.titulo-admin div {
     position: absolute;
     top: 50%;
     left: 60%;
     transform: translate(-50%, -50%);
 }
 
-.titulo-admin div h2{
+.titulo-admin div h2 {
     font-size: 60px;
-
 }

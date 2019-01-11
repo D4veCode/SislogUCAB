@@ -6,14 +6,14 @@ import * as actions from './store/actions/auth.jsx';
 
 class App extends Component {
   componentDidMount(){
-    this.props.onTryAutoSignup();
+    //this.props.onTryAutoSignup();
   }
   render() {
     return (
       <div>
         <Router>
             <div>
-              <BaseRouter {...this.props }/>
+              <BaseRouter/>
             </div> 
         </Router>
       </div>
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
+    //onTryAutoSignup: () => dispatch(actions.authCheckState())
   }
 }
 

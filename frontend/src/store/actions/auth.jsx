@@ -22,26 +22,29 @@ export const authFail = error => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem("user");
+    localStorage.removeItem("rol");
+    localStorage.removeItem("token");
     localStorage.removeItem('expirationDate');
     return {
         type: actionTypes.AUTH_LOGOUT
     }
 }
-
-export const checkAuthTimeout = expirationTime => {
+/*
+export const checkAuthTimeout = (expirationTime ) => {
      return dispatch =>  {
         setTimeout(() => {
             dispatch(logout())
         }, expirationTime * 1000);
      }
 }
-
+*/
 export const authLogin = (data, history) => {
-    return dispatch => {
+    return async (dispatch) => {
         dispatch(authStart());
-        console.log(data);
-        axios.post("http://127.0.0.1:3001/api/v1/cliente/login", data, {
+        
+        await axios.post("http://127.0.0.1:3001/api/v1/cliente/login", data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -51,20 +54,56 @@ export const authLogin = (data, history) => {
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
-            history.push('/');
             dispatch(authSuccess(token));
-            dispatch(checkAuthTimeout(3600));
+            //dispatch(checkAuthTimeout(3600));
+        }).catch(error => {
+            dispatch(authFail(error))
+            console.log(error.response)
+        })
+        
 
+       await axios.get("http://127.0.0.1:3001/api/v1/getrol", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            console.log(response.data);
+            const user = response.data.username;
+            const rol = response.data.rol;
+            localStorage.setItem('username', user);
+            localStorage.setItem('rol', rol );
         }).catch(error => {
             dispatch(authFail(error))
             console.log(error.response)
         })
 
-
+        switch (localStorage.getItem('rol')){
+            case 'Admin':
+                console.log('entrando por admin');
+                history.push("/account"); 
+                break;
+            case 'Cliente':
+                console.log('entrando por cliente');
+                history.push('/shaoudh'); 
+                break;
+            case 'Cajero':
+                console.log('entrando por cajero');
+                history.push('/account'); 
+                break;
+            case 'Empaquetador':
+                console.log('entrando por empaquetador');
+                history.push('/account');
+                break;
+            default:
+                console.log('entrando por aqui');
+                history.push('/');
+        }
+        
     }
 }
 
-export const authSingup = (username, email ,password) => {
+/* export const authSingup = (username, email ,password) => {
     return dispatch => {
         dispatch(authStart());
         axios.post("http://127.0.0.1:3001/api/v1/cliente/registro", {
@@ -82,7 +121,7 @@ export const authSingup = (username, email ,password) => {
             dispatch(authFail(error))
         })
     }
-}
+} 
 
 export const authCheckState = () => {
     return dispatch => {
@@ -95,9 +134,9 @@ export const authCheckState = () => {
                 dispatch(logout());
             }else {
                 dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000 ))
+               // dispatch(checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000 ))
             }
         }
     }
 }
-
+*/

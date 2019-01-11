@@ -34,9 +34,9 @@ import Paquetes from "./views/pages/paquete/Paquetes.jsx";
 const BaseRouter = () =>(
     <div>
         <Route exact path="/" component={Home} />
-        <Route path="/cliente/login" component={Login} />
+        <Route exact path="/cliente/login" component={Login} />
         <Route path="/cliente/register" name="Register Page" component={Register} />
-        <Route path="/account" component={Account} />
+        <Route exact path="/account" component={Account} />
         <Route path="/admin/sucursales" component={Sucursal} />
         <Route path="/admin/sucursal/create" component={RegistroSucursal} />
         <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />

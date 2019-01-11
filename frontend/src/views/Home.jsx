@@ -3,7 +3,9 @@ import Menu from '../components/Menu.jsx';
 import { connect } from 'react-redux';
 
 class Home extends Component {
+
     render() {
+        console.log(this.props);
         return (
             <div>
                 <Menu {...this.props}/>
@@ -28,7 +30,9 @@ class Home extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.token !== null
+        isAuthenticated: state.token !== null,
+        rol: state.rol !== null,
+        user: state.rol !== null
     }
 }
 
