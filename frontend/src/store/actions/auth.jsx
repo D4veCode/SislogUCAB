@@ -44,6 +44,8 @@ export const authLogin = (data, history) => {
     return async (dispatch) => {
         dispatch(authStart());
         
+        console.log(data);
+
         await axios.post("http://127.0.0.1:3001/api/v1/cliente/login", data, {
             headers: {
                 'Content-Type': 'application/json'
@@ -80,23 +82,23 @@ export const authLogin = (data, history) => {
 
         switch (localStorage.getItem('rol')){
             case 'Admin':
-                console.log('entrando por admin');
+                //console.log('entrando por admin');
                 history.push("/account"); 
                 break;
             case 'Cliente':
-                console.log('entrando por cliente');
-                history.push('/shaoudh'); 
+                //console.log('entrando por cliente');
+                history.push('/cliente'); 
                 break;
             case 'Cajero':
-                console.log('entrando por cajero');
-                history.push('/account'); 
+                //console.log('entrando por cajero');
+                history.push('/empleado'); 
                 break;
             case 'Empaquetador':
-                console.log('entrando por empaquetador');
-                history.push('/account');
+                //console.log('entrando por empaquetador');
+                history.push('/empaquetador');
                 break;
             default:
-                console.log('entrando por aqui');
+                //console.log('entrando por aqui');
                 history.push('/');
         }
         

@@ -15,7 +15,7 @@ class Login extends Component {
       password: Password,
     })
     //console.log(data);
-    console.log(this.props);
+    //console.log(this.props);
 
       if (!event.error) {
         this.props.onAuth(data, this.props.history);

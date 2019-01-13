@@ -7,10 +7,10 @@ class Sidemenu extends Component{
     onLogout(){
       this.props.logout();
 
-      console.log('regrese aqui');
-      console.log(localStorage.getItem("token"));
+      //console.log('regrese aqui');
+      //console.log(localStorage.getItem("token"));
       if (localStorage.getItem('token')=== null){
-        console.log('entre al if');
+        //console.log('entre al if');
         this.props.history.push('/');
       }
     }
@@ -18,6 +18,8 @@ class Sidemenu extends Component{
         return <nav id="sidebar">
             <div className="sidebar-header">
               <h3>SisLogUCAB</h3>
+              <br/>
+              <h3>Usuario: <strong>{localStorage.getItem("username")}</strong></h3>
             </div>
 
             <ul className="list-unstyled components">
