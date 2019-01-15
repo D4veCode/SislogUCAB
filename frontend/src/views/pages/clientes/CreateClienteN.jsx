@@ -15,12 +15,12 @@ export default class CreateClienteN extends Component{
         axios.get("http://127.0.0.1:3001/api/v1/estados", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => {
             this.setState({ estados: response.data.lugar });
-            console.log(this.state.estados)
+            //console.log(this.state.estados)
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -55,7 +55,7 @@ export default class CreateClienteN extends Component{
 
         axios.post('http://127.0.0.1:3001/api/v1/cliente/registro', datas, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         })
@@ -69,12 +69,12 @@ export default class CreateClienteN extends Component{
         console.log(this.refs.Estados.value);
         axios.get('http://localhost:3001/api/v1/municipios/'+ this.refs.Estados.value,{
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ municipios: response.data.lugar });
-            console.log(this.state.municipios)
+            //console.log(this.state.municipios)
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -84,12 +84,12 @@ export default class CreateClienteN extends Component{
         console.log(this.refs.Municipios.value);
         axios.get('http://localhost:3001/api/v1/parroquias/' + this.refs.Municipios.value, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ parroquias: response.data.lugar });
-            console.log(this.state.parroquias)
+            //console.log(this.state.parroquias)
         }).catch(function (error) {
             console.log(error.response);
         });

@@ -18,13 +18,13 @@ export default class Aviones extends Component {
         axios.get("http://127.0.0.1:3001/api/v1/aviones", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
                 }
             })
             .then(response => {
                 this.setState({ aviones: response.data.aviones });
-                console.log(this.state.aviones);
+                //console.log(this.state.aviones);
             })
             .catch(function (error) {
                 console.log(error.response);
@@ -33,13 +33,13 @@ export default class Aviones extends Component {
         axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
             headers: {
                 Authorization:
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         })
             .then(response => {
                 this.setState({ sucursales: response.data.sucursales });
-                console.log(this.state.sucursales);
+                //console.log(this.state.sucursales);
             })
             .catch(function (error) {
                 console.log(error.response);
@@ -91,7 +91,7 @@ export default class Aviones extends Component {
         axios.post('http://localhost:3001/api/v1/aviones', datas, {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => console.log(response))
@@ -369,7 +369,7 @@ export default class Aviones extends Component {
                             axios.delete('http://localhost:3001/api/v1/avion/' + props.original.id,
                                 {
                                     headers: {
-                                        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                                        Authorization: "Bearer " + localStorage.getItem('token'),
                                         "Content-Type": "application/json"
                                     }
                                 }

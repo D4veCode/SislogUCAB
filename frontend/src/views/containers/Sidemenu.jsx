@@ -132,8 +132,9 @@ class Sidemenu extends Component{
                     <Link to="/admin/rutas">Info Rutas</Link>
                   </li>
                 </ul>
-                
               </li>
+              <br/>
+
               <li className="active">
                 <button onClick={e => this.onLogout(e)}>
                     Cerrar Sesion

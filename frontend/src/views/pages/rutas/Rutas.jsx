@@ -21,12 +21,12 @@ export default class Rutas extends Component {
         axios.get("http://127.0.0.1:3001/api/v1/rutas", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => {
             this.setState({ rutas: response.data.rutas });
-            console.log(this.state.rutas);
+            //console.log(this.state.rutas);
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -34,12 +34,12 @@ export default class Rutas extends Component {
         axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
             headers: {
                 Authorization:
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => {
             this.setState({ sucursales: response.data.sucursales });
-            console.log(this.state.sucursales);
+            //console.log(this.state.sucursales);
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -47,12 +47,12 @@ export default class Rutas extends Component {
         axios.get("http://127.0.0.1:3001/api/v1/met_trans", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => {
             this.setState({ met_trans: response.data.m_trans });
-            console.log(this.state.met_trans);
+            //console.log(this.state.met_trans);
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -80,7 +80,7 @@ export default class Rutas extends Component {
         axios.post('http://localhost:3001/api/v1/rutas', datas, {
                 headers: {
                     Authorization:
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                    "Bearer " + localStorage.getItem('token'),
                     "Content-Type": "application/json"
                 }
             }
@@ -94,24 +94,24 @@ export default class Rutas extends Component {
         console.log(this.refs.Origen.value)
         axios.get('http://localhost:3001/api/v1/sucursales',{
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ destinos: response.data.sucursales });
-            console.log(this.state.destinos)
+            //console.log(this.state.destinos)
         }).catch(function (error) {
             console.log(error.response);
         });
 
         axios.get('http://localhost:3001/api/v1/sucursal/' + this.refs.Origen.value, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ dest: response.data.sucursal });
-            console.log(this.state.dest)
+            //console.log(this.state.dest)
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -220,7 +220,7 @@ export default class Rutas extends Component {
                         onClick={() => {
                             axios.delete('http://localhost:3001/api/v1/ruta/' + props.original.id, {
                                     headers: {
-                                        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                                        Authorization: "Bearer " + localStorage.getItem('token'),
                                         "Content-Type": "application/json"
                                     }
                                 }

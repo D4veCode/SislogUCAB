@@ -14,7 +14,8 @@ export default class Empleado extends Component{
             estados: [],
             municipios: [],
             parroquias: [],
-            jefe:[]
+            jefe:[],
+            roles:[]
         } 
     }
     componentDidMount(){
@@ -22,27 +23,40 @@ export default class Empleado extends Component{
           .get("http://127.0.0.1:3001/api/v1/empleados", {
             headers: {
               Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
-              "Content-Type": "application/json"
+                "Bearer " + localStorage.getItem('token'),
+                "Content-Type": "application/json"
             }
           })
           .then(response => {
             this.setState({ empleados: response.data.empleados });
-            console.log(this.state.empleados);
+            //console.log(this.state.empleados);
           })
           .catch(function(error) {
             console.log(error.response);
-          });  
+          }); 
+          
+        axios.get("http://127.0.0.1:3001/api/v1/roles", {
+            headers: {
+                Authorization:
+                    "Bearer " + localStorage.getItem('token'),
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            this.setState({ roles: response.data.roles });
+            //console.log(this.state.roles);
+        }).catch(function (error) {
+            console.log(error.response);
+        });
           
         axios.get("http://127.0.0.1:3001/api/v1/estados", {
             headers: {
                 Authorization:
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                "Bearer "+ localStorage.getItem('token'),
                 "Content-Type": "application/json"
             }
         }).then(response => {
             this.setState({ estados: response.data.lugar });
-            console.log(this.state.estados)
+            //console.log(this.state.estados)
         }).catch(function (error) {
             console.log(error.response);
         });   
@@ -52,12 +66,12 @@ export default class Empleado extends Component{
         console.log(this.refs.Estados.value);
         axios.get('http://localhost:3001/api/v1/municipios/' + this.refs.Estados.value, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer '+ localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ municipios: response.data.lugar });
-            console.log(this.state.municipios)
+            //console.log(this.state.municipios)
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -67,12 +81,12 @@ export default class Empleado extends Component{
         console.log(this.refs.Municipios.value);
         axios.get('http://localhost:3001/api/v1/parroquias/' + this.refs.Municipios.value, {
             headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4',
+                'Authorization': 'Bearer '+ localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             this.setState({ parroquias: response.data.lugar });
-            console.log(this.state.parroquias)
+            //console.log(this.state.parroquias)
         }).catch(function (error) {
             console.log(error.response);
         });
@@ -96,6 +110,7 @@ export default class Empleado extends Component{
         const Fk_Lugar = parseInt(event.target.elements.Parroquias.value);
         const Fk_Emp = parseInt(event.target.elements.jefes.value);
         const Nivel_ACD = event.target.elements.Nivel_ACD.value;
+        const rol = event.target.elements.rol.value;
 
             let datas = JSON.stringify({
                 p_nombre: PNombre,
@@ -113,7 +128,8 @@ export default class Empleado extends Component{
                 fk_lugar: Fk_Lugar,
                 fk_emp: Fk_Emp,
                 username: Username,
-                password: Password
+                password: Password,
+                rol: rol
             });
 
             console.log(datas);
@@ -121,7 +137,7 @@ export default class Empleado extends Component{
             axios.post('http://localhost:3001/api/v1/empleado/registro', datas, {
                 headers: {
                     Authorization:
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                    "Bearer "+ localStorage.getItem('token'),
                     "Content-Type": "application/json"
                 }
             }).then(response => console.log(response))
@@ -176,7 +192,6 @@ export default class Empleado extends Component{
                 }
                 return (
                     props.original.p_nombre +" "+ segundoN
-
                 )
             },
             sortable: false,
@@ -391,7 +406,7 @@ export default class Empleado extends Component{
                             axios.delete('http://localhost:3001/api/v1/empleado/' + props.original.id,
                                 {
                                     headers: {
-                                        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDQ2NTcwMjYsIm5iZiI6MTU0NDY1NzAyNiwianRpIjoiYTNhOTM3N2QtOTVkYS00YTc3LTkyOGItOWMyYzhjZDY3OGUxIiwiZXhwIjoxNTQ1OTUzMDI2LCJpZGVudGl0eSI6InJhbW9uMyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.X80zuLw7bUH3V1PEwbteG6RARR1NZYcJJsMLTtDLcj4",
+                                        Authorization: "Bearer " + localStorage.getItem('token'),
                                         "Content-Type": "application/json"
                                     }
                                 }
@@ -423,8 +438,11 @@ export default class Empleado extends Component{
         var Parroquias = this.state.parroquias.map(function (parro) {
             return <option value={parro.id} key={`option_${parro.id}`}> {parro.nombre}</option>
         });
+        var roles = this.state.roles.map(function (rol) {
+            return <option value={rol.nombre} key={`option_${rol.id}`}> {rol.nombre}</option>
+        });
         var jefes = this.state.empleados.map(function(jefe){
-            if (jefe.fk_emp != null){
+            if (jefe.fk_emp !== null){
                 return <option value={jefe.fk_emp} key={jefe.id}> {jefe.fk_emp} </option>
             }
         })
@@ -516,25 +534,32 @@ export default class Empleado extends Component{
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlform="estados">Estados</label>
                                         <select ref="Estados" className="form-control" name="Estados" onChange={(e) => { this.onGetMunicipios(); }}>
                                             <option readOnly>Seleccione...</option>
                                             {Est}
                                         </select>
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlform="municipios">Municipios</label>
                                         <select ref="Municipios" className="form-control" name="Municipios" onChange={(e) => { this.onGetParroquias(); }}>
                                             <option readOnly>Seleccione...</option>
                                             {Municipios}
                                         </select>
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlform="parroquias">Parroquias</label>
                                         <select className="form-control" name="Parroquias">
                                             <option readOnly>Seleccione...</option>
                                             {Parroquias}
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-md-3">
+                                        <label htmlform="parroquias">Roles</label>
+                                        <select className="form-control" name="rol">
+                                            <option readOnly>Seleccione...</option>
+                                            {roles}
                                         </select>
                                     </div>
                                 </div>
