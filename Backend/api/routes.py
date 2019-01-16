@@ -11,6 +11,7 @@ import api.Resources.Ruta as ruta
 import api.Resources.Lugar as lug
 import api.Resources.Rol as rol
 import api.Resources.Usuario as users
+import api.Resources.Paquete as paq
 
 api = Api(app, prefix='/api/v1')
 
@@ -40,5 +41,5 @@ api.add_resource(ruta.RutaList, '/rutas')
 api.add_resource(ruta.Ruta, '/ruta/<int:id>')
 api.add_resource(ruta.MetodoTransp, '/met_trans')
 api.add_resource(veh.ModeloList, '/modelos')
-
+api.add_resource(paq.PaqueteList, '/paquetes')
 api.add_resource(rol.RolLogin, '/getrol')

@@ -225,7 +225,7 @@ def getRol(id):
 def getRolUser(username):
     con = connect()
 
-    rol = con.query("select nombre from rol where id = (select fk_rol from usuario where username=$1)", (username,)).dictresult()
+    rol = con.query("select nombre, id from rol where id = (select fk_rol from usuario where username=$1)", (username,)).dictresult()
     con.close()
 
     return rol
@@ -277,6 +277,17 @@ def getEmpleado(id):
                     (id,)).dictresult()
     con.close()
     return emp
+
+
+def getIdEmp(username):
+    con = connect()
+
+    emp = con.query("select e.id from empleado e where e.fk_user = (select id from usuario where username = $1)", (username,)).dictresult()
+
+    con.close()
+
+    return emp
+
 
 
 def updateEmpleado(id, p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
@@ -500,7 +511,39 @@ def deleteVehiculo(id):
 def getModelos():
     con = connect()
 
-    modelos = con.query("select m.id, m.nombre from modelo").dictresult()
+    modelos = con.query("select m.id, m.nombre from modelo as m").dictresult()
 
     con.close()
     return modelos
+
+
+def getPaquetes():
+    con = connect()
+    paquetes = con.query("SELECT p.id, p.num_g, p.peso, p.monto, "
+                         "(select tipo as fk_trans from tipo_transp where p.fk_trans=id), "
+                         "(select nombre as fk_cliente from cliente where p.fk_cliente=id), (select largo from dimension where p.fk_dim=id), "
+                         "(select alto from dimension where p.fk_dim=id), (select ancho from dimension where p.fk_dim=id)"
+                         "FROM paquete as p").dictresult()
+    con.close()
+    return paquetes
+
+
+def agregarPaquete(num_g, peso, monto, fk_cliente, fk_trans, alto, largo, ancho):
+    con = connect()
+    dim = con.query("INSERT INTO dimension(ancho, alto, largo) VALUES ($1, $2, $3)returning id",
+              (ancho, alto, largo)).dictresult()[0].get("id")
+    con.query("INSERT INTO paquete(num_g, peso, monto, fk_trans, fk_cliente, fk_dim) "
+              "VALUES ($1, $2, $3, $4, $5, $6)", (num_g, peso, monto, fk_trans, fk_cliente, dim))
+
+    con.close()
+
+
+def contarPaquetes(fk_cliente):
+    con = connect()
+
+    num_paqs = con.query("select count(p.*) as paquetes from paquete p where fk_cliente = $1", (fk_cliente,)).dictresult()[0]
+
+    con.close()
+
+    return num_paqs
+
