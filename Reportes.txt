@@ -1,0 +1,61 @@
+?listado de oficinas
+?listado de medio de tranportes
+?lista de empleados activos dando info básica, cargo, fecha de ingreso a la empresa
+?listado de empleados activos y no con info básica,cargo que ocupo, fecha de ingreso y egreso, total de empleados act y total no act
+?listado de rutas
+?medio mas usado
+?% de uso de un medio de transporte según perdió de tiempo
+?que oficina recibe mas paquetes
+?oficina que envia mas
+?que mes tiene mas envios
+?peso promedio de los paquetes por oficina
+?clientes frecuentes por oficina	
+	frecuente si envia mas de 5 al mes
+?listado de paquetes por status (entregado, por entregar, en aduana, en oficina origen, oficina, destino)
+?oficina con mas transito de paquetes por perdido
+?usuario registra mas paquetes por oficina
+?listado de vehículos por oficina base
+?flota terrestre nacional e internacional agrupado por ubicación, tipo, ordenado por serial de motor
+?oficina y zonas por estado
+?centros de servicio a nivel internacional
+?listado de aviones y carac
+?listado de puertos y aeropuertos con info base
+?listado de empleados con su horario y ubicación dentro de cada oficina 
+?listado de paquetes por clasificación y oficina en un periodo
+promedio de paquetes diarios por oficina
+?Listado de oficinas indicando región, país, continente.
+?paquetes combinan más medios de transporte
+?oficina es la más amplia por estado, región y país
+?usuarios y roles.
+?Listado de acciones ejecutadas por usuario y con qué rol se hizo.
+?Promedio de días de estancia de un paquete dentro de las zonas de cada
+oficina.
+?Listado de nomina semanal por oficina.
+?Costo de cada empleado por oficina en un periodo de tiempo. Al final del
+reporte debe mostrar el total los cálculos.
+?Listado de talleres por zona.
+?Listado de flota con su última fecha de revisión y próxima fecha por oficina.
+?Contabilidad: Indicar ingresos y egresos por oficina. Por periodo de tiempo.
+?Oficinas más costosas por estado y país.
+?Listado de servicios por oficina.
+?Registro de asistencia de empleados.
+?Cambio de estatus de paquetes durante el envío.
+?Envío de paquetes con el medio de transporte, tomar en cuenta duración, costos y fecha estimada de entrega.
+?Recibo de envíos.
+?Para los clientes VIP se otorga 10% de descuento sobre el total a pagar en el envío.
+?Asignación de roles a usuarios.
+?Asignación de permisos a roles.
+?Inicio de sesión con la validación de permisos.
+?Alerta de paquetes con más de 24 horas.
+?Generación de clientes VIP y su carnet.
+?Oficina que envía y recibe más paquetes
+?Ingresos y egresos por oficina por mes.
+?Peso promedio de los paquetes que se envían por oficina.
+?Mes del año que se realizan más envíos. ? Ruta más utilizada.
+?Recibo de pago de nómina. ? Listado de empleados con las inasistencias.
+?Listado de inasistencia indicando el horario asignado al empleado
+?Listado de paquetes con todos los cambios de estatus indicando las fechas de cambio.
+?Auditoria del sistema por fecha. ? Promedio de estancia de los paquetes por cada zona de las oficinas.
+?Sucursales de puertos y aeropuertos.
+?Histórico de revisión de la flota indicando taller, falla y duración de la revisión
+?Total de gastos generados por revisión de flotas por mes y por sucursal. 
