@@ -21,7 +21,6 @@ def getClientes():
 def agregarCliente(user, nombre, ci, apellido, email, lvip, fk_lugar, f_nacimiento, est_civil=None,
                    nombre_empresa=None):
     con = connect()
-
     con.query(
         "insert into Cliente(FK_User, Nombre, cedula, apellido, email, edo_c, nombre_e, l_vip, FK_Lugar, fecha_n) "
         "values ($1,$2,$3,$4,$5,$6,$7,$8, $9, $10)",
@@ -64,7 +63,6 @@ def getPrivilegios(username):
 
 def agregarUser(username, password, rol):
     con = connect()
-
     user = con.query("insert into usuario(username, password, fk_rol) values($1, $2, $3) returning id",
                      (username, password, rol)).dictresult()
 

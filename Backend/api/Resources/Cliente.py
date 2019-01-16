@@ -55,7 +55,7 @@ class RegistroCliente(Resource):
             if data['edo_c']:
 
                 password = encrypt_password(data['password'])
-                user = database.agregarUser(data['username'], password,2)[0].get("id")
+                user = database.agregarUser(data['username'], password,1)[0].get("id")
                 database.agregarCliente(user, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
                                   data['fk_lugar'], data['fecha_n'], data['edo_c'])
                 token = create_access_token(identity=data['username'])
@@ -64,7 +64,7 @@ class RegistroCliente(Resource):
             elif data['nombre_e']:
 
                 password = encrypt_password(data['password'])
-                user = database.agregarUser(data['username'], password, 2)[0].get("id")
+                user = database.agregarUser(data['username'], password, 1)[0].get("id")
                 database.agregarCliente(user, data['nombre'], data['cedula'], data['apellido'], data['email'], data['l_vip'],
                                   data['fk_lugar'], data['fecha_n'], None, data['nombre_e'])
                 token = create_access_token(identity=data['username'])

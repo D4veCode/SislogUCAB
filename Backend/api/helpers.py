@@ -15,15 +15,16 @@ def encrypt_password(password):
 
 
 def getRol(username):
-    return database.getRolUser(username)[0]['nombre']
+    return database.getRolUser(username)[0]['nombre'] 
 
 
 def getIdUsuario(username):
     
-    if(database.getRolUser(username)[0]['id'] == 2):
-        return database.getIdCliente(username)[0]['id']
-    else:
-        return database.getIdEmp(username)[0]['id']
+    #if(database.getRolUser(username)[0]['id'] == 2):
+    return database.getIdCliente(username)[0]['id']
+    #else:
+    #   id = database.getIdEmp(username)[0]['id'] 
+    #    return id
 
 
 def getPrivilegios(username):
