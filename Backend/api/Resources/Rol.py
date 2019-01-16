@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, fields, marshal
 import api.db as database
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 
 rol_parse = reqparse.RequestParser()
 
