@@ -20,11 +20,13 @@ def getRol(username):
 
 def getIdUsuario(username):
     
-    #if(database.getRolUser(username)[0]['id'] == 2):
-    return database.getIdCliente(username)[0]['id']
-    #else:
-    #   id = database.getIdEmp(username)[0]['id'] 
-    #    return id
+    if(database.getRolUser(username)[0]['id'] == 2):
+        
+        return database.getIdCliente(username)[0]['id']
+    
+    else:
+         
+       return database.getIdEmp(username)[0]['id']
 
 
 def getPrivilegios(username):
