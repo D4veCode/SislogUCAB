@@ -40,3 +40,5 @@ api.add_resource(ruta.RutaList, '/rutas')
 api.add_resource(ruta.Ruta, '/ruta/<int:id>')
 api.add_resource(ruta.MetodoTransp, '/met_trans')
 api.add_resource(veh.ModeloList, '/modelos')
+
+api.add_resource(rol.RolLogin, '/getrol')

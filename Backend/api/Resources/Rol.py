@@ -76,3 +76,10 @@ class Rol(Resource):
         except Exception as e:
 
             return {"status": "fail", "error": str(e)}, 500
+
+
+class RolLogin(Resource):
+    @jwt_required
+    def get(self):
+        data = get_jwt_claims()
+        return data
