@@ -34,6 +34,9 @@ def getPrivilegios(username):
 
 
 def getSucEmp(username):
-    return database.getSucEmp(username)[0]['id']
+    if(database.getRolUser(username)[0]['id'] == 2 ):
+        return None
+    else: 
+        return database.getSucEmp(username)[0]['cod']
 
 

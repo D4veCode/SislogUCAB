@@ -138,3 +138,14 @@ class Cliente(Resource):
 
         except Exception as e:
             return {"status": "fail", "error": str(e)}, 500
+
+
+class GenerarCarnet(Resource):
+    @jwt_required
+    def get(self):
+        try:
+            seq = database.getSecuencia()[0]['num']
+            return {'status': 'success', 'seq': seq}, 200
+        
+        except Exception as e:
+            return {'status': 'fail', 'error': str(e)}, 500 

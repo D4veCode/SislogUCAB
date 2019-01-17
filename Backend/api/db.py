@@ -566,3 +566,12 @@ def contarPaquetes(fk_cliente):
 
     return num_paqs
 
+
+def getSecuencia():
+    con = connect()
+
+    seq = con.query("select nextval('carnet_secuencia') as num").dictresult()
+
+    con.close()
+
+    return seq
