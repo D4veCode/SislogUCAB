@@ -27,9 +27,10 @@ def add_claims_to_access_token(identity):
          'username': identity,
          'rol': getRol(identity),
          'id': getIdUsuario(identity),
-         'privilegios': getPrivilegios(identity)
+         'privilegios': getPrivilegios(identity),
+         'sucursal': getSucEmp(identity)
     }
 
 
 from api import db, routes
-from api.helpers import getRol, getIdUsuario, getPrivilegios
+from api.helpers import getRol, getIdUsuario, getPrivilegios, getSucEmp

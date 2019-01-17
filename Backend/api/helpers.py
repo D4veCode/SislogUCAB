@@ -33,3 +33,7 @@ def getPrivilegios(username):
     return database.getPrivilegios(username)
 
 
+def getSucEmp(username):
+    return database.getSucEmp(username)
+
+

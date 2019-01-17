@@ -158,6 +158,17 @@ def getSucursal(id):
     return suc
 
 
+def getSucEmp(username):
+    con = connect()
+
+    suc = con.query("select s.cod from sucursal s where s.cod in (select es.fk_suc from emp_suc es where "
+                    "fk_emp = (select e.id from empleado e where "
+                    "fk_user = (select u.id from usuario u where username = $1)))", (username)).dictresult()
+    con.close()
+
+    return suc
+
+
 def updateSucursal(id, nombre, cap_m2, cap_alm, email, tamano, fk_lugar):
     con = connect()
 
