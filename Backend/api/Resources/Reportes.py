@@ -36,18 +36,18 @@ class ListadoEmp(Resource):
             return {'status': 'fail', 'error': str(e)}, 500
 
 
-class CantEmp():
+class CantEmp(Resource):
     @jwt_required
     def get(self):
         try:
-            cant_emp = database.cantEmp() # cantidad de empleados
+            cant_emp = database.cantEmp()[0] # cantidad de empleados
             return {'status': 'success', 'reporte4': cant_emp}, 200
         
         except Exception as e:
             return {'status': 'fail', 'error': str(e)}, 500 
 
 
-class ListadoRutas():
+class ListadoRutas(Resource):
     @jwt_required
     def get(self):
         try:
@@ -58,7 +58,7 @@ class ListadoRutas():
             return {'status': 'fail', 'error': str(e)}, 500 
 
 
-class RutaMasUsada():
+class RutaMasUsada(Resource):
     @jwt_required
     def get(self):
         try:
