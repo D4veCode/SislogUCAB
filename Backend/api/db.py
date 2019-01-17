@@ -581,7 +581,7 @@ def getSecuencia():
 def listadoSuc():
     con = connect()
 
-    sucs = con.query("a.nombre,a.email,b.nombre as \"lugar\",a.cap_m2 as tamaño from sucursal a, lugar b "
+    sucs = con.query("select a.nombre,a.email,b.nombre as \"lugar\",a.cap_m2 as tamaño from sucursal a, lugar b "
                      "where a.fk_lugar = b.id").dictresult()
     con.close()
 
