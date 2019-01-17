@@ -48,7 +48,7 @@ class PaqueteList(Resource):
 
             database.agregarPaquete(data['num_g'], data['peso'], data['monto'], data['fk_cliente'], data['fk_trans'],
                                 data['alto'], data['largo'], data['ancho'])
-            paquetes = database.contarPaquetes(data['fk_clientes'])['paquetes']
+            paquetes = database.contarPaquetes(data['fk_cliente'])['paquetes']
 
             return {"status": "success", "message": "Package created.", "cant_paquetes": paquetes}, 201
 
