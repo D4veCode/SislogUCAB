@@ -1,61 +1,61 @@
-?listado de oficinas
-?listado de medio de tranportes
-?lista de empleados activos dando info b·sica, cargo, fecha de ingreso a la empresa
-?listado de empleados activos y no con info b·sica,cargo que ocupo, fecha de ingreso y egreso, total de empleados act y total no act
-?listado de rutas
-?medio mas usado
-?% de uso de un medio de transporte seg˙n perdiÛ de tiempo
-?que oficina recibe mas paquetes
-?oficina que envia mas
-?que mes tiene mas envios
-?peso promedio de los paquetes por oficina
-?clientes frecuentes por oficina	
+1listado de oficinas
+2listado de medio de tranportes
+3lista de empleados activos dando info b√°sica, cargo, fecha de ingreso a la empresa
+4listado de empleados activos y no con info b√°sica,cargo que ocupo, fecha de ingreso y egreso, total de empleados act y total no act
+5listado de rutas
+6medio mas usado
+7% de uso de un medio de transporte seg√∫n perdi√≥ de tiempo
+8que oficina recibe mas paquetes
+9oficina que envia mas
+10que mes tiene mas envios
+11peso promedio de los paquetes por oficina
+12clientes frecuentes por oficina	
 	frecuente si envia mas de 5 al mes
-?listado de paquetes por status (entregado, por entregar, en aduana, en oficina origen, oficina, destino)
-?oficina con mas transito de paquetes por perdido
-?usuario registra mas paquetes por oficina
-?listado de vehÌculos por oficina base
-?flota terrestre nacional e internacional agrupado por ubicaciÛn, tipo, ordenado por serial de motor
-?oficina y zonas por estado
-?centros de servicio a nivel internacional
-?listado de aviones y carac
-?listado de puertos y aeropuertos con info base
-?listado de empleados con su horario y ubicaciÛn dentro de cada oficina 
-?listado de paquetes por clasificaciÛn y oficina en un periodo
+13listado de paquetes por status (entregado, por entregar, en aduana, en oficina origen, oficina, destino)
+14oficina con mas transito de paquetes por perdido
+15usuario registra mas paquetes por oficina
+16listado de veh√≠culos por oficina base
+17flota terrestre nacional e internacional agrupado por ubicaci√≥n, tipo, ordenado por serial de motor
+18oficina y zonas por estado
+19centros de servicio a nivel internacional
+20listado de aviones y carac
+21listado de puertos y aeropuertos con info base
+22listado de empleados con su horario y ubicaci√≥n dentro de cada oficina 
+23listado de paquetes por clasificaci√≥n y oficina en un periodo
 promedio de paquetes diarios por oficina
-?Listado de oficinas indicando regiÛn, paÌs, continente.
-?paquetes combinan m·s medios de transporte
-?oficina es la m·s amplia por estado, regiÛn y paÌs
-?usuarios y roles.
-?Listado de acciones ejecutadas por usuario y con quÈ rol se hizo.
-?Promedio de dÌas de estancia de un paquete dentro de las zonas de cada
+24Listado de oficinas indicando regi√≥n, pa√≠s, continente.
+25paquetes combinan m√°s medios de transporte
+26oficina es la m√°s amplia por estado, regi√≥n y pa√≠s
+27usuarios y roles.
+28Listado de acciones ejecutadas por usuario y con qu√© rol se hizo.
+29Promedio de d√≠as de estancia de un paquete dentro de las zonas de cada
 oficina.
-?Listado de nomina semanal por oficina.
-?Costo de cada empleado por oficina en un periodo de tiempo. Al final del
-reporte debe mostrar el total los c·lculos.
-?Listado de talleres por zona.
-?Listado de flota con su ˙ltima fecha de revisiÛn y prÛxima fecha por oficina.
-?Contabilidad: Indicar ingresos y egresos por oficina. Por periodo de tiempo.
-?Oficinas m·s costosas por estado y paÌs.
-?Listado de servicios por oficina.
-?Registro de asistencia de empleados.
-?Cambio de estatus de paquetes durante el envÌo.
-?EnvÌo de paquetes con el medio de transporte, tomar en cuenta duraciÛn, costos y fecha estimada de entrega.
-?Recibo de envÌos.
-?Para los clientes VIP se otorga 10% de descuento sobre el total a pagar en el envÌo.
-?AsignaciÛn de roles a usuarios.
-?AsignaciÛn de permisos a roles.
-?Inicio de sesiÛn con la validaciÛn de permisos.
-?Alerta de paquetes con m·s de 24 horas.
-?GeneraciÛn de clientes VIP y su carnet.
-?Oficina que envÌa y recibe m·s paquetes
-?Ingresos y egresos por oficina por mes.
-?Peso promedio de los paquetes que se envÌan por oficina.
-?Mes del aÒo que se realizan m·s envÌos. ? Ruta m·s utilizada.
-?Recibo de pago de nÛmina. ? Listado de empleados con las inasistencias.
-?Listado de inasistencia indicando el horario asignado al empleado
-?Listado de paquetes con todos los cambios de estatus indicando las fechas de cambio.
-?Auditoria del sistema por fecha. ? Promedio de estancia de los paquetes por cada zona de las oficinas.
-?Sucursales de puertos y aeropuertos.
-?HistÛrico de revisiÛn de la flota indicando taller, falla y duraciÛn de la revisiÛn
-?Total de gastos generados por revisiÛn de flotas por mes y por sucursal. 
+30Listado de nomina semanal por oficina.
+31Costo de cada empleado por oficina en un periodo de tiempo. Al final del
+reporte debe mostrar el total los c√°lculos.
+32Listado de talleres por zona.
+33Listado de flota con su √∫ltima fecha de revisi√≥n y pr√≥xima fecha por oficina.
+34Contabilidad: Indicar ingresos y egresos por oficina. Por periodo de tiempo.
+35Oficinas m√°s costosas por estado y pa√≠s.
+36Listado de servicios por oficina.
+37Registro de asistencia de empleados.
+38Cambio de estatus de paquetes durante el env√≠o.
+39Env√≠o de paquetes con el medio de transporte, tomar en cuenta duraci√≥n, costos y fecha estimada de entrega.
+40Recibo de env√≠os.
+41Para los clientes VIP se otorga 10% de descuento sobre el total a pagar en el env√≠o.
+42Asignaci√≥n de roles a usuarios.
+43Asignaci√≥n de permisos a roles.
+45Inicio de sesi√≥n con la validaci√≥n de permisos.
+46Alerta de paquetes con m√°s de 24 horas.
+47Generaci√≥n de clientes VIP y su carnet.
+48Oficina que env√≠a y recibe m√°s paquetes
+49Ingresos y egresos por oficina por mes.
+50Peso promedio de los paquetes que se env√≠an por oficina.
+51Mes del a√±o que se realizan m√°s env√≠os. ? Ruta m√°s utilizada.
+52Recibo de pago de n√≥mina. ? Listado de empleados con las inasistencias.
+53Listado de inasistencia indicando el horario asignado al empleado
+54Listado de paquetes con todos los cambios de estatus indicando las fechas de cambio.
+55Auditoria del sistema por fecha. ? Promedio de estancia de los paquetes por cada zona de las oficinas.
+56Sucursales de puertos y aeropuertos.
+57Hist√≥rico de revisi√≥n de la flota indicando taller, falla y duraci√≥n de la revisi√≥n
+58Total de gastos generados por revisi√≥n de flotas por mes y por sucursal. 
