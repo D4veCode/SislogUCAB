@@ -270,12 +270,14 @@ def agregarEmpleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e,
                     num_h, fk_lugar, user, fk_emp=None, email_p=None):
     con = connect()
 
-    con.query("INSERT INTO empleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, "
+    emp = con.query("INSERT INTO empleado(p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, "
               "edo_c, profesion, num_h, fk_lugar, fk_user, fk_emp, email_p) VALUES "
-              "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)",
+              "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) returning id",
               (p_nombre, s_nombre, p_apellido, s_apellido, cedula, email_e, fecha_n, nivel_acd, edo_c,
-               profesion, num_h, fk_lugar, user, fk_emp, email_p))
+               profesion, num_h, fk_lugar, user, fk_emp, email_p)).dictresult()[0]
     con.close()
+
+    return emp 
 
 
 def getEmpleado(id):
@@ -314,6 +316,14 @@ def deleteEmpleado(id):
     con = connect()
 
     con.query("DELETE FROM empleado WHERE id=$1", (id,))
+
+    con.close()
+
+
+def empsuc(sucursal, empleado):
+    con = connect()
+    
+    con.query("insert into emp_suc (salario, fk_suc, fk_emp) values ($1, $2, $3)", (10000, sucursal, empleado))
 
     con.close()
 

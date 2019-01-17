@@ -23,6 +23,7 @@ emp_parse.add_argument('username', required=True)
 emp_parse.add_argument('password', required=True)
 emp_parse.add_argument('fk_emp')
 emp_parse.add_argument('rol')
+emp_parse.add_argument('fk_sucursal')
 
 emp_fields = {
     'id': fields.Integer,
@@ -131,10 +132,13 @@ class RegistroEmpleado(Resource):
         try:
             args = emp_parse.parse_args()
             user = database.agregarUser(args['username'], encrypt_password(args['password']), args['rol'])[0].get("id")
-            database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'],
+            
+            emp = database.agregarEmpleado(args['p_nombre'], args['s_nombre'], args['p_apellido'], args['s_apellido'],
                                      args['cedula'], args['email_e'], args['fecha_n'], args['nivel_acd'],
                                      args['edo_c'], args['profesion'], args['num_h'], args['fk_lugar'],
-                                     user, args['fk_emp'], args['email_p'])
+                                     user, args['fk_emp'], args['email_p']).get("id")
+            
+            database.empsuc(args['fk_sucursal'], emp)
 
             return {"status": "success", "message": "Employee registered."}, 201
         except Exception as e:

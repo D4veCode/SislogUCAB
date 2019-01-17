@@ -34,6 +34,6 @@ def getPrivilegios(username):
 
 
 def getSucEmp(username):
-    return database.getSucEmp(username)
+    return database.getSucEmp(username)[0]['id']
 
 
