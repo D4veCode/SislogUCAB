@@ -7,12 +7,10 @@ class Sidemenu extends Component{
     onLogout(){
       this.props.logout();
 
-      //console.log('regrese aqui');
-      //console.log(localStorage.getItem("token"));
-      if (localStorage.getItem('token')=== null){
+        console.log(this.props);
+        
         //console.log('entre al if');
         this.props.history.push('/');
-      }
     }
     render(){
         return <nav id="sidebar">
@@ -140,12 +138,9 @@ class Sidemenu extends Component{
                     Cerrar Sesion
                 </button>
               </li>
-              {/*<li className="active">
-                <a href="#regresar">
-                  <Link to="/account" onClick={e => this.onRefrescar(e)}>Regresar</Link>
-                </a>
-
-    </li>  */}
+              <li className="active">
+                  <Link to="/account">Regresar</Link>
+              </li>  
             </ul>
           </nav>;
     }

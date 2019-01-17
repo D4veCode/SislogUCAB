@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from "react-router-dom";
 
 //importando las rutas de la pagina
 import Home from './views/Home.jsx';
@@ -10,13 +10,11 @@ import CreateClienteN from './views/pages/clientes/CreateClienteN.jsx';
 import CreateClienteJ from './views/pages/clientes/CreateClienteJ.jsx';
 import Empleados from './views/pages/empleados/Empleados.jsx';
 import EmpleadoDetail from './views/pages/empleados/EmpleadoDetail.jsx';
-import CreateEmpleado from './views/pages/empleados/CreateEmpleado.jsx';
 import Usuarios from './views/pages/usuarios/Usuarios.jsx';
 import Roles from './views/pages/roles/Roles.jsx';
 import RolDetail from './views/pages/roles/RolDetail.jsx';
 import Account from './views/Account.jsx';
 import Login from './views/Login';
-import Register from "./views/Register";
 import Aviones from './views/pages/avion/Aviones.jsx';
 import AvionDetail from './views/pages/avion/AvionDetail.jsx';
 import Barcos from "./views/pages/barco/Barcos.jsx";
@@ -27,14 +25,21 @@ import Vehiculos from "./views/pages/vehiculo/Vehiculos.jsx";
 import VehiculoDetail from "./views/pages/vehiculo/VehiculoDetail.jsx";
 import SucursalDetail from "./views/pages/sucursal/SucursalDetail.jsx";
 import Paquetes from "./views/pages/paquete/Paquetes.jsx";
-
+import Perfil from "./views/pages/VistaUsuario/Perfil.jsx";
+import Tracking from "./views/pages/VistaUsuario/Tracking.jsx";
+import PerfilEmp from "./views/pages/VistaEmpleado/PerfilEmp.jsx";
+import RegistroClienteN from "./views/pages/VistaEmpleado/RegistroClienteN.jsx";
+import RegistroClienteJ from './views/pages/VistaEmpleado/RegistroClienteJ.jsx';
+import RegistroPaquete from "./views/pages/VistaEmpleado/RegistrarPaquete.jsx";
+import ClienteIndex from './views/pages/VistaUsuario/ClienteIndex.jsx';
+import EmpleadoIndex from './views/pages/VistaEmpleado/EmpleadoIndex.jsx';
+import Carnet from './views/pages/VistaEmpleado/Carnet.jsx';
 
 const BaseRouter = () =>(
     <div>
         <Route exact path="/" component={Home} />
-        <Route exact path="/cliente/login" component={Login} />
-        <Route path="/cliente/register" name="Register Page" component={Register} />
         <Route exact path="/account" component={Account} />
+        <Route path="/login" component={Login} />
         <Route path="/admin/sucursales" component={Sucursal} />
         <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />
         <Route path="/admin/clientes" component={Clientes} />
@@ -42,7 +47,6 @@ const BaseRouter = () =>(
         <Route path="/admin/clientes/registro/juridico" component={CreateClienteJ} />
         <Route path="/admin/cliente/:cliente" component={ClienteDetail} />
         <Route path="/admin/empleados" component={Empleados} />
-        <Route path="/admin/empleado/create" component={CreateEmpleado} />
         <Route path="/admin/empleado/:empleado" component={EmpleadoDetail} />
         <Route path="/admin/usuarios" component={Usuarios} />
         <Route path="/admin/roles" component={Roles} />
@@ -56,7 +60,22 @@ const BaseRouter = () =>(
         <Route path="/admin/vehiculos" component={Vehiculos} />
         <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
         <Route path="/admin/paquetes" component={Paquetes} />
+        <Switch>
+            <Route exact path="/cliente" component={ClienteIndex} />
+            <Route exact path="/cliente/perfil" component={Perfil} />
+            <Route exact path="/cliente/tracking" component={Tracking} />
+        </Switch>
+        <Switch>
+            <Route exact path="/empleado" component={EmpleadoIndex} />
+            <Route exact path="/empleado/perfil" component={PerfilEmp} />
+            <Route exact path="/empleado/paquete" component={RegistroPaquete}/>
+            <Route exact path="/empleado/registro/clienteN" component={ RegistroClienteN } />
+            <Route exact path="/empleado/registro/clienteJ" component={ RegistroClienteJ } />
+        </Switch>
+        <Route path="/generar/carnet" component={ Carnet } />
     </div>
 );
+
+
 
 export default BaseRouter;

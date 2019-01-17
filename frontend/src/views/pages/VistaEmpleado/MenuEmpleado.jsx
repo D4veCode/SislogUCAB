@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/auth.jsx";
+import * as actions from "../../../store/actions/auth.jsx";
 
 class Sidemenu extends Component {
     onLogout() {
@@ -30,10 +30,10 @@ class Sidemenu extends Component {
                     </a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <Link to="/empleado/clienteN">Registro ClientesN</Link>
+                            <Link to="/empleado/registro/clienteN">Registro ClientesN</Link>
                         </li>
                         <li>
-                            <Link to="/empleado/clienteJ">Registro ClientesJ</Link>
+                            <Link to="/empleado/registro/clienteJ">Registro ClientesJ</Link>
                         </li>
                     </ul>
                 </li>

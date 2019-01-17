@@ -110,7 +110,16 @@ export default class Empleado extends Component{
         const Fk_Lugar = parseInt(event.target.elements.Parroquias.value);
         const Fk_Emp = parseInt(event.target.elements.jefes.value);
         const Nivel_ACD = event.target.elements.Nivel_ACD.value;
-        const rol = event.target.elements.rol.value;
+        const verificar = event.target.elements.rol.value;
+        let rol;
+
+        if (verificar === 'Cajero'){
+            rol = 3;
+        } else if (verificar === 'Admin'){
+            rol = 1;
+        }else {
+            rol = 4;
+        }
 
             let datas = JSON.stringify({
                 p_nombre: PNombre,
@@ -439,7 +448,9 @@ export default class Empleado extends Component{
             return <option value={parro.id} key={`option_${parro.id}`}> {parro.nombre}</option>
         });
         var roles = this.state.roles.map(function (rol) {
-            return <option value={rol.nombre} key={`option_${rol.id}`}> {rol.nombre}</option>
+            if(rol.nombre !== 'Cliente'){
+               return <option value={rol.nombre} key={`option_${rol.id}`}> {rol.nombre}</option> 
+            }
         });
         var jefes = this.state.empleados.map(function(jefe){
             if (jefe.fk_emp !== null){

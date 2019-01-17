@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import BaseRouter from './Routes.jsx';
 import {connect} from 'react-redux';
-import * as actions from './store/actions/auth.jsx';
+//import * as actions from './store/actions/auth.jsx';
 
 class App extends Component {
   componentDidMount(){

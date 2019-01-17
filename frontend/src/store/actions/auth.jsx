@@ -25,6 +25,8 @@ export const logout = () => {
     localStorage.removeItem('username');
     localStorage.removeItem("user");
     localStorage.removeItem("rol");
+    localStorage.removeItem("privilegios");
+    localStorage.removeItem("id");
     localStorage.removeItem("token");
     localStorage.removeItem('expirationDate');
     return {
@@ -73,8 +75,12 @@ export const authLogin = (data, history) => {
             console.log(response.data);
             const user = response.data.username;
             const rol = response.data.rol;
+            const privilegios = response.data.privilegios; 
+            const id = response.data.id;
             localStorage.setItem('username', user);
-            localStorage.setItem('rol', rol );
+            localStorage.setItem('privilegios', privilegios );
+            localStorage.setItem('rol', rol);
+            localStorage.setItem('id', id);
         }).catch(error => {
             dispatch(authFail(error))
             console.log(error.response)

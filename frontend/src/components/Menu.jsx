@@ -5,7 +5,8 @@ import * as actions from "../store/actions/auth.jsx";
 
 class Menu extends Component{
 	render(){
-		console.log(this.props)
+		//console.log(this.props)
+		console.log(this.props.isAuthenticated);
         return(
           <div>
             <header id="home" className="mt-3">
@@ -20,7 +21,7 @@ class Menu extends Component{
 								<li><a href="#offer">Mision</a></li>
 								<li><a href="#about">Vision</a></li>
 								<li><a href="#price">Historia</a></li>
-								{
+								{/* {
 									this.props.isAuthenticated ? 
 											<li className="nav-item dropdown">
 												<a className="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,7 +37,8 @@ class Menu extends Component{
 											</li>
 									:
 									<li><Link to='/cliente/login'>Login</Link></li>
-								}
+								} */}
+								<li><Link to='/login'>Login</Link></li>
 							</ul>
 						</nav>	    		
 					</div>

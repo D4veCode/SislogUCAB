@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Sidemenu from "../../containers/Sidemenu.jsx";
+import MenuEmpleado from "./MenuEmpleado.jsx";
 
-export default class CreateClienteN extends Component{
+export default class RegistroClienteN extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -108,12 +108,12 @@ export default class CreateClienteN extends Component{
         });
         return (
             <div className="wrapper" keywords="clientes">
-                <Sidemenu />
+                <MenuEmpleado />
 
                 <div className="container-fluid m-0 p-0">
                 
                     <div className="m-2 w-100">
-                        <h2 className="text-center"> SisLogUCAB Registro Clientes Naturales </h2>
+                        <h2 className="text-center"> SisLogUCAB Registro Cliente Natural </h2>
 
                         <form onSubmit={event => this.handleFormSubmit(event)}>
                             <div className="form-row">

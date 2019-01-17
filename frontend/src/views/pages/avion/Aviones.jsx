@@ -13,6 +13,7 @@ export default class Aviones extends Component {
             aviones: [],
             sucursales:[],
         }
+        console.log(this.props);
     }
     componentDidMount() {
         axios.get("http://127.0.0.1:3001/api/v1/aviones", {
