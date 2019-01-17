@@ -12,6 +12,7 @@ import api.Resources.Lugar as lug
 import api.Resources.Rol as rol
 import api.Resources.Usuario as users
 import api.Resources.Paquete as paq
+import api.Resources.Reportes as rep
 
 api = Api(app, prefix='/api/v1')
 
@@ -44,3 +45,9 @@ api.add_resource(veh.ModeloList, '/modelos')
 api.add_resource(paq.PaqueteList, '/paquetes')
 api.add_resource(rol.RolLogin, '/getrol')
 api.add_resource(cli.GenerarCarnet, '/generarseq')
+api.add_resource(rep.ListadoSuc, '/reporte1')
+api.add_resource(rep.MediosTrans, '/reporte2')
+api.add_resource(rep.ListadoEmp, '/reporte3')
+api.add_resource(rep.CantEmp, '/reporte4')
+api.add_resource(rep.ListadoRutas, '/reporte5')
+api.add_resource(rep.RutaMasUsada, '/reporte6')

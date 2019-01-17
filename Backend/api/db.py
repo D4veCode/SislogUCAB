@@ -575,3 +575,80 @@ def getSecuencia():
     con.close()
 
     return seq
+
+# ---------------------- Reportes ------------------------------------
+
+def listadoSuc():
+    con = connect()
+
+    sucs = con.query("a.nombre,a.email,b.nombre as lugar,a.cap_m2 as tamaño from sucursal a, lugar b "
+                     "where a.fk_lugar = b.id").dictresult()
+    con.close()
+
+    return sucs
+
+
+def mediosTrans():
+    con = connect()
+
+    mets = con.query("select c.nombre from vehiculo a, modelo c where a.fk_mod = c.id  "
+                    "union select b.nombre from avion b union select d.nombre from barco d").dictresult()
+    
+    con.close()
+
+    return mets
+
+
+def listadoEmp():
+    con = connect()
+
+    emps = con.query("select a.cedula,a.p_nombre as nombre,a.s_apellido as apellido,a.email_p as email, "
+                    "a.fecha_n as nacimiento,b.nombre as direccion, d.nombre as \"zona de trabajo\" "
+                    "from empleado a, lugar b,departamento d,emp_dep c where a.fk_lugar = b.id and a.id = c.fk_emp and c.fk_dep = d.cod").dictresult()
+
+    con.close()
+
+    return emps
+
+
+def cantEmp():
+    con = connect()
+
+    cant_emp  = con.query("select count(*) as cant from empleado").dictresult()
+
+    con.close()
+
+    return cant_emp
+
+def listadoRutas():
+    con = connect()
+
+    rutas = con.query("select b.tipo,o.nombre as origen,d.nombre as destino,a.tiempo as \"tiempo(min)\",a.precio \"precio(bs.S)\" "
+                     "from ruta_trans a,tipo_transp b,ruta c, sucursal o, sucursal d "
+                     "where a.fk_tt = b.id and a.fk_ruta = c.id and c.fk_origen = o.cod and c.fk_destino = d.cod").dictresult()
+    con.close()
+
+    return rutas
+
+
+def rutaMasUsada():
+    con = connect()
+
+    ruta = con.query("select b.tipo as medio, count(b.tipo) as usos "
+                    "from tracking a, ruta_trans c, tipo_transp b where a.fk_rt = c.id and c.fk_tt = b.id "
+                    "group by b.tipo order by count(b.tipo) desc limit 1").dictresult()
+
+    con.close()
+
+    return ruta
+
+
+def sucursalMasRecibidos():
+    con = connect()
+
+    suc = con.query("select b.nombre, count(b.nombre) from tracking a, sucursal b " 
+                    "where a.fk_suc = b.cod group by b.nombre order by count(b.nombre) desc limit 1").dictresult()
+
+    con.close()
+
+    return suc
