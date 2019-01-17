@@ -1,0 +1,149 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 Listado de oficinas\
+\
+	 a.nombre,a.email,b.nombre as lugar,a.cap_m2 as tama\'f1o from sucursal a, lugar b where a.fk_lugar = b.id\
+\
+Listado de medios de transporte\
+\
+	select c.nombre from vehiculo a, modelo c where a.fk_mod = c.id  union select b.nombre from avion b union select d.nombre from barco d\
+\
+Listado de empleados\
+\
+	select a.cedula,a.p_nombre as nombre,a.s_apellido as apellido,a.email_p as email,a.fecha_n as nacimiento,b.nombre as direccion,d.nombre as "zona de trabajo" from empleado a, lugar b,departamento d,emp_dep c where a.fk_lugar = b.id and a.id = c.fk_emp and c.fk_dep = d.cod\
+\
+cantidad de empleados (activos y no activos)\
+\
+	select count(*) from empleado\
+\
+Listado de rutas\
+\
+select b.tipo,o.nombre as origen,d.nombre as destino,a.tiempo as "tiempo(min)",a.precio "precio(bs.S)" from ruta_trans a,tipo_transp b,ruta c, sucursal o, sucursal d where a.fk_tt = b.id and a.fk_ruta = c.id and c.fk_origen = o.cod and c.fk_destino = d.cod\
+\
+ruta mas usada\
+\
+select b.tipo as medio, count(b.tipo) as usos\
+from tracking a, ruta_trans c, tipo_transp b\
+where a.fk_rt = c.id and c.fk_tt = b.id\
+group by b.tipo\
+order by count(b.tipo) desc\
+limit 1\
+\
+sucursal con mas recibidos\
+\
+select b.nombre, count(b.nombre)\
+from tracking a, sucursal b\
+where a.fk_suc = b.cod\
+group by b.nombre\
+order by count(b.nombre) desc\
+limit 1\
+\
+sucursal que mas envia paquetes\
+\
+select b.nombre, count(b.nombre)\
+from tracking a, ruta_trans c, sucursal b, ruta d\
+where a.fk_rt = c.id and c.fk_ruta = d.id and d.fk_origen = b.cod\
+group by b.nombre\
+order by count(b.nombre) desc\
+limit 1\
+\
+mes que mas envia\
+\
+select to_char(date(fecha_s),'monthYYYY') as mes,count(to_char(date(fecha_s),'month--YYYY')) as cantidad\
+from tracking\
+group by mes order by cantidad desc\
+limit 1\
+\
+peso promedio por sucursal\
+\
+select avg(a.peso), b.nombre as sucursal\
+from paquete a, sucursal b, tracking c, ruta_trans as d, ruta as e\
+where a.id = c.fk_paq and c.fk_rt = d.id and d.fk_ruta = e.id and e.fk_origen = b.cod\
+group by 2\
+\
+clientes con mas de 5 env (frecuentes) [no lo tengo por mes]\
+\
+select a.id, a.nombre\
+from cliente a, paquete b \
+where b.fk_cliente = a.id\
+group by 1,2\
+having count(a.id) >5\
+order by 1\
+\
+paquetes por status [se muestran todos los estados del paquete]\
+\
+select p.num_g as "numero guia", e.nombre as due\'f1o,c.fecha, d.tipo\
+from paquete p ,tracking b, sta_tra c ,status d, cliente e\
+where p.id = b.fk_paq and b.id = c.fk_tracking and c.fk_status = d.id and p.fk_cliente = e.id\
+order by d.id desc ,p.id\
+\
+sucursal con mas transito de paquetes\
+\
+select b.nombre, count(b.nombre)\
+from tracking a, ruta_trans c, sucursal b, ruta d\
+where a.fk_rt = c.id and c.fk_ruta = d.id and d.fk_destino = b.cod\
+group by b.nombre\
+order by count(b.nombre) desc\
+limit 1\
+\
+usuario que mas env\'eda por sucursal [no por sucursal sino el que mas envia]\
+\
+select a.username , count(a.username)\
+from usuario a, cliente b, paquete c\
+where a.id = b.fk_user and b.id = c.fk_cliente \
+group by a.username\
+order by count(a.username) desc\
+limit 1\
+\
+listados veh\'edculos por sucursal\
+\
+select s.nombre,v.id, v.placa, m.nombre \
+from vehiculo v, sucursal s, modelo m\
+where s.cod = v.fk_sucursal and v.fk_mod = m.id\
+order by s.cod\
+\
+flota terrestre ordenada\
+\
+select l.nombre,m.nombre, v.serial_m \
+from vehiculo v,sucursal s, lugar l, modelo m\
+where v.fk_mod = m.id and v.fk_sucursal = s.cod and s.fk_lugar = l.id\
+group by 1,2,3\
+order by 3\
+\
+oficina y zona por estado\
+\
+select l.nombre, m.nombre as direccion ,s.nombre as oficina,d.nombre as zona\
+from sucursal s, departamento d, lugar l, lugar p, lugar m\
+where s.cod = d.fk_sucursal and s.fk_lugar = p.id and p.tipo = 'Prq' and p.fk_lugar = m.id and m.fk_lugar = l.id\
+union\
+select l.nombre, m.nombre as direccion ,s.nombre,d.nombre \
+from sucursal s, departamento d, lugar l, lugar m\
+where s.cod = d.fk_sucursal and s.fk_lugar = m.id and m.tipo = 'Mpo' and m.fk_lugar = l.id\
+group by 1,2,3,4\
+order by 1\
+\
+\
+registro de asistencia de empleados\
+\
+select a.dia as fecha, a.hora_e as "hora de entrada", a.hora_s as "hora de salida", e.id, e.p_nombre\
+from asistencia a, empleado e\
+where a.fk_empleado = e.id\
+order by 1 desc,2 desc,3 desc, 4\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
