@@ -40,7 +40,7 @@ class CantEmp():
     @jwt_required
     def get(self):
         try:
-            cant_emp = database.cantEmp()
+            cant_emp = database.cantEmp() # cantidad de empleados
             return {'status': 'success', 'reporte4': cant_emp}, 200
         
         except Exception as e:
