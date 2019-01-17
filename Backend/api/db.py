@@ -591,8 +591,9 @@ def listadoSuc():
 def mediosTrans():
     con = connect()
 
-    mets = con.query("select c.nombre from vehiculo a, modelo c where a.fk_mod = c.id  "
-                    "union select b.nombre from avion b union select d.nombre from barco d").dictresult()
+    mets = con.query("select c.nombre || ' -- Vehiculo' as nombre from vehiculo a, modelo c where a.fk_mod = c.id  "
+                    "union select b.nombre || ' -- Avion' as nombre from avion b "
+                    "union select d.nombre || ' -- Barco' as nombre from barco d").dictresult()
     
     con.close()
 
