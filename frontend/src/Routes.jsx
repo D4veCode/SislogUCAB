@@ -50,6 +50,11 @@ import Reporte12 from "./views/pages/reportes/Reporte12.jsx";
 import Reporte13 from "./views/pages/reportes/Reporte13.jsx";
 import Reporte14 from "./views/pages/reportes/Reporte14.jsx";
 import Reporte15 from "./views/pages/reportes/Reporte15.jsx";
+import Reporte16 from "./views/pages/reportes/Reporte16.jsx";
+import Reporte17 from "./views/pages/reportes/Reporte17.jsx";
+import Reporte18 from "./views/pages/reportes/Reporte18.jsx";
+import Reporte19 from "./views/pages/reportes/Reporte19.jsx";
+import Reporte20 from "./views/pages/reportes/Reporte20.jsx";
 
 const BaseRouter = () =>(
     <div>
@@ -80,6 +85,11 @@ const BaseRouter = () =>(
             <Route exact path="/admin/reportetrece" component={Reporte13} />
             <Route exact path="/admin/reportecatorce" component={Reporte14} />
             <Route exact path="/admin/reportequince" component={Reporte15} />
+            <Route exact path="/admin/reportedieciseis" component={Reporte16} />
+            <Route exact path="/admin/reportediecisiete" component={Reporte17} />
+            <Route exact path="/admin/reportedieciocho" component={Reporte18} />
+            <Route exact path="/admin/reportediecinueve" component={Reporte19} />
+            <Route exact path="/admin/reporteveinte" component={Reporte20} />
             <Route exact path="/admin/aviones" component={Aviones} />
             <Route exact path="/admin/barcos" component={Barcos} />
             <Route exact path="/admin/rutas" component={Rutas} />

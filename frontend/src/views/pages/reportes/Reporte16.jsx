@@ -9,28 +9,28 @@ export default class Account extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            reporte10: [],
+            reporte16: [],
 
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:3001/api/v1/reporte10",
+        axios.get("http://localhost:3001/api/v1/reporte16",
             {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('token'),
                     "Content-Type": "application/json"
                 }
             }).then(response => {
-                this.setState({ reporte10: response.data.reporte10 });
-                console.log(this.state.reporte10);
+                this.setState({ reporte16: response.data.reporte16 });
+                console.log(this.state.reporte16);
             });
 
     }
     render() {
         const columns = [
             {
-                Header: 'Peso',
-                accessor: 'peso',
+                Header: 'Aeropuerto o Puerto ',
+                accessor: 'nombre',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -39,13 +39,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 750,
-                maxWidth: 750,
-                minWidth: 750,
+                width: 430,
+                maxWidth: 430,
+                minWidth: 430,
             },
             {
                 Header: 'Nombre Sucursal',
-                accessor: 'sucursal',
+                accessor: 'nombre_sucursal',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -54,9 +54,24 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 750,
-                maxWidth: 750,
-                minWidth: 750,
+                width: 430,
+                maxWidth: 430,
+                minWidth: 430,
+            },
+            {
+                Header: 'Ubicacion',
+                accessor: 'direccion',
+                sortable: false,
+                style: {
+                    textAlign: "center"
+                },
+                headerStyle: {
+                    background: "black",
+                    color: 'white',
+                },
+                width: 430,
+                maxWidth: 430,
+                minWidth: 430,
             }]
         return (
             <div className="wrapper">
@@ -65,11 +80,11 @@ export default class Account extends Component {
                 <div className="container-fluid m-0 p-0">
                     <div className="m-3 w-100">
 
-                        <h2 className="text-center m-5"> Reporte 10: Peso Promedio de los Paquetes por Sucursal</h2>
+                        <h2 className="text-center m-5"> Reporte 16: Sucursales que son Puerto o Aereopuerto </h2>
 
                         <ReactTable className="mr-4"
                             columns={columns}
-                            data={this.state.reporte10}
+                            data={this.state.reporte16}
                             defaultPageSize={10}
                             filterable={false}
                             noDataText="No Posee Registro Alguno!"
