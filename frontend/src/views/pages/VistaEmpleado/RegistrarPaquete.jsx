@@ -101,7 +101,7 @@ export default class Paquetes extends Component {
             console.log(error.response);
         });
 
-        if (this.state.carnet >= 5){
+        if (this.state.carnet === 5){
             //console.log('entre');
             //console.log(this.props);
             localStorage.setItem('cliente', Fk_Cliente);

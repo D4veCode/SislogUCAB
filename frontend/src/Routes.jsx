@@ -55,6 +55,17 @@ import Reporte17 from "./views/pages/reportes/Reporte17.jsx";
 import Reporte18 from "./views/pages/reportes/Reporte18.jsx";
 import Reporte19 from "./views/pages/reportes/Reporte19.jsx";
 import Reporte20 from "./views/pages/reportes/Reporte20.jsx";
+import Reporte21 from "./views/pages/reportes/Reporte21.jsx";
+import Reporte22 from "./views/pages/reportes/Reporte22.jsx";
+import Reporte23 from "./views/pages/reportes/Reporte23.jsx";
+import Reporte24 from "./views/pages/reportes/Reporte24.jsx";
+import Reporte25 from "./views/pages/reportes/Reporte25.jsx";
+import Reporte26 from "./views/pages/reportes/Reporte26.jsx";
+import Reporte27 from "./views/pages/reportes/Reporte27.jsx";
+import Reporte28 from "./views/pages/reportes/Reporte28.jsx";
+import Reporte29 from "./views/pages/reportes/Reporte29.jsx";
+import Reporte30 from "./views/pages/reportes/Reporte30.jsx";
+
 
 const BaseRouter = () =>(
     <div>
@@ -90,6 +101,16 @@ const BaseRouter = () =>(
             <Route exact path="/admin/reportedieciocho" component={Reporte18} />
             <Route exact path="/admin/reportediecinueve" component={Reporte19} />
             <Route exact path="/admin/reporteveinte" component={Reporte20} />
+            <Route exact path="/admin/reporteveintiuno" component={Reporte21} />
+            <Route exact path="/admin/reporteveintidos" component={Reporte22} />
+            <Route exact path="/admin/reporteveintitres" component={Reporte23} />
+            <Route exact path="/admin/reporteveinticuatro" component={Reporte24} />
+            <Route exact path="/admin/reporteveinticinco" component={Reporte25} />
+            <Route exact path="/admin/reporteveintiseis" component={Reporte26} />
+            <Route exact path="/admin/reporteveintisiete" component={Reporte27} />
+            <Route exact path="/admin/reporteveintiocho" component={Reporte28} />
+            <Route exact path="/admin/reporteveintinueve" component={Reporte29} />
+            <Route exact path="/admin/reportetreinta" component={Reporte30} />
             <Route exact path="/admin/aviones" component={Aviones} />
             <Route exact path="/admin/barcos" component={Barcos} />
             <Route exact path="/admin/rutas" component={Rutas} />
