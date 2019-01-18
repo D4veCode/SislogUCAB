@@ -448,8 +448,8 @@ def deleteAvion(id):
 
 def getBarcos():
     con = connect()
-    barcos = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
-                       "(select nombre from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
+    barcos = con.query("SELECT b.id, b.nombre, b.descripcion, b.vmax, b.long, "
+                       "(select nombre as fk_sucursal from sucursal where b.fk_sucursal=cod)FROM barco as b").dictresult()
     con.close()
     return barcos
 
@@ -463,7 +463,7 @@ def agregarBarco(nombre, descripcion, vmax, long, fk_sucursal):
 
 def getBarco(id):
     con = connect()
-    barco = con.query("SELECT b.id, b.nombre, b.descripcion, b.peso, b.cap_c, b.vmax, b.long, "
+    barco = con.query("SELECT b.id, b.nombre, b.descripcion, b.vmax, b.long, "
                       "(select nombre from sucursal where b.fk_sucursal=cod) FROM barco as b where id=$1",
                       (id,)).dictresult()
     con.close()
@@ -488,8 +488,8 @@ def deleteBarco(id):
 def getVehiculos():
     con = connect()
     vehs = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
-                     "(select nombre from modelo where v.fk_mod=id), "
-                     "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v").dictresult()
+                     "(select nombre modelo from modelo where v.fk_mod=id limit 1), "
+                     "(select nombre fk_sucursal from sucursal where v.fk_sucursal=id limit 1) FROM vehiculo as v").dictresult()
     con.close()
     return vehs
 
@@ -515,8 +515,8 @@ def updateVehiculo(id, placa, cap_c, peso, descripcion, color, fecha_v, serial_m
 def getVehiculo(id):
     con = connect()
     veh = con.query("SELECT v.id, v.placa, v.peso, v.cap_c, v.descripcion, v.color, v.fecha_v, v.serial_m, v.serial_c, "
-                    "(select nombre from modelo where v.fk_mod=id), "
-                    "(select nombre from sucursal where v.fk_sucursal=id) FROM vehiculo as v where id=$1",
+                    "(select nombre modelo from modelo where v.fk_mod=id limit 1), "
+                    "(select nombre fk_sucursal from sucursal where v.fk_sucursal=id limit 1) FROM vehiculo as v where id=$1",
                     (id,)).dictresult()
     con.close()
     return veh
@@ -603,7 +603,7 @@ def mediosTrans():
 def listadoEmp():
     con = connect()
 
-    emps = con.query("select a.cedula,a.p_nombre as nombre,a.s_apellido as apellido,a.email_p as email, "
+    emps = con.query("select a.cedula, a.p_nombre as nombre , a.s_apellido as apellido, a.email_p as email, "
                     "a.fecha_n as nacimiento,b.nombre as direccion, d.nombre as \"zona de trabajo\" "
                     "from empleado a, lugar b,departamento d,emp_dep c where a.fk_lugar = b.id and a.id = c.fk_emp and c.fk_dep = d.cod").dictresult()
 
@@ -624,7 +624,7 @@ def cantEmp():
 def listadoRutas():
     con = connect()
 
-    rutas = con.query("select b.tipo,o.nombre as origen,d.nombre as destino,a.tiempo as \"tiempo(min)\",a.precio \"precio(bs.S)\" "
+    rutas = con.query("select b.tipo,o.nombre as origen,d.nombre as destino,a.tiempo as \"tiempo(min)\",a.precio \"precio\" "
                      "from ruta_trans a,tipo_transp b,ruta c, sucursal o, sucursal d "
                      "where a.fk_tt = b.id and a.fk_ruta = c.id and c.fk_origen = o.cod and c.fk_destino = d.cod").dictresult()
     con.close()
@@ -632,7 +632,7 @@ def listadoRutas():
     return rutas
 
 
-def rutaMasUsada():
+def medioMasUsado():
     con = connect()
 
     ruta = con.query("select b.tipo as medio, count(b.tipo) as usos "
@@ -647,9 +647,166 @@ def rutaMasUsada():
 def sucursalMasRecibidos():
     con = connect()
 
-    suc = con.query("select b.nombre, count(b.nombre) from tracking a, sucursal b " 
-                    "where a.fk_suc = b.cod group by b.nombre order by count(b.nombre) desc limit 1").dictresult()
+    suc = con.query("select b.nombre, count(b.nombre) as veces from tracking a, sucursal b " 
+                    "where a.fk_suc = b.cod group by b.nombre order by veces desc limit 1").dictresult()
 
     con.close()
 
     return suc
+
+def sucursalMasEnviados():
+    con = connect()
+
+    suc = con.query("select b.nombre, count(b.nombre) as veces"
+                    "from tracking a, ruta_trans c, sucursal b, ruta d where a.fk_rt = c.id and c.fk_ruta = d.id and d.fk_origen = b.cod "
+                    "group by b.nombre order by veces desc limit 1").dictresult()
+    con.close()
+
+    return suc
+
+
+def mesMasEnvia():
+    con = connect()
+
+    mes = con.query("select to_char(date(fecha_s),'monthYYYY') as mes,count(to_char(date(fecha_s),'month--YYYY')) as cantidad "
+                    "from tracking group by mes order by cantidad desc limit 1").dictresult()
+
+    con.close()
+
+    return mes
+
+
+def pesoPromedio():
+    con = connect()
+
+    peso = con.query("select avg(a.peso) as peso, b.nombre as sucursal from paquete a, sucursal b, tracking c, ruta_trans as d, ruta as e "
+                    "where a.id = c.fk_paq and c.fk_rt = d.id and d.fk_ruta = e.id and e.fk_origen = b.cod group by 2").dictresult()
+
+    con.close()
+    
+    return peso
+
+
+def sucursalMasTransPaquetes():
+    con = connect()
+
+    suc = con.query("select b.nombre, count(b.nombre) as veces from tracking a, ruta_trans c, sucursal b, ruta d "
+                    "where a.fk_rt = c.id and c.fk_ruta = d.id and d.fk_destino = b.cod "
+                    "group by b.nombre order by count(b.nombre) desc limit 1").dictresult()
+
+    con.close()
+
+    return suc
+
+
+def listadoVehiculosSuc():
+    con = connect()
+
+    vehs = con.query("select s.nombre,v.id, v.placa, m.nombre as modelo from vehiculo v, sucursal s, modelo m "
+                    "where s.cod = v.fk_sucursal and v.fk_mod = m.id order by s.cod").dictresult()
+
+    con.close()
+
+    return vehs
+
+def flotaTerrestre():
+    con = connect()
+
+    flota = con.query("select l.nombre,m.nombre as modelo, v.serial_m from vehiculo v,sucursal s, lugar l, modelo m "
+                    "where v.fk_mod = m.id and v.fk_sucursal = s.cod and s.fk_lugar = l.id group by 1,2,3 order by 3").dictresult()
+
+    con.close()
+
+    return flota 
+
+
+def sucporestado():
+    con = connect()
+
+    sucs = con.query("select l.nombre, m.nombre as direccion ,s.nombre as oficina,d.nombre as zona "
+                    "from sucursal s, departamento d, lugar l, lugar p, lugar m "
+                    "where s.cod = d.fk_sucursal and s.fk_lugar = p.id and p.tipo = 'Prq' and "
+                    "p.fk_lugar = m.id and m.fk_lugar = l.id union select l.nombre, m.nombre as direccion ,s.nombre as oficina ,d.nombre as zona "
+                    "from sucursal s, departamento d, lugar l, lugar m "
+                    "where s.cod = d.fk_sucursal and s.fk_lugar = m.id and m.tipo = 'Mpo' and "
+                    "m.fk_lugar = l.id group by 1,2,3,4 order by 1").dictresult()
+
+    con.close()
+
+    return sucs
+
+
+def asistencia():
+    con = connect()
+
+    asis = con.query("select a.dia as fecha, a.hora_e as \"hora de entrada\", a.hora_s as \"hora de salida\", e.id as idempleado, e.p_nombre as nombreempleado "
+                    "from asistencia a, empleado e where a.fk_empleado = e.id order by 1 desc,2 desc,3 desc, 4").dictresult()
+
+    con.close()
+
+    return asis
+
+
+def sucpuertoaero():
+    con = connect()
+
+    sucs = con.query("select a.nombre, s.nombre as nombre_sucursal, l.nombre as direccion from aeropuerto a, sucursal s,lugar l "
+                    "where s.cod = a.fk_sucursal and s.fk_lugar = l.id union "
+                    "select p.nombre, s.nombre as nombre_sucursal, l.nombre  from puerto p, sucursal s, lugar l "
+                    "where s.cod = p.fk_sucursal and s.fk_lugar = l.id").dictresult()
+
+    con.close()
+
+    return sucs 
+
+
+def sucmasusada():
+    con = connect()
+
+    suc = con.query("select o.nombre as Suc_Origen, d.nombre as Suc_Destino, b.tipo,count(t.fk_rt) from tracking t, ruta_trans a, ruta r, tipo_transp b, sucursal o, sucursal d "
+                    "where t.fk_rt = a.id and a.fk_ruta = r.id and r.fk_origen = o.cod and r.fk_destino = d.cod and a.fk_tt = b.id "
+                    "group by 1,2,3 order by 4 desc limit 1").dictresult()
+
+    con.close()
+
+    return suc 
+
+
+def tallerporzona():
+    con = connect()
+
+    tall = con.query("select l.nombre, m.nombre as direccion ,s.nombre as nombre_taller from taller s, departamento d, lugar l, lugar p, lugar m "
+                    "where s.id = d.fk_sucursal and s.fk_lugar = p.id and p.tipo = 'Prq' and p.fk_lugar = m.id and m.fk_lugar = l.id "
+                    "union select l.nombre, m.nombre as direccion ,s.nombre as nombre_taller from taller s, departamento d, lugar l, lugar m "
+                    "where s.id = d.fk_sucursal and s.fk_lugar = m.id and m.tipo = 'Mpo' and m.fk_lugar = l.id "
+                    "group by 1,2,3 order by 1").dictresult()
+
+    con.close()
+
+    return tall
+
+
+def listadoacciones():
+    con = connect()
+
+    acciones = con.query("select u.username, r.nombre as nombre_rol, a.fecha as fecha_accion, p.tipo as tipo_priv "
+                        "from accion a, usuario u, privilegio p, rol r "
+                        "where a.fk_user = u.id and a.fk_privilegio = p.id and u.fk_rol = r.id order by 1,3").dictresult()
+
+    con.close()
+
+    return acciones
+
+
+def listadoempporzonahorario():
+    con = connect()
+
+    list_emp = con.query("select s.nombre as sucursal, e.p_nombre as nombre,e.p_apellido as apellido, d.nombre as zona, c.nombre as dia, "
+                        "b.hora_E as \"hora de entrada\",b.hora_S as \"hora de salida\" "
+                        "from empleado e, emp_dep a, departamento d, horario h, hora b, dia c, sucursal s "
+                        "where e.id = a.fk_emp and d.cod = a.fk_dep and h.fk_emp = e.id and h.fk_dia = c.id and "
+                        "h.fk_hor = b.id and d.fk_sucursal = s.cod group by 1,2,3,4,5,6,7 order by 1,2").dictresult()
+
+    con.close()
+
+    return list_emp
