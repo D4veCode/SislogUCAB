@@ -9,28 +9,28 @@ export default class Account extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            reporte5: [],
+            reporte14:[],
 
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:3001/api/v1/reporte5",
+        axios.get("http://localhost:3001/api/v1/reporte14",
             {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('token'),
                     "Content-Type": "application/json"
                 }
             }).then(response => {
-                this.setState({ reporte5: response.data.reporte5 });
-                console.log(this.state.reporte5);
+                this.setState({ reporte14: response.data.reporte14 });
+                console.log(this.state.reporte14);
             });
 
     }
     render() {
         const columns = [
             {
-                Header: 'Tipo',
-                accessor: 'tipo',
+                Header: 'Nombre Sucursal',
+                accessor: 'nombre',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -39,13 +39,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 325,
+                maxWidth: 325,
+                minWidth: 325,
             },
             {
-                Header: 'Origen',
-                accessor: 'origen',
+                Header: 'Ubicacion',
+                accessor: 'direccion',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -54,13 +54,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 325,
+                maxWidth: 325,
+                minWidth: 325,
             },
             {
-                Header: 'Destino',
-                accessor: 'destino',
+                Header: 'Oficina',
+                accessor: 'oficina',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -69,13 +69,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 325,
+                maxWidth: 325,
+                minWidth: 325,
             },
             {
-                Header: 'Tiempo en Minutos',
-                accessor: 'tiempo(min)',
+                Header: 'Zona',
+                accessor: 'zona',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -84,24 +84,9 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
-            },
-            {
-                Header: 'Precio Bs.S',
-                accessor: 'precio',
-                sortable: false,
-                style: {
-                    textAlign: "center"
-                },
-                headerStyle: {
-                    background: "black",
-                    color: 'white',
-                },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 325,
+                maxWidth: 325,
+                minWidth: 325,
             }]
         return (
             <div className="wrapper">
@@ -110,11 +95,11 @@ export default class Account extends Component {
                 <div className="container-fluid m-0 p-0">
                     <div className="m-3 w-100">
 
-                        <h2 className="text-center m-5"> Reporte 5: Listado de Rutas</h2>
+                        <h2 className="text-center m-5"> Reporte 14: Sucursales por Estado</h2>
 
                         <ReactTable className="mr-4"
                             columns={columns}
-                            data={this.state.reporte5}
+                            data={this.state.reporte14}
                             defaultPageSize={10}
                             filterable={false}
                             noDataText="No Posee Registro Alguno!"

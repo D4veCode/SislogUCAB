@@ -41,6 +41,15 @@ import Reporte3 from "./views/pages/reportes/Reporte3.jsx";
 import Reporte4 from "./views/pages/reportes/Reporte4.jsx";
 import Reporte5 from "./views/pages/reportes/Reporte5.jsx";
 import Reporte6 from "./views/pages/reportes/Reporte6.jsx";
+import Reporte7 from "./views/pages/reportes/Reporte7.jsx";
+import Reporte8 from "./views/pages/reportes/Reporte8.jsx";
+import Reporte9 from "./views/pages/reportes/Reporte9.jsx";
+import Reporte10 from "./views/pages/reportes/Reporte10.jsx";
+import Reporte11 from "./views/pages/reportes/Reporte11.jsx";
+import Reporte12 from "./views/pages/reportes/Reporte12.jsx";
+import Reporte13 from "./views/pages/reportes/Reporte13.jsx";
+import Reporte14 from "./views/pages/reportes/Reporte14.jsx";
+import Reporte15 from "./views/pages/reportes/Reporte15.jsx";
 
 const BaseRouter = () =>(
     <div>
@@ -62,6 +71,15 @@ const BaseRouter = () =>(
             <Route exact path="/admin/reportecuatro" component={Reporte4} />
             <Route exact path="/admin/reportecinco" component={Reporte5} />
             <Route exact path="/admin/reporteseis" component={Reporte6} />
+            <Route exact path="/admin/reportesiete" component={Reporte7} />
+            <Route exact path="/admin/reporteocho" component={Reporte8} />
+            <Route exact path="/admin/reportenueve" component={Reporte9} />
+            <Route exact path="/admin/reportediez" component={Reporte10} />
+            <Route exact path="/admin/reporteonce" component={Reporte11} />
+            <Route exact path="/admin/reportedoce" component={Reporte12} />
+            <Route exact path="/admin/reportetrece" component={Reporte13} />
+            <Route exact path="/admin/reportecatorce" component={Reporte14} />
+            <Route exact path="/admin/reportequince" component={Reporte15} />
             <Route exact path="/admin/aviones" component={Aviones} />
             <Route exact path="/admin/barcos" component={Barcos} />
             <Route exact path="/admin/rutas" component={Rutas} />

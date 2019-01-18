@@ -44,6 +44,33 @@ class Sidemenu extends Component {
                 <li className="active">
                     <Link to="/admin/reporteseis">Reporte 6</Link>
                 </li>
+                <li className="active">
+                    <Link to="/admin/reportesiete">Reporte 7</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reporteocho">Reporte 8</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportenueve">Reporte 9</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportediez">Reporte 10</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reporteonce">Reporte 11</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportedoce">Reporte 12</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportetrece">Reporte 13</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportecatorce">Reporte 14</Link>
+                </li>
+                <li className="active">
+                    <Link to="/admin/reportequince">Reporte 15</Link>
+                </li>
                
                 <li className="active">
                     <Link to="/admin" onClick={e => this.onRefrescar(e)}>Regresar</Link>

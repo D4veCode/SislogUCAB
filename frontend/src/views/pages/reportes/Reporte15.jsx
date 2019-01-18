@@ -9,28 +9,28 @@ export default class Account extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            reporte5: [],
+            reporte15: [],
 
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:3001/api/v1/reporte5",
+        axios.get("http://localhost:3001/api/v1/reporte15",
             {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('token'),
                     "Content-Type": "application/json"
                 }
             }).then(response => {
-                this.setState({ reporte5: response.data.reporte5 });
-                console.log(this.state.reporte5);
+                this.setState({ reporte15: response.data.reporte15 });
+                console.log(this.state.reporte15);
             });
 
     }
     render() {
         const columns = [
             {
-                Header: 'Tipo',
-                accessor: 'tipo',
+                Header: 'Id Empleado',
+                accessor: 'idempleado',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -39,13 +39,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 260,
+                maxWidth: 260,
+                minWidth: 260,
             },
             {
-                Header: 'Origen',
-                accessor: 'origen',
+                Header: 'Nombre Empleado',
+                accessor: 'nombreempleado',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -54,13 +54,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 260,
+                maxWidth: 260,
+                minWidth: 260,
             },
             {
-                Header: 'Destino',
-                accessor: 'destino',
+                Header: 'Fecha',
+                accessor: 'fecha',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -69,13 +69,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 260,
+                maxWidth: 260,
+                minWidth: 260,
             },
             {
-                Header: 'Tiempo en Minutos',
-                accessor: 'tiempo(min)',
+                Header: 'Hora de Entrada',
+                accessor: 'hora de entrada',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -84,13 +84,13 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 260,
+                maxWidth: 260,
+                minWidth: 260,
             },
             {
-                Header: 'Precio Bs.S',
-                accessor: 'precio',
+                Header: 'Hora de Salida',
+                accessor: 'hora de salida',
                 sortable: false,
                 style: {
                     textAlign: "center"
@@ -99,9 +99,9 @@ export default class Account extends Component {
                     background: "black",
                     color: 'white',
                 },
-                width: 150,
-                maxWidth: 150,
-                minWidth: 150,
+                width: 260,
+                maxWidth: 260,
+                minWidth: 260,
             }]
         return (
             <div className="wrapper">
@@ -110,11 +110,11 @@ export default class Account extends Component {
                 <div className="container-fluid m-0 p-0">
                     <div className="m-3 w-100">
 
-                        <h2 className="text-center m-5"> Reporte 5: Listado de Rutas</h2>
+                        <h2 className="text-center m-5"> Reporte 15: Asistencia de Empleados</h2>
 
                         <ReactTable className="mr-4"
                             columns={columns}
-                            data={this.state.reporte5}
+                            data={this.state.reporte15}
                             defaultPageSize={10}
                             filterable={false}
                             noDataText="No Posee Registro Alguno!"
