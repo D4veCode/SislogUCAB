@@ -28,6 +28,7 @@ export const logout = () => {
     localStorage.removeItem("privilegios");
     localStorage.removeItem("id");
     localStorage.removeItem("token");
+    localStorage.removeItem("sucursal");
     localStorage.removeItem('expirationDate');
     return {
         type: actionTypes.AUTH_LOGOUT
@@ -77,10 +78,12 @@ export const authLogin = (data, history) => {
             const rol = response.data.rol;
             const privilegios = response.data.privilegios; 
             const id = response.data.id;
+            const sucursal = response.data.sucursal
             localStorage.setItem('username', user);
             localStorage.setItem('privilegios', privilegios );
             localStorage.setItem('rol', rol);
             localStorage.setItem('id', id);
+            localStorage.setItem('sucursal', sucursal);
         }).catch(error => {
             dispatch(authFail(error))
             console.log(error.response)
@@ -89,7 +92,7 @@ export const authLogin = (data, history) => {
         switch (localStorage.getItem('rol')){
             case 'Admin':
                 //console.log('entrando por admin');
-                history.push("/account"); 
+                history.push("/admin"); 
                 break;
             case 'Cliente':
                 //console.log('entrando por cliente');

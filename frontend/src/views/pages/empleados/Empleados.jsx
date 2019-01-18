@@ -15,12 +15,12 @@ export default class Empleado extends Component{
             municipios: [],
             parroquias: [],
             jefe:[],
-            roles:[]
+            roles:[],
+            sucursales:[]
         } 
     }
     componentDidMount(){
-        axios
-          .get("http://127.0.0.1:3001/api/v1/empleados", {
+        axios.get("http://127.0.0.1:3001/api/v1/empleados", {
             headers: {
               Authorization:
                 "Bearer " + localStorage.getItem('token'),
@@ -59,7 +59,22 @@ export default class Empleado extends Component{
             //console.log(this.state.estados)
         }).catch(function (error) {
             console.log(error.response);
-        });   
+        });  
+        
+        axios.get("http://127.0.0.1:3001/api/v1/sucursales", {
+            headers: {
+                Authorization:
+                    "Bearer " + localStorage.getItem('token'),
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                this.setState({ sucursales: response.data.sucursales });
+                //console.log(this.state.sucursales);
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
     }
 
     onGetMunicipios() {
@@ -111,6 +126,7 @@ export default class Empleado extends Component{
         const Fk_Emp = parseInt(event.target.elements.jefes.value);
         const Nivel_ACD = event.target.elements.Nivel_ACD.value;
         const verificar = event.target.elements.rol.value;
+        const Fk_Sucursal = parseInt(event.target.elements.sucursal.value);
         let rol;
 
         if (verificar === 'Cajero'){
@@ -138,7 +154,8 @@ export default class Empleado extends Component{
                 fk_emp: Fk_Emp,
                 username: Username,
                 password: Password,
-                rol: rol
+                rol: rol,
+                fk_sucursal: Fk_Sucursal
             });
 
             console.log(datas);
@@ -457,6 +474,9 @@ export default class Empleado extends Component{
                 return <option value={jefe.fk_emp} key={jefe.id}> {jefe.fk_emp} </option>
             }
         })
+        var sucursales = this.state.sucursales.map(function (av) {
+            return <option value={av.cod} key={av.cod}> {av.nombre} </option>
+        })
         return (
             <div className="wrapper" keywords="clientes">
                 <Sidemenu/>
@@ -521,19 +541,26 @@ export default class Empleado extends Component{
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Email_E">
                                         Email Empresarial
                                         </label>
                                         <input type="email" name="Email_E" className="form-control" />
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
+                                        <label htmlFor="sucursal">Sucursal</label>
+                                        <select className="form-control" name="sucursal">
+                                            <option >Choose...</option>
+                                            {sucursales}
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Fecha_N">
                                         Fecha Nacimiento
                                         </label>
                                         <input type="date" name="Fecha_N" className="form-control" />
                                     </div>
-                                    <div className="form-group col-md-4">
+                                    <div className="form-group col-md-3">
                                         <label htmlFor="Edo_C">Estado Civil</label>
                                         <select  className="form-control" name="Edo_C">
                                         <option >Choose...</option>

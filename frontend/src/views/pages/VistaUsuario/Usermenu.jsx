@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/auth.jsx";
 
 class Usermenu extends Component {
+    onRefrescar(e) {
+        window.location.reload();
+    }
     onLogout() {
         this.props.logout();
 
@@ -25,6 +28,10 @@ class Usermenu extends Component {
             <ul className="list-unstyled components">
                 <li className="active"> <Link to="/cliente/perfil"> Perfil </Link></li>
                 <li className="active"> <Link to="/tracking"> Tracking </Link></li>
+                <li className="active">
+                    <Link to="/cliente" onClick={e => this.onRefrescar(e)}>Regresar</Link>
+                </li>
+                <br />
                 <li className="active">
                     <button onClick={e => this.onLogout(e)}>
                         Cerrar Sesion

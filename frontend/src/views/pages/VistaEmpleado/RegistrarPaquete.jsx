@@ -102,8 +102,9 @@ export default class Paquetes extends Component {
         });
 
         if (this.state.carnet >= 5){
-            console.log('entre');
-            console.log(this.props);
+            //console.log('entre');
+            //console.log(this.props);
+            localStorage.setItem('cliente', Fk_Cliente);
             this.props.history.push('/generar/carnet');
         
         }

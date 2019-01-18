@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/auth.jsx";
 
 class Sidemenu extends Component {
+    onRefrescar(e) {
+        window.location.reload();
+    }
     onLogout() {
         this.props.logout();
 
@@ -47,6 +50,10 @@ class Sidemenu extends Component {
                     </li>
                     </ul>
                 </li>
+                <li className="active">
+                    <Link to="/empleado" onClick={e => this.onRefrescar(e)}>Regresar</Link>
+                </li>
+                <br />
                 <li className="active">
                     <button onClick={e => this.onLogout(e)}>
                     Cerrar Sesion

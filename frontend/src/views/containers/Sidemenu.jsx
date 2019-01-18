@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth.jsx";
 
 class Sidemenu extends Component{
+    onRefrescar(e) {
+      window.location.reload();
+    }
     onLogout(){
       this.props.logout();
 
-        console.log(this.props);
+        //console.log(this.props);
         
         //console.log('entre al if');
         this.props.history.push('/');
@@ -131,6 +134,12 @@ class Sidemenu extends Component{
                   </li>
                 </ul>
               </li>
+              <li className="active">
+                <Link to="/admin/reportes"> Reportes </Link>
+              </li>  
+              <li className="active">
+                <Link to="/admin" onClick={e => this.onRefrescar(e)}>Regresar</Link>
+              </li>  
               <br/>
 
               <li className="active">
@@ -138,9 +147,7 @@ class Sidemenu extends Component{
                     Cerrar Sesion
                 </button>
               </li>
-              <li className="active">
-                  <Link to="/account">Regresar</Link>
-              </li>  
+             
             </ul>
           </nav>;
     }

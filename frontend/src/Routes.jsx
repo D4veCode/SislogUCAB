@@ -34,32 +34,48 @@ import RegistroPaquete from "./views/pages/VistaEmpleado/RegistrarPaquete.jsx";
 import ClienteIndex from './views/pages/VistaUsuario/ClienteIndex.jsx';
 import EmpleadoIndex from './views/pages/VistaEmpleado/EmpleadoIndex.jsx';
 import Carnet from './views/pages/VistaEmpleado/Carnet.jsx';
+import Reportes from "./views/pages/reportes/Reportes.jsx";
+import Reporte1 from './views/pages/reportes/Reporte1.jsx';
+import Reporte2 from "./views/pages/reportes/Reporte2.jsx";
+import Reporte3 from "./views/pages/reportes/Reporte3.jsx";
+import Reporte4 from "./views/pages/reportes/Reporte4.jsx";
+import Reporte5 from "./views/pages/reportes/Reporte5.jsx";
+import Reporte6 from "./views/pages/reportes/Reporte6.jsx";
 
 const BaseRouter = () =>(
     <div>
         <Route exact path="/" component={Home} />
-        <Route exact path="/account" component={Account} />
         <Route path="/login" component={Login} />
-        <Route path="/admin/sucursales" component={Sucursal} />
-        <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />
-        <Route path="/admin/clientes" component={Clientes} />
-        <Route path="/admin/clientes/registro/natural" component={CreateClienteN} />
-        <Route path="/admin/clientes/registro/juridico" component={CreateClienteJ} />
-        <Route path="/admin/cliente/:cliente" component={ClienteDetail} />
-        <Route path="/admin/empleados" component={Empleados} />
-        <Route path="/admin/empleado/:empleado" component={EmpleadoDetail} />
-        <Route path="/admin/usuarios" component={Usuarios} />
-        <Route path="/admin/roles" component={Roles} />
-        <Route path="/admin/rol/:rol" component={RolDetail} />
-        <Route path="/admin/aviones" component={Aviones} />
-        <Route path="/admin/avion/:avion" component={AvionDetail} />
-        <Route path="/admin/barcos" component={Barcos} />
-        <Route path="/admin/barco/:barco" component={BarcoDetail} />
-        <Route path="/admin/rutas" component={Rutas} />
-        <Route path="/admin/ruta/:ruta" component={RutaDetail} />
-        <Route path="/admin/vehiculos" component={Vehiculos} />
-        <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
-        <Route path="/admin/paquetes" component={Paquetes} />
+        <Switch>
+            <Route exact path="/admin" component={Account} />
+            <Route exact path="/admin/sucursales" component={Sucursal} />
+            <Route exact path="/admin/clientes" component={Clientes} />
+            <Route exact path="/admin/clientes/registro/natural" component={CreateClienteN} />
+            <Route exact path="/admin/clientes/registro/juridico" component={CreateClienteJ} />
+            <Route exact path="/admin/empleados" component={Empleados} />
+            <Route exact path="/admin/usuarios" component={Usuarios} />
+            <Route exact path="/admin/roles" component={Roles} />
+            <Route exact path="/admin/reportes" component={Reportes} />
+            <Route exact path="/admin/reporteuno" component={Reporte1} />
+            <Route exact path="/admin/reportedos" component={Reporte2} />
+            <Route exact path="/admin/reportetres" component={Reporte3} />
+            <Route exact path="/admin/reportecuatro" component={Reporte4} />
+            <Route exact path="/admin/reportecinco" component={Reporte5} />
+            <Route exact path="/admin/reporteseis" component={Reporte6} />
+            <Route exact path="/admin/aviones" component={Aviones} />
+            <Route exact path="/admin/barcos" component={Barcos} />
+            <Route exact path="/admin/rutas" component={Rutas} />
+            <Route exact path="/admin/vehiculos" component={Vehiculos} />
+            <Route exact path="/admin/paquetes" component={Paquetes} />
+            <Route path="/admin/sucursal/:sucursal" component={SucursalDetail} />
+            <Route path="/admin/cliente/:cliente" component={ClienteDetail} />
+            <Route path="/admin/empleado/:empleado" component={EmpleadoDetail} />
+            <Route path="/admin/rol/:rol" component={RolDetail} />
+            <Route path="/admin/avion/:avion" component={AvionDetail} />
+            <Route path="/admin/barco/:barco" component={BarcoDetail} />
+            <Route path="/admin/ruta/:ruta" component={RutaDetail} />
+            <Route path="/admin/vehiculo/:vehiculo" component={VehiculoDetail} />
+        </Switch>
         <Switch>
             <Route exact path="/cliente" component={ClienteIndex} />
             <Route exact path="/cliente/perfil" component={Perfil} />
